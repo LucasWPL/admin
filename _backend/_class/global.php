@@ -1,7 +1,7 @@
 <?php
     session_start();
     if(!isset($_SESSION['logValidated'])){
-        header('Location: /projeto-adm/bi/login/');
+        header('Location: login');
     }
 
     function limpa(){

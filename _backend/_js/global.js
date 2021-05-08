@@ -4,6 +4,11 @@ function loadPage(type, page, tittle){
 	$('.tittlePage').html(tittle);
 }
 
+//FUNÇÃO PARA DESTRUIR A SESSÃO
+function logout(){
+	window.location.replace("login/_controller/logout.php");
+}
+
 //TOAST DE SUCESS, ERROR, INFO E WARNING
 function toast(type, message){
 	var Toast = Swal.mixin({
@@ -16,5 +21,5 @@ function toast(type, message){
 	Toast.fire({
 		icon: type,
 		title: message
-	})
+	});
 }

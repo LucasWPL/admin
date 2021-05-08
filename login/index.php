@@ -88,7 +88,7 @@
             console.log(data);
             if(data != false){
                 console.log('LOG');
-                window.location.replace('<?=$_SESSION['index']?>');
+                window.location.replace('/');
             }else{
             }
         })
