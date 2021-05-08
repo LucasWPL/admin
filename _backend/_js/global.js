@@ -9,6 +9,11 @@ function openForm(form, tittle){
 	loadPage('form', form, tittle);
 }
 
+//FUNÇÃO PARA RETORNAR PARA A GRID
+function openForm(grid, tittle){
+	loadPage('grid', grid, tittle);
+}
+
 //FUNÇÃO PARA DESTRUIR A SESSÃO
 function logout(){
 	window.location.replace("login/_controller/logout.php");

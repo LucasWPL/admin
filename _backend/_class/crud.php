@@ -1,29 +1,34 @@
 <?php
-    error_reporting(0); session_start();
-    class Crud {
+    session_start(); error_reporting(0);
+    class Crud extends \PDO{
+        private $db = 'sistema';
         private $username = 'root';
         private $password = '';
         private $conn = '';
         private $stmt = '';
-    
-        function __construct() {
-                try {
-                    $this->conn = new PDO('mysql:host=localhost;dbname=sistema', $this->username, $this->password);
-                    $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                } catch(PDOException $e) {
-                    $this->conn =  'ERROR: ' . $e->getMessage();
-                }
+        
+        public function rollbackId($tabela)
+        {
+            $auto = $this-> getSelect("SELECT `AUTO_INCREMENT` as auto FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{$this->db}' AND  TABLE_NAME = '{$tabela}'");
+            $index = $auto->auto - 1;
+            $retorno = $this-> sql("ALTER TABLE {$tabela} AUTO_INCREMENT = {$index}");
+        }
+
+        public function __construct()
+        {
+            $this->conn = parent :: __construct("mysql:host=localhost;dbname={$this->db}", $this->username, $this->password);
         }
         
-        private function setParams($statement, $parameters = array())
+        
+        private function setParams($statement, $parameters = '')
         {
-
-            foreach ($parameters as $key => $value) {
+            if($parameters != ''){
+                foreach ($parameters as $key => $value) {
                 
-                $this->bindParam($statement, $key, $value);
-
+                    $this->bindParam($statement, $key, $value);
+    
+                }
             }
-
         }
 
         private function bindParam($statement, $key, $value)
@@ -34,7 +39,7 @@
         }
 
         public function getSelect($sql, $params = '', $multi = FALSE){
-            $stmt = $this->conn->prepare($sql);
+            $stmt = parent::prepare($sql);
             $this->setParams($stmt, $params);
             $stmt->execute();
 
@@ -42,6 +47,21 @@
             if($multi == TRUE)  $json = json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
 
             return json_decode($json);
+        }
+
+        public function sql($sql){
+            $stmt = parent::prepare($sql);
+            $retorno = $stmt->execute();
+            return $retorno;
+        }
+
+        public function insert($array, $tabela){
+            $sql = "INSERT INTO {$tabela} SET ";
+            foreach($array AS $key => $value){
+                $sql .= $key . " = '" . $value . "', ";
+            }
+            $retorno = $this->sql(substr($sql, 0, -2));
+            return $retorno;
         }
     }
 ?>

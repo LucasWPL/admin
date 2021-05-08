@@ -9,6 +9,7 @@
 	$dados = $conn->getSelect('SELECT * FROM user WHERE userPass = :userPass AND userLogin = :userLogin', $params);
 	
 	if($dados != false){
+		$_SESSION['userId'] = $dados->userId;
 		$_SESSION['userLogin'] = $dados->userLogin;
 		$_SESSION['userName'] = $dados->userName;
 		$_SESSION['logTime'] = date('Y-m-d H:i:s');
