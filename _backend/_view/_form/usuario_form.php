@@ -52,6 +52,7 @@
                 type: 'POST',
                 dataType: "json",
                 success: (function(data){
+                    console.log(data);
                     if(data.retorno == true){
                         toast('success', data.mensagem);
                         returnGrid('usuario_grid', 'Usuário');
@@ -60,5 +61,7 @@
                     }
                 })
             });
+
+            verifyURLForm();
         });
     </script>

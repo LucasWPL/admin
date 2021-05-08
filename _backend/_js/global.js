@@ -2,25 +2,58 @@
 function loadPage(type, page, tittle){
 	$('#tela').load('_backend/_view/_'+type+'/'+page);
 	$('.tittlePage').html(tittle);
-	setURLParams(page);
+	if(type == 'form') setURLParams(page, type);
+}
+
+//FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
+function formEdit(id, url){
+	$.ajax({
+		url : "_backend/_controller/_select/_ajax/"+url+"_select_ajax.php",
+		type : 'get',
+		dataType: "json",
+		data : {
+			id : id
+		},
+		success : function(data){
+			$.each(data, function (k,v) {
+				$('input[name="'+k+'"]').val(v);
+				$('select[name="'+k+'"]').val(v);
+			});
+		}
+	})
+}
+
+//FUNÇÃO PARA VERIFICAR QUAL É O INTUITO DA CHAMADA DO FORM
+function verifyURLForm(){
+	var get = getURLParams();
+	if(get.hasGet != false){
+		if(get.action == 'edit'){
+			formEdit(get.id, get.url);
+		}else if(get.action == 'view'){
+			formView(get.id, get.url);
+		}
+	}else{
+		return false;
+	}
 }
 
 //FUNÇÕES SET E GET PARÂMETROS ENVIADOS POR URL
-function setURLParams(url){
-	var json = '';
-	var aux = url.split('?');
-	if(aux[1] == undefined) {
-		sessionStorage.setItem("URLParams", false);
-		return false;
-	}
-
-	var params = aux[1].split('&');
+function setURLParams(url, type){
 	var array = {};
-	$(params).each(function(k,v){
-		var row = v.split('=');
-		array[row[0]] = row[1];
-		
-	});
+	var aux = url.split('?');
+	
+	array['url'] = aux[0].replace('_'+type, '').replace('.php', '');
+	if(aux[1] == undefined){
+		array['hasGet'] = false;
+	} else{
+		array['hasGet'] = true;
+		var params = aux[1].split('&');
+		$(params).each(function(k,v){
+			var row = v.split('=');
+			array[row[0]] = row[1];
+		});
+	} 
+	
 	sessionStorage.setItem("URLParams", JSON.stringify(array));
 }
 
@@ -38,9 +71,11 @@ function openForm(form, tittle, action = 'insert'){
 	if(action != 'insert') {
 		form += '?action=' + action;
 		var selecionados = new Array();
+		var coluna = '';
 		$('.checkboxGrids').each(function(){
 			if($(this).prop("checked")){
-				selecionados.push($(this).val());
+				var aux = $(this).val().split('-');
+				selecionados.push(aux[0]);
 			}
 		});
 		if($(selecionados).get(0) != undefined){
