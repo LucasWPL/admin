@@ -3,10 +3,11 @@
 	session_start();
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
-	$dados = $conn->getSelect('SELECT * FROM user','', TRUE);
+	$dados = $conn->getSelect('SELECT * FROM user ORDER BY id DESC','', TRUE);
 	
 	$array = array(); $fullData = array();
 	foreach ($dados as $key => $value) {//COLUNA
+		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids'>";
 		$data[] = $value->id;
 		$data[] = $value->userName;

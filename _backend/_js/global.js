@@ -10,7 +10,7 @@ function openForm(form, tittle){
 }
 
 //FUNÇÃO PARA RETORNAR PARA A GRID
-function openForm(grid, tittle){
+function returnGrid(grid, tittle){
 	loadPage('grid', grid, tittle);
 }
 

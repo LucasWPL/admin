@@ -5,7 +5,7 @@
 	$conn = new Crud();
     
     $_POST['userPass'] = password_hash($_POST['userPass'], PASSWORD_DEFAULT); 
-    $_POST['userUserCadastro'] = $_SESSION['userId']; $_POST['userUserCadastro'] = $_SESSION['userName']; 
+    $_POST['userUserCadastro'] = $_SESSION['userId']; $_POST['userUserCadastroNome'] = $_SESSION['userName']; 
     
     $return = $conn->insert($_POST, 'user');
     if($return){
