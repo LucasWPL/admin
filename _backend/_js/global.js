@@ -4,6 +4,11 @@ function loadPage(type, page, tittle){
 	$('.tittlePage').html(tittle);
 }
 
+//FUNÇÃO PARA ABRIR FORMULÁRIOS
+function openForm(form, tittle){
+	loadPage('form', form, tittle);
+}
+
 //FUNÇÃO PARA DESTRUIR A SESSÃO
 function logout(){
 	window.location.replace("login/_controller/logout.php");

@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    error_reporting(0); session_start();
     class Crud {
         private $username = 'root';
         private $password = '';
