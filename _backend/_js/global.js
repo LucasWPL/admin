@@ -31,6 +31,21 @@ function toLastGrid(){
 
 //FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
 function formEdit(id, url){
+	$("#formPrincipal").ajaxForm({
+		url: '_backend/_controller/_update/'+url+'_update.php', 
+		type: 'POST',
+		dataType: "json",
+		success: (function(data){
+			console.log(data);
+			if(data.retorno == true){
+				toast('success', data.mensagem);
+				toLastGrid();
+			}else{
+				toast('error', data.mensagem);
+			}
+		})
+	});
+
 	$.ajax({
 		url : "_backend/_controller/_select/_ajax/"+url+"_select_ajax.php",
 		type : 'get',
@@ -48,6 +63,24 @@ function formEdit(id, url){
 	})
 }
 
+//FUNÇÃO PARA ESTRUTURAÇÃO DO INSERT DO FORM
+function formInsert(url){
+	$("#formPrincipal").ajaxForm({
+		url: '_backend/_controller/_insert/'+url+'_insert.php', 
+		type: 'POST',
+		dataType: "json",
+		success: (function(data){
+			console.log(data);
+			if(data.retorno == true){
+				toast('success', data.mensagem);
+				toLastGrid();
+			}else{
+				toast('error', data.mensagem);
+			}
+		})
+	});
+}
+
 //FUNÇÃO PARA VERIFICAR QUAL É O INTUITO DA CHAMADA DO FORM
 function verifyURLForm(){
 	var get = getURLParams();
@@ -58,7 +91,7 @@ function verifyURLForm(){
 			formView(get.id, get.url);
 		}
 	}else{
-		return false;
+		formInsert(get.url);
 	}
 }
 

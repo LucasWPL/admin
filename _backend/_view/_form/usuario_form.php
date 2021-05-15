@@ -48,21 +48,6 @@
 
     <script>
         $(document).ready(function() {
-            $("#formPrincipal").ajaxForm({
-                url: '_backend/_controller/_update/usuario_update.php', 
-                type: 'POST',
-                dataType: "json",
-                success: (function(data){
-                    console.log(data);
-                    if(data.retorno == true){
-                        toast('success', data.mensagem);
-                        toLastGrid();
-                    }else{
-                        toast('error', data.mensagem);
-                    }
-                })
-            });
-
             verifyURLForm();
         });
     </script>
