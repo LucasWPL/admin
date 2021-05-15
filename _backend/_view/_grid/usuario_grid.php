@@ -22,7 +22,7 @@
                 </span>
                 <span id="fimBotoes">
                     <a class="btn btn-app bg-danger">
-                        <i class="fas fa-trash" onclick="deleteFromGrid('user')"></i> Deletar
+                        <i class="fas fa-trash" onclick="deleteFromGrid('usuario_delete.php', 'user')"></i> Deletar
                     </a>
                     <a class="btn btn-app bg-secondary">
                         <i class="fas fa-redo" onclick="toLastGrid()"></i> Atualizar

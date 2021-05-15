@@ -21,8 +21,21 @@ function loadGrid(grid){
 }
 
 //FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID
-function deleteFromGrid(tabela){
-	
+function deleteFromGrid(arquivo, tabela){
+	var registros = getSelectedFromGrid(true);
+	$.ajax({
+		url : "_backend/_controller/_delete/"+arquivo+"",
+		type : 'post',
+		dataType: "json",
+		data : {
+			registros : registros,
+			tabela : tabela
+		},
+		success : function(data){
+			toast('success', data.mensagem);
+			toLastGrid(); 
+		}
+	});
 }
 
 //FUNÇÃO PARA PEGAR OS REGISTROS SELECIONADOS
@@ -57,7 +70,7 @@ function getLastGridType(){
 }
 
 function toLastGrid(){
-	loadPage(getLastGridType(), getLastGrid(), getLastGridTitle());
+	setTimeout(function(){ loadPage(getLastGridType(), getLastGrid(), getLastGridTitle()); }, 500);
 }
 
 //FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
@@ -91,7 +104,7 @@ function formEdit(id, url){
 			});
 			$('input[name="id"]').attr('disabled', false);
 		}
-	})
+	});
 }
 
 //FUNÇÃO DE VISUALIZAÇÃO DE FORM

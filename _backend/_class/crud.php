@@ -74,6 +74,17 @@
             return $retorno;
         }
 
+        public function delete($tabela, $id){
+            $sql = "DELETE FROM {$tabela} ";
+            foreach ($id as $key => $value) {
+                $sql .= " WHERE {$key} = '{$value}'";
+            }
+
+            $stmt = parent::prepare($sql);
+            $retorno = $stmt->execute();
+            return $retorno;
+        }
+
         public function insert($array, $tabela){
             $sql = "INSERT INTO {$tabela} SET ";
             foreach($array AS $key => $value){
