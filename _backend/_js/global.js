@@ -169,7 +169,7 @@ function formView(id, url){
 		}
 	});
 
-	$('.submitFormPrincipal').html('Voltar');
+	$('.submitFormPrincipal').remove();
 	
 	$("#formPrincipal").submit(function(e){
 		e.preventDefault();
@@ -250,6 +250,7 @@ function openForm(form, title, action = 'insert', self = false){
 		}
 	}
 	loadPage('form', form, title);
+	//setTimeout(function(){ $('.submitFormPrincipal').css('float', 'right'); }, 50);
 }
 
 //FUNÇÃO PARA RETORNAR PARA A GRID

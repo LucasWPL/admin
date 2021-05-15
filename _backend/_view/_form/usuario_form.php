@@ -2,19 +2,19 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Main row -->
-            <div class="row">
-                <div class="col-md-8">
-                    <div class="card card-default">
-                        <div class="card-header">
-                            <h3 class="card-title">Dados cadastrais</h3>
+            <form id="formPrincipal">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Dados cadastrais</h3>
 
-                            <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                <i class="fas fa-minus"></i>
-                            </button>
+                                <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                </div>
                             </div>
-                        </div>
-                        <form id="formPrincipal">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-8">
@@ -36,13 +36,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary submitFormPrincipal">Salvar</button>
-                            </div>
-                        </form>
+                        </div>
                     </div>
+                </div>                
+                
+                <div class="botoesBase">
+                    <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
+                    <button type="submit" class="btn btn-primary submitFormPrincipal">Salvar</button>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
 

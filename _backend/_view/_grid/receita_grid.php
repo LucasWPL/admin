@@ -23,9 +23,10 @@
                         <tr>
                             <th class="thCkechboxGrid"></th>
                             <th>Id</th>
-                            <th>Nome</th>
-                            <th>Login</th>
-                            <th>Data cadastro</th>
+                            <th>Histórico</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
                     </thead>
@@ -39,5 +40,5 @@
     </section>
     <script>
         loadGrid('receita_select_grid.php');
-        setBotoes('receita', 'receita', 'Cadastro lançamento receita');
+        setBotoes('receita', 'receita', 'Cadastro receita');
     </script>

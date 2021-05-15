@@ -8,7 +8,7 @@
 	$array = array(); $fullData = array();
 	foreach ($dados as $key => $value) {//COLUNA
 		$data = array();
-		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";//ENVIAR NO VALUE O IDENTIFICADOR E APÓS O TRAÇO QUAL É ESSA COLUNA NO BDD
+		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";
 		$data[] = $value->id;
 		$data[] = $value->userName;
 		$data[] = $value->userLogin;
