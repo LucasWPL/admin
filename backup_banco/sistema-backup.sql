@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15-Maio-2021 às 14:12
+-- Tempo de geração: 15-Maio-2021 às 18:46
 -- Versão do servidor: 10.4.18-MariaDB
 -- versão do PHP: 7.3.27
 
@@ -20,6 +20,22 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `sistema`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `receita`
+--
+
+CREATE TABLE `receita` (
+  `id` int(11) NOT NULL,
+  `historico` varchar(128) NOT NULL,
+  `valor` decimal(15,4) NOT NULL,
+  `dataVencimento` datetime NOT NULL,
+  `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `usuarioCadastro` varchar(16) NOT NULL,
+  `usuarioCadastroNome` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -43,13 +59,18 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `userName`, `userLogin`, `userEmail`, `userPass`, `userDataCadastro`, `userUserCadastro`, `userUserCadastroNome`) VALUES
-(1, 'Administrador', 'admin', NULL, '$2y$10$cGs0pNR6E3SB.97EeI6m8u4d/dvYLtWHDWr4ekb648GZouDluLI.u', '2021-05-08 16:23:21', '1', 'Administrador'),
-(24, 'Administrador 2', 'admin2', 'pedro.lucaswpl@gmail.com', '$2y$10$wkCywCr4v3F9YYvjQyXWyeVDqwUAFYBVmpw7g5eUpCL1h8YfVdX0i', '2021-05-08 18:51:55', '1', 'Administrador'),
-(38, 'Administrador 3', 'admin3', 'pedro.lucaswpl@gmail.com', '$2y$10$agTp/5NCogUkLJ6dBUEJ1.JGlRbEce39lUMN8incPK.YwjYt9QayS', '2021-05-08 19:15:33', '1', 'Administrador');
+(1, 'Administrador', 'admin', 'pedro.lucaswpl@gmail.com', '$2y$10$cGs0pNR6E3SB.97EeI6m8u4d/dvYLtWHDWr4ekb648GZouDluLI.u', '2021-05-08 16:23:21', '1', 'Administrador'),
+(54, 'Usuário 2', 'admin2', 'pedro.lucaswpl@gmail.com', '$2y$10$xBLQ/jrr2vV3ovS3zxeXreTl4cJ5Y1eZmJQNW/a3C9iyjRCHlIpUG', '2021-05-15 16:12:19', '1', 'Administrador');
 
 --
 -- Índices para tabelas despejadas
 --
+
+--
+-- Índices para tabela `receita`
+--
+ALTER TABLE `receita`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Índices para tabela `user`
@@ -63,10 +84,16 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT de tabela `receita`
+--
+ALTER TABLE `receita`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -204,6 +204,35 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="javascript:;" class="nav-link">
+              <i class="nav-icon fas fa-chart-line"></i>
+              <p>
+                Financeiro
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita')" class="nav-link">
+                  <i class="fas fa-money-bill-wave-alt nav-icon"></i>
+                  <p>Receita</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'despesa_grid.php','Despesa')" class="nav-link">
+                  <i class="fas fa-hand-holding-usd nav-icon"></i>
+                  <p>Despesa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'fluxo_caixa_grid.php','Fluxo de caixa')" class="nav-link">
+                  <i class="fas fa-file-invoice-dollar nav-icon"></i>
+                  <p>Fluxo de caixa</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
