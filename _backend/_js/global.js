@@ -20,6 +20,50 @@ function loadGrid(grid){
 	});
 }
 
+//BOTÕES GENÉRICOS GRID
+function setBotoes(prefixo, tabela, titleForm){
+	//INÍCIO
+	botoesInicio = "<a class='btn btn-app bg-primary' id='formInsert'>";
+		botoesInicio += "<i class='fas fa-plus'></i> Novo";
+	botoesInicio += '</a>';
+
+	botoesInicio += "<a class='btn btn-app bg-warning' id='formUpdate'>";
+		botoesInicio += "<i class='fas fa-edit'></i> Editar";
+	botoesInicio += "</a>";
+
+	botoesInicio += "<a class='btn btn-app bg-info' id='formView'>";
+		botoesInicio += "<i class='fas fa-search'></i> Visualizar";
+	botoesInicio += "</a>";
+
+	//FIM
+	botoesFim = "<a class='btn btn-app bg-danger' id='gridDelete'>";
+		botoesFim += "<i class='fas fa-trash'></i> Deletar";
+	botoesFim += '</a>';
+
+	botoesFim += "<a class='btn btn-app bg-secondary' id='refreshGrid'>";
+		botoesFim += "<i class='fas fa-redo'></i> Atualizar";
+	botoesFim += '</a>';
+
+	//CLICK DOS BOTÕES
+	$('#inicioBotoes').html(botoesInicio);
+	$('#fimBotoes').html(botoesFim);
+
+	$('#formInsert').click(function(){
+		openForm(prefixo+'_form.php', titleForm)
+	});
+	$('#formUpdate').click(function(){
+		openForm(prefixo+'_form.php', titleForm, 'edit')
+	});
+	$('#formView').click(function(){
+		openForm(prefixo+'_form.php', titleForm, 'view')
+	});
+	$('#gridDelete').click(function(){
+		deleteFromGrid(prefixo+'_delete.php', tabela)
+	});
+	$('#refreshGrid').click(function(){
+		toLastGrid();
+	});
+}
 //FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID
 function deleteFromGrid(arquivo, tabela){
 	var registros = getSelectedFromGrid(true);
@@ -70,7 +114,7 @@ function getLastGridType(){
 }
 
 function toLastGrid(){
-	setTimeout(function(){ loadPage(getLastGridType(), getLastGrid(), getLastGridTitle()); }, 500);
+	loadPage(getLastGridType(), getLastGrid(), getLastGridTitle());
 }
 
 //FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
