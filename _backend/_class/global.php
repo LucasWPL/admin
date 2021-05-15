@@ -4,7 +4,13 @@
         header('Location: login');
     }
 
-    function limpa(){
-
+    function limpaMoeda($valor){
+        $aux = str_replace('.', '',$valor);
+        $aux = str_replace(',', '.',$aux);
+        return $aux;
+    }
+    
+    function formataReal($valor){
+        return number_format($valor,2,",",".");
     }
 ?>

@@ -1,5 +1,6 @@
 <?php
 	require_once('../../../_class/crud.php');
+	require_once('../../../_class/global.php');
 	session_start();
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
@@ -11,10 +12,10 @@
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";
 		$data[] = $value->id;
 		$data[] = $value->historico;
-		$data[] = $value->valor;
-		$data[] = date('d/m/Y H:i:s', strtotime($value->dataVencimento));
-		$data[] = date('d/m/Y H:i:s', strtotime($value->dataCadastro));
-		$data[] = $value->userUserCadastroNome;
+		$data[] = formataReal($value->valor);
+		$data[] = date('d/m/Y', strtotime($value->dataVencimento));
+		$data[] = date('d/m/Y', strtotime($value->dataCadastro));
+		$data[] = $value->usuarioCadastroNome;
 
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
