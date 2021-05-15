@@ -3,12 +3,12 @@
 	require_once('../../_backend/_class/crud.php');
 	$conn = new Crud();
 	$params = array(
-		':userPass' => 	$_POST['userPass'],
 		':userLogin' => 	$_POST['userLogin']
 	);
-	$dados = $conn->getSelect('SELECT * FROM user WHERE userPass = :userPass AND userLogin = :userLogin', $params);
+	$dados = $conn->getSelect('SELECT * FROM user WHERE userLogin = :userLogin', $params);
 	
-	if($dados != false){
+	$return = password_verify($_POST['userPass'], $dados->userPass);
+	if($return != false){
 		$_SESSION['userId'] = $dados->id;
 		$_SESSION['userLogin'] = $dados->userLogin;
 		$_SESSION['userName'] = $dados->userName;

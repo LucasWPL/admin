@@ -43,7 +43,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `userName`, `userLogin`, `userEmail`, `userPass`, `userDataCadastro`, `userUserCadastro`, `userUserCadastroNome`) VALUES
-(1, 'Administrador', 'admin', NULL, 'root', '2021-05-08 16:23:21', '1', 'Administrador'),
+(1, 'Administrador', 'admin', NULL, '$2y$10$cGs0pNR6E3SB.97EeI6m8u4d/dvYLtWHDWr4ekb648GZouDluLI.u', '2021-05-08 16:23:21', '1', 'Administrador'),
 (24, 'Administrador 2', 'admin2', 'pedro.lucaswpl@gmail.com', '$2y$10$wkCywCr4v3F9YYvjQyXWyeVDqwUAFYBVmpw7g5eUpCL1h8YfVdX0i', '2021-05-08 18:51:55', '1', 'Administrador'),
 (38, 'Administrador 3', 'admin3', 'pedro.lucaswpl@gmail.com', '$2y$10$agTp/5NCogUkLJ6dBUEJ1.JGlRbEce39lUMN8incPK.YwjYt9QayS', '2021-05-08 19:15:33', '1', 'Administrador');
 
