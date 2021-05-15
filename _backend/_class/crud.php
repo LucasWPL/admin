@@ -55,6 +55,25 @@
             return $retorno;
         }
 
+        public function update($dados, $tabela, $id){
+            $keys = ''; $values = '';
+            $sql = "UPDATE {$tabela} SET ";
+            
+            foreach ($dados as $key => $value) {
+                $sql .= "{$key} = '{$value}', ";
+            }
+            
+            $sql = substr($sql, 0, -2);
+
+            foreach ($id as $key => $value) {
+                $sql .= " WHERE {$key} = '{$value}'";
+            }
+
+            $stmt = parent::prepare($sql);
+            $retorno = $stmt->execute();
+            return $retorno;
+        }
+
         public function insert($array, $tabela){
             $sql = "INSERT INTO {$tabela} SET ";
             foreach($array AS $key => $value){

@@ -1,8 +1,32 @@
 //FUNÇÃO GLOBAL DE CARREGAMENTO DE PÁGINAS
-function loadPage(type, page, tittle){
+function loadPage(type, page, title){
 	$('#tela').load('_backend/_view/_'+type+'/'+page);
-	$('.tittlePage').html(tittle);
+	$('.titlePage').html(title);
 	if(type == 'form') setURLParams(page, type);
+	if(type == 'grid' || type == 'dashboard') setLastGrid(type, page, title);
+}
+
+//SET, GET E RETURN LAST GRID 
+function setLastGrid(type, page, title){
+	sessionStorage.setItem('lastGrid', page);
+	sessionStorage.setItem('lastGridTitle', title);
+	sessionStorage.setItem('lastGridType', type);
+}
+
+function getLastGrid(){
+	return sessionStorage.getItem('lastGrid');
+}
+
+function getLastGridTitle(){
+	return sessionStorage.getItem('lastGridTitle');
+}
+
+function getLastGridType(){
+	return sessionStorage.getItem('lastGridType');
+}
+
+function toLastGrid(){
+	loadPage(getLastGridType(), getLastGrid(), getLastGridTitle());
 }
 
 //FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
@@ -19,6 +43,7 @@ function formEdit(id, url){
 				$('input[name="'+k+'"]').val(v);
 				$('select[name="'+k+'"]').val(v);
 			});
+			$('input[name="id"]').attr('disabled', false);
 		}
 	})
 }
@@ -62,12 +87,12 @@ function getURLParams(){
 }
 
 //FUNÇÃO PARA RECERREGAR PÁGINA
-function refreshPage(grid, tittle){
-	loadPage('grid', grid, tittle);
+function refreshPage(grid, title){
+	loadPage('grid', grid, title);
 }
 
 //FUNÇÃO PARA ABRIR FORMULÁRIOS
-function openForm(form, tittle, action = 'insert', self = false){
+function openForm(form, title, action = 'insert', self = false){
 	if(action != 'insert') {
 		form += '?action=' + action;
 		var selecionados = new Array();
@@ -86,12 +111,12 @@ function openForm(form, tittle, action = 'insert', self = false){
 			return false;
 		}
 	}
-	loadPage('form', form, tittle);
+	loadPage('form', form, title);
 }
 
 //FUNÇÃO PARA RETORNAR PARA A GRID
-function returnGrid(grid, tittle){
-	loadPage('grid', grid, tittle);
+function returnGrid(grid, title){
+	loadPage('grid', grid, title);
 }
 
 //FUNÇÃO PARA DESTRUIR A SESSÃO

@@ -8,10 +8,10 @@
 	sessionStorage.setItem('userId', '<?=$_SESSION["userId"]?>');
 	sessionStorage.setItem('userLogin', '<?=$_SESSION["userLogin"]?>');
 	sessionStorage.setItem('userName', '<?=$_SESSION["userName"]?>');
-	
+
   	loadPage('dashboard', 'modelo.html', 'Dashboard');
     $('#userMenu').html('<?=$_SESSION["userName"]?>');
     $('#userMenu').click(function(){
-		openForm('usuario_form.php', 'Usuário', 'edit', true);
+		openForm('usuario_form.php', 'Cadastro usuário', 'edit', true);
 	});
 </script>>

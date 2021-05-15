@@ -20,6 +20,7 @@
                                     <div class="col-md-8">
                                         <label>Nome</label>
                                         <input type="text" class="form-control" name="userName" required></input>
+                                        <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Login</label>
@@ -31,7 +32,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Senha</label>
-                                        <input type="password" class="form-control" name="userPass" required></input>
+                                        <input type="password" class="form-control" name="userPass"></input>
                                     </div>
                                 </div>
                             </div>
@@ -48,14 +49,14 @@
     <script>
         $(document).ready(function() {
             $("#formPrincipal").ajaxForm({
-                url: '_backend/_controller/_insert/usuario_insert.php', 
+                url: '_backend/_controller/_update/usuario_update.php', 
                 type: 'POST',
                 dataType: "json",
                 success: (function(data){
                     console.log(data);
                     if(data.retorno == true){
                         toast('success', data.mensagem);
-                        returnGrid('usuario_grid', 'Usuário');
+                        toLastGrid();
                     }else{
                         toast('error', data.mensagem);
                     }
