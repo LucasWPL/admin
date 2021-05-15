@@ -67,10 +67,11 @@ function refreshPage(grid, tittle){
 }
 
 //FUNÇÃO PARA ABRIR FORMULÁRIOS
-function openForm(form, tittle, action = 'insert'){
+function openForm(form, tittle, action = 'insert', self = false){
 	if(action != 'insert') {
 		form += '?action=' + action;
 		var selecionados = new Array();
+		if(self == true) selecionados.push(sessionStorage.getItem('userId'));
 		var coluna = '';
 		$('.checkboxGrids').each(function(){
 			if($(this).prop("checked")){
