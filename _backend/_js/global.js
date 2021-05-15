@@ -63,6 +63,33 @@ function formEdit(id, url){
 	})
 }
 
+//FUNÇÃO DE VISUALIZAÇÃO DE FORM
+function formView(id, url){
+	$.ajax({
+		url : "_backend/_controller/_select/_ajax/"+url+"_select_ajax.php",
+		type : 'get',
+		dataType: "json",
+		data : {
+			id : id
+		},
+		success : function(data){
+			$.each(data, function (k,v) {
+				$('input[name="'+k+'"]').val(v);
+				$('select[name="'+k+'"]').val(v);
+			});
+			$('input[name="id"]').attr('disabled', false);
+		}
+	});
+
+	$('.submitFormPrincipal').html('Voltar');
+	
+	$("#formPrincipal").submit(function(e){
+		e.preventDefault();
+		toLastGrid();
+		toast('warning', 'Nenhuma alteração foi salva.');
+	});
+}
+
 //FUNÇÃO PARA ESTRUTURAÇÃO DO INSERT DO FORM
 function formInsert(url){
 	$("#formPrincipal").ajaxForm({
