@@ -22,10 +22,10 @@
                 </span>
                 <span id="fimBotoes">
                     <a class="btn btn-app bg-danger">
-                        <i class="fas fa-trash"></i> Deletar
+                        <i class="fas fa-trash" onclick="deleteFromGrid('user')"></i> Deletar
                     </a>
                     <a class="btn btn-app bg-secondary">
-                        <i class="fas fa-redo" onclick="refreshPage('usuario_grid.php', 'Usuário')"></i> Atualizar
+                        <i class="fas fa-redo" onclick="toLastGrid()"></i> Atualizar
                     </a>
                 </span>
             </div>
@@ -33,7 +33,7 @@
         <!-- Main row -->
         <div class="row">
             <div class="col-md-12">
-                <table id="tabelaPrincipal" class="table table-bordered table-hover">
+                <table id="gridPrincipal" class="table table-bordered table-hover">
                     <thead>
                         <tr>
                             <th class="thCkechboxGrid"></th>
@@ -53,16 +53,5 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        $(function () {
-            var tabela = $('#tabelaPrincipal').DataTable({
-            "ajax": '_backend/_controller/_select/_grid/usuario_select_grid.php',
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            });
-        });
+        loadGrid('usuario_select_grid.php');
     </script>

@@ -6,6 +6,37 @@ function loadPage(type, page, title){
 	if(type == 'grid' || type == 'dashboard') setLastGrid(type, page, title);
 }
 
+//FUNÇÃO DE CARREGAMENTO DOS DADOS DA GRID
+function loadGrid(grid){
+	$('#gridPrincipal').DataTable({
+		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
+		"paging": true,
+		"lengthChange": true,
+		"searching": true,
+		"ordering": true,
+		"info": true,
+		"autoWidth": false,
+		"responsive": true,
+	});
+}
+
+//FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID
+function deleteFromGrid(tabela){
+	
+}
+
+//FUNÇÃO PARA PEGAR OS REGISTROS SELECIONADOS
+function getSelectedFromGrid(multi = false){
+	var selecionados = new Array();
+	$('.checkboxGrids').each(function(){
+		if($(this).prop("checked")){
+			selecionados.push($(this).val());
+		}
+	});
+	if(multi == false) 	return $(selecionados).get(0);
+	if(multi == true) 	return selecionados;
+}
+
 //SET, GET E RETURN LAST GRID 
 function setLastGrid(type, page, title){
 	sessionStorage.setItem('lastGrid', page);
@@ -146,26 +177,16 @@ function getURLParams(){
 	return JSON.parse(sessionStorage.getItem("URLParams"));
 }
 
-//FUNÇÃO PARA RECERREGAR PÁGINA
-function refreshPage(grid, title){
-	loadPage('grid', grid, title);
-}
 
 //FUNÇÃO PARA ABRIR FORMULÁRIOS
 function openForm(form, title, action = 'insert', self = false){
 	if(action != 'insert') {
 		form += '?action=' + action;
+		var registro = getSelectedFromGrid();
 		var selecionados = new Array();
 		if(self == true) selecionados.push(sessionStorage.getItem('userId'));
-		var coluna = '';
-		$('.checkboxGrids').each(function(){
-			if($(this).prop("checked")){
-				var aux = $(this).val().split('-');
-				selecionados.push(aux[0]);
-			}
-		});
-		if($(selecionados).get(0) != undefined){
-			form += '&id=' + $(selecionados).get(0);
+		if(registro != undefined){
+			form += '&id=' + registro;
 		}else{
 			toast('warning', "Nenhum registro foi selecionado");
 			return false;
