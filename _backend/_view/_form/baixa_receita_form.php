@@ -23,7 +23,7 @@
                                         <input type="hidden" class="form-control" name="lancamento"></input>
                                     </div>
                                     <div class="col-md-2">
-                                        <label>Valor</label>
+                                        <label>Saldo restante</label>
                                         <input type="text" class="form-control inputDinheiro" name="valor" readonly></input>
                                     </div>
                                     <div class="col-md-2">
@@ -66,10 +66,11 @@
                 },
                 success : function(data){
                     if(data.status != 'baixada'){
+                        var valor = data.valor - data.valorPago;
                         $('#historico').html(data.historico);
                         $('input[name="dataVencimento"]').val(data.dataVencimento);
-                        $('input[name="valorBaixa"]').val(real(data.valor));
-                        $('input[name="valor"]').val(real(data.valor));
+                        $('input[name="valorBaixa"]').val(real(valor));
+                        $('input[name="valor"]').val(real(valor));
                         $('input[name="lancamento"]').val(data.id);
                     }else{
                         toLastGrid();
