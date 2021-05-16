@@ -1,12 +1,11 @@
 //FUNÇÃO GLOBAL DE CARREGAMENTO DE PÁGINAS
 function loadPage(type, page, title){
-	$('#tela').load('_backend/_view/_'+type+'/'+page);
+	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
+		setMask();
+	});
 	$('.titlePage').html(title);
 	if(type == 'form') setURLParams(page, type);
 	if(type == 'grid' || type == 'dashboard') setLastGrid(type, page, title);
-	setTimeout(function(){ 
-		setMask(); 
-	}, 50);
 }
 
 //FUNÇÃO DE CARREGAMENTO DOS DADOS DA GRID
@@ -25,10 +24,27 @@ function loadGrid(grid, status = false){
 				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
 				if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#99ffbb');
 				if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#ccffdd');
-				if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ffebe6');
+				if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
 			}
 		}
 	});
+}
+
+//FUNÇÃO USADA PARA A ABERTURA DO MODAL ONDE TERÁ A GRID DE BUSCA
+function abreBusca(arquivo, titulo){
+	$('#modalBusca').modal('show');
+	$('#modalBuscaTitulo').html(titulo);
+	$('#modalBuscaCorpo').load('_backend/_view/_grid/'+arquivo+'_grid.php?busca=S', function() {
+		$('#gridPrincipal').attr('id', 'formBusca');		
+		$('.blocoBotoes').html('');
+		$('#modalBuscaSubmit').unbind('click');
+		$('#modalBuscaSubmit').click(function(){
+			//FUNÇÃO QUE DEVE SER REESCRITA NAS GRIDS PARA ATENDER AS NECESSIDADES ESPECÍFICAS
+			$('.checkboxGrids').addClass('checkboxBuscas').removeClass('checkboxGrids');
+			selecionadosBusca(getSelectedFromGrid(true, 'checkboxBuscas'), arquivo);
+			$('#modalBusca').modal('hide');
+		});
+	});    
 }
 
 //BOTÕES GENÉRICOS GRID
@@ -151,9 +167,9 @@ function deleteFromGridGeneric(tabela){
 }
 
 //FUNÇÃO PARA PEGAR OS REGISTROS SELECIONADOS
-function getSelectedFromGrid(multi = false){
+function getSelectedFromGrid(multi = false, classe = 'checkboxGrids'){
 	var selecionados = new Array();
-	$('.checkboxGrids').each(function(){
+	$('.'+classe).each(function(){
 		if($(this).prop("checked")){
 			selecionados.push($(this).val());
 		}
