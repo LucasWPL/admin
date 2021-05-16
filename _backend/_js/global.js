@@ -261,8 +261,7 @@ function openForm(form, title, action = 'insert', self = false){
 	if(action != 'insert') {
 		form += '?action=' + action;
 		var registro = getSelectedFromGrid();
-		var selecionados = new Array();
-		if(self == true) selecionados.push(sessionStorage.getItem('userId'));
+		if(self == true) registro = sessionStorage.getItem('userId');
 		if(registro != undefined){
 			form += '&id=' + registro;
 		}else{
