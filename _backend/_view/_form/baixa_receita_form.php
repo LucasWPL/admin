@@ -7,7 +7,7 @@
                     <div class="col-md-12">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Histórico: <span id="historico"></span></h3>
+                                <h3 class="card-title"><span id="historico"></span></h3>
 
                                 <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -20,14 +20,15 @@
                                     <div class="col-md-4">
                                         <label>Observação de baixa</label>
                                         <input type="text" class="form-control" name="obsBaixa"></input>
+                                        <input type="hidden" class="form-control" name="lancamento"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valor" required></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valor" disabled></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor baixa</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa"></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" required></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
@@ -35,7 +36,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Data baixa</label>
-                                        <input type="date" class="form-control" name="dataPagamento" value="<?=date('Y-m-d')?>"></input>
+                                        <input type="date" class="form-control" name="dataBaixa" value="<?=date('Y-m-d')?>"></input>
                                     </div>
                                 </div>
                             </div>
@@ -65,10 +66,27 @@
                 },
                 success : function(data){
                     $('#historico').html(data.historico);
+                    $('input[name="dataVencimento"]').val(data.dataVencimento);
                     $('input[name="valorBaixa"]').val(real(data.valor));
                     $('input[name="valor"]').val(real(data.valor));
+                    $('input[name="lancamento"]').val(data.id);
                 }
             });
             
+            $("#formPrincipal").ajaxForm({
+                url: '_backend/_controller/_insert/'+get.url+'_insert.php', 
+                type: 'POST',
+                dataType: "json",
+                success: (function(data){
+                    console.log(data);
+                    if(data.retorno == true){
+                        toast('success', data.mensagem);
+                        toLastGrid();
+                    }else{
+                        toast('error', data.mensagem);
+                    }
+                })
+            });
+
         });
     </script>
