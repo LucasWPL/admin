@@ -9,7 +9,9 @@
                 <span id="inicioBotoes"></span>
                 
                 <span id="botoesEspecificos">
-
+                    <a class='btn btn-app bg-primary' onclick='baixarReceita();'>
+                        <i class='fas fa-angle-double-down'></i> Baixar
+                    </a>
                 </span>
                 
                 <span id="fimBotoes"></span>
@@ -42,4 +44,15 @@
     <script>
         loadGrid('receita_select_grid.php');
         setBotoes('receita', 'receita', 'Cadastro receita');
+
+        function baixarReceita(){
+            selecionado = getSelectedFromGrid();
+            if(selecionado != undefined){
+                loadPage('form', 'baixa_receita_form.php?lancamento='+selecionado, 'Baixa receita');
+            }else{
+                toast('warning', 'Nenhum registro foi selecionado.');
+            }
+            
+        }
+
     </script>
