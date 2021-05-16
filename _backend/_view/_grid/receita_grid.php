@@ -28,6 +28,8 @@
                         <tr>
                             <th class="thCkechboxGrid"></th>
                             <th>Id</th>
+                            <th>CPF/CNPJ</th>
+                            <th>Nome</th>
                             <th>Histórico</th>
                             <th>Valor</th>
                             <th>Saldo devedor</th>
@@ -47,7 +49,7 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('receita_select_grid.php', 5);
+        loadGrid('receita_select_grid.php', 7);
         setBotoes('receita', 'receita', 'Cadastro receita');
 
         function baixarReceita(){
