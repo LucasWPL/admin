@@ -25,6 +25,7 @@
                             <th>Id</th>
                             <th>Histórico</th>
                             <th>Valor</th>
+                            <th>Status</th>
                             <th>Vencimento</th>
                             <th>Cadastro</th>
                             <th>Usuário cadastro</th>
@@ -40,5 +41,5 @@
     </section>
     <script>
         loadGrid('receita_select_grid.php');
-        setBotoes('receita', 'receita', 'Cadastro receita');
+        setBotoes('receita', 'receita', 'Cadastro receita', true);
     </script>

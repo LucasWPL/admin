@@ -21,7 +21,7 @@ function loadGrid(grid){
 }
 
 //BOTÕES GENÉRICOS GRID
-function setBotoes(prefixo, tabela, titleForm){
+function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
 	//INÍCIO
 	botoesInicio = "<a class='btn btn-app bg-primary' id='formInsert'>";
 		botoesInicio += "<i class='fas fa-plus'></i> Novo";
@@ -58,17 +58,38 @@ function setBotoes(prefixo, tabela, titleForm){
 		openForm(prefixo+'_form.php', titleForm, 'view')
 	});
 	$('#gridDelete').click(function(){
-		deleteFromGrid(prefixo+'_delete.php', tabela)
+		if(deleteGeneric == false){
+			deleteFromGrid(prefixo+'_delete.php', tabela);
+		}else{
+			deleteFromGridGeneric(tabela);
+		}
 	});
 	$('#refreshGrid').click(function(){
 		toLastGrid();
 	});
 }
-//FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID
+//FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID 
 function deleteFromGrid(arquivo, tabela){
 	var registros = getSelectedFromGrid(true);
 	$.ajax({
 		url : "_backend/_controller/_delete/"+arquivo+"",
+		type : 'post',
+		dataType: "json",
+		data : {
+			registros : registros,
+			tabela : tabela
+		},
+		success : function(data){
+			toast('success', data.mensagem);
+			toLastGrid(); 
+		}
+	});
+}
+
+function deleteFromGridGeneric(tabela){
+	var registros = getSelectedFromGrid(true);
+	$.ajax({
+		url : "_backend/_controller/_delete/geral_delete.php",
 		type : 'post',
 		dataType: "json",
 		data : {

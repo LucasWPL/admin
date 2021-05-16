@@ -13,6 +13,7 @@
 		$data[] = $value->id;
 		$data[] = $value->historico;
 		$data[] = formataReal($value->valor);
+		$data[] = ucfirst($value->status);
 		$data[] = date('d/m/Y', strtotime($value->dataVencimento));
 		$data[] = date('d/m/Y', strtotime($value->dataCadastro));
 		$data[] = $value->usuarioCadastroNome;
