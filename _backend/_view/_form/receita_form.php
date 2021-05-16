@@ -75,8 +75,8 @@
                                     <div class="col-md-2">
                                         <label>Pagador tipo</label>
                                         <select class="form-control" name="entidadeTipo" onchange="changeEntidadeTipo(this.value)">
-                                            <option value="avulso">Avulso</option>
                                             <option value="cliente">Cliente</option>
+                                            <option value="avulso">Avulso</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
