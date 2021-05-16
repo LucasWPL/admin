@@ -30,8 +30,10 @@
                             <th>Id</th>
                             <th>Histórico</th>
                             <th>Valor</th>
+                            <th>Saldo devedor</th>
                             <th>Status</th>
                             <th>Vencimento</th>
+                            <th>Pagamento</th>
                             <th>Cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
