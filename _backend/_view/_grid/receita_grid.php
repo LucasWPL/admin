@@ -41,5 +41,5 @@
     </section>
     <script>
         loadGrid('receita_select_grid.php');
-        setBotoes('receita', 'receita', 'Cadastro receita', true);
+        setBotoes('receita', 'receita', 'Cadastro receita');
     </script>

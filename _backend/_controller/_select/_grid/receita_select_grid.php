@@ -8,8 +8,10 @@
 	
 	$array = array(); $fullData = array();
 	foreach ($dados as $key => $value) {//COLUNA
+		$value->status != 'apagada' ? $disabled = "" : $disabled = "disabled";
+		
 		$data = array();
-		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";
+		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
 		$data[] = $value->id;
 		$data[] = $value->historico;
 		$data[] = formataReal($value->valor);

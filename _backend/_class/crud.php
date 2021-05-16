@@ -49,8 +49,9 @@
             return json_decode($json);
         }
 
-        public function sql($sql){
+        public function sql($sql, $params = ''){
             $stmt = parent::prepare($sql);
+            $this->setParams($stmt, $params);
             $retorno = $stmt->execute();
             return $retorno;
         }
