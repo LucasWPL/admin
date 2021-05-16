@@ -31,7 +31,7 @@
                             <th>Histórico</th>
                             <th>Valor</th>
                             <th>Saldo devedor</th>
-                            <th>Status</th>
+                            <th id="colunaStatus">Status</th>
                             <th>Vencimento</th>
                             <th>Pagamento</th>
                             <th>Cadastro</th>
@@ -47,7 +47,7 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('receita_select_grid.php');
+        loadGrid('receita_select_grid.php', 5);
         setBotoes('receita', 'receita', 'Cadastro receita');
 
         function baixarReceita(){

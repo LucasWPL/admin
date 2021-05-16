@@ -10,7 +10,7 @@ function loadPage(type, page, title){
 }
 
 //FUNÇÃO DE CARREGAMENTO DOS DADOS DA GRID
-function loadGrid(grid){
+function loadGrid(grid, status = false){
 	$('#gridPrincipal').DataTable({
 		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
 		"paging": true,
@@ -20,6 +20,14 @@ function loadGrid(grid){
 		"info": true,
 		"autoWidth": false,
 		"responsive": true,
+		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+			if(status != false){
+				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
+				if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#99ffbb');
+				if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#ccffdd');
+				if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ffebe6');
+			}
+		}
 	});
 }
 

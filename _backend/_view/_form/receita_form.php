@@ -73,6 +73,7 @@
         $(document).ready(function() {
             verifyURLForm();
             var get = getURLParams();
+            console.log(get);
             $.ajax({
                 url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
                 type : 'get',
@@ -81,7 +82,12 @@
                     id : get.id
                 },
                 success : function(data){
-                    $('input[name="valor"]').val(real(data.valor));
+                    if(data.status == 'aberta' || get.action != 'edit'){
+                        $('input[name="valor"]').val(real(data.valor));
+                    }else{
+                        toLastGrid();
+                        toast('error', "Só é possível editar lançamentos em aberto.");
+                    }
                 }
             });
         });

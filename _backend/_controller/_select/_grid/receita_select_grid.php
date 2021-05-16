@@ -12,7 +12,8 @@
 	$array = array(); $fullData = array();
 	foreach ($dados as $key => $value) {//COLUNA
 		$value->status != 'apagada' ? $disabled = "" : $disabled = "disabled";
-		
+		if($value->dataVencimento < date('Y-m-d') && ($value->status == 'aberta' || $value->status == 'baixa parcial')) $value->status = 'vencida';
+
 		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
 		$data[] = $value->id;
