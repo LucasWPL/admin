@@ -76,9 +76,7 @@
                                         <label>Pagador tipo</label>
                                         <select class="form-control" name="entidadeTipo" onchange="changeEntidadeTipo(this.value)">
                                             <option value="avulso">Avulso</option>
-                                            <option value="usuario">Usuário</option>
                                             <option value="cliente">Cliente</option>
-                                            <option value="representante">Representante</option>
                                         </select>
                                     </div>
                                     <div class="col-md-4">
@@ -120,6 +118,19 @@
                         $('input[name="entidadeNome"]').val(data.userName);
                     }
                 });
+            }else if(arquivo == 'cliente'){
+                $.ajax({
+                    url : "_backend/_controller/_select/_ajax/cliente_select_ajax.php",
+                    type : 'get',
+                    dataType: "json",
+                    data : {
+                        id : $(selecionados).get(0)
+                    },
+                    success : function(data){
+                        $('input[name="entidadeCNPJ"]').val(data.CNPJ);
+                        $('input[name="entidadeNome"]').val(data.nome);
+                    }
+                });
             }
         }
         function changeEntidadeTipo(value){
@@ -141,6 +152,10 @@
             if(value == 'usuario'){
                 $('.busca').click(function(){
                     abreBusca('usuario', 'Busca usuário');
+                });
+            }else if(value == 'cliente'){
+                $('.busca').click(function(){
+                    abreBusca('cliente', 'Busca cliente');
                 });
             }
         }
