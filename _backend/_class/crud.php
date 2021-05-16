@@ -77,8 +77,9 @@
 
         public function delete($tabela, $id){
             $sql = "DELETE FROM {$tabela} ";
+            $sql .= " WHERE 1=1 ";
             foreach ($id as $key => $value) {
-                $sql .= " WHERE {$key} = '{$value}'";
+                $sql .= " AND {$key} = '{$value}'";
             }
 
             $stmt = parent::prepare($sql);

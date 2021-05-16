@@ -12,6 +12,9 @@
                     <a class='btn btn-app bg-primary' onclick='baixarReceita();'>
                         <i class='fas fa-angle-double-down'></i> Baixar
                     </a>
+                    <a class='btn btn-app bg-orange' onclick="estornarLancamento('receita');">
+                        <i class='fas fa-retweet'></i> Estornar
+                    </a>
                 </span>
                 
                 <span id="fimBotoes"></span>

@@ -80,6 +80,28 @@ function setMask(){
 	});
 }
 
+//ESTORNO DE LANCAMENTOS FINANCEIROS
+function estornarLancamento(tipo){
+	var selecionados = getSelectedFromGrid(true);
+	console.log(selecionados);
+	$.ajax({
+		url : "_backend/_controller/_update/estornar_lancamento_update.php",
+		type : 'post',
+		dataType: "json",
+		data : {
+			tipo : tipo,
+			selecionados : selecionados
+		},
+		success : function(data){
+			if(data.retorno == true){
+				toast('success', data.mensagem);
+				toLastGrid();
+			}else{
+				toast('error', data.mensagem);
+			} 
+		}
+	});
+}
 
 //FUNÇÃO PARA O DELETE DE REGISTROS POR MEIO DA GRID 
 function deleteFromGrid(arquivo, tabela){
@@ -93,8 +115,12 @@ function deleteFromGrid(arquivo, tabela){
 			tabela : tabela
 		},
 		success : function(data){
-			toast('success', data.mensagem);
-			toLastGrid(); 
+			if(data.retorno == true){
+				toast('success', data.mensagem);
+				toLastGrid();
+			}else{
+				toast('error', data.mensagem);
+			}			 
 		}
 	});
 }
