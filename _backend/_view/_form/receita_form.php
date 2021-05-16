@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control" name="valor" required></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valor" required></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Vencimento</label>
@@ -72,5 +72,17 @@
     <script>
         $(document).ready(function() {
             verifyURLForm();
+            var get = getURLParams();
+            $.ajax({
+                url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
+                type : 'get',
+                dataType: "json",
+                data : {
+                    id : get.id
+                },
+                success : function(data){
+                    $('input[name="valor"]').val(real(data.valor));
+                }
+            });
         });
     </script>

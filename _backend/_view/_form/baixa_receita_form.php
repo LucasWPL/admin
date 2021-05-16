@@ -23,11 +23,11 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control" name="valor"></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valor" required></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor baixa</label>
-                                        <input type="text" class="form-control" name="valorBaixa"></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
@@ -64,13 +64,11 @@
                     id : get.lancamento
                 },
                 success : function(data){
-                    $.each(data, function (k,v) {
-                        $('input[name="'+k+'"]').val(v);
-                        $('select[name="'+k+'"]').val(v);
-                    });
                     $('#historico').html(data.historico);
-                    $('input[name="valorBaixa"]').val(data.valor);
+                    $('input[name="valorBaixa"]').val(real(data.valor));
+                    $('input[name="valor"]').val(real(data.valor));
                 }
             });
+            
         });
     </script>
