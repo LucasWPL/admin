@@ -24,7 +24,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valor" disabled></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valor" readonly></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor baixa</label>
@@ -65,11 +65,16 @@
                     id : get.lancamento
                 },
                 success : function(data){
-                    $('#historico').html(data.historico);
-                    $('input[name="dataVencimento"]').val(data.dataVencimento);
-                    $('input[name="valorBaixa"]').val(real(data.valor));
-                    $('input[name="valor"]').val(real(data.valor));
-                    $('input[name="lancamento"]').val(data.id);
+                    if(data.status != 'baixada'){
+                        $('#historico').html(data.historico);
+                        $('input[name="dataVencimento"]').val(data.dataVencimento);
+                        $('input[name="valorBaixa"]').val(real(data.valor));
+                        $('input[name="valor"]').val(real(data.valor));
+                        $('input[name="lancamento"]').val(data.id);
+                    }else{
+                        toLastGrid();
+                        toast('error', "O lançamento selecionado já foi baixado.");
+                    }
                 }
             });
             
