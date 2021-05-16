@@ -9,9 +9,9 @@ function loadPage(type, page, title){
 }
 
 //FUNÇÃO DE CARREGAMENTO DOS DADOS DA GRID
-function loadGrid(grid, status = false){
-	$('#gridPrincipal').DataTable({
-		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
+/*
+	parametros retirados
+	
 		"paging": true,
 		"lengthChange": true,
 		"searching": true,
@@ -19,6 +19,11 @@ function loadGrid(grid, status = false){
 		"info": true,
 		"autoWidth": false,
 		"responsive": true,
+		
+*/
+function loadGrid(grid, status = false){
+	$('#gridPrincipal').DataTable({
+		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			if(status != false){
 				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
