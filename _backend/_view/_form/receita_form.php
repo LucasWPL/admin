@@ -59,10 +59,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-7">
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">Informações de pagador</h3>
+                                <h3 class="card-title">Informações do pagador</h3>
 
                                 <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -81,11 +81,34 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>CPF/CNPJ</label>
-                                        <input type="text" class="form-control busca" name="entidadeCNPJ" readonly></input>
+                                        <input type="text" class="form-control busca entidade" name="entidadeCNPJ" readonly></input>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control busca" name="entidadeNome" readonly></input>
+                                        <input type="text" class="form-control busca entidade" name="entidadeNome" readonly></input>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"> Configurações de pagamento</h3>
+
+                                <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Condição de pagamento</label>
+                                        <input type="text" class="form-control busca" id="condicaoPagamento" onclick="abreBusca('condicao_pagamento', 'Busca condição de pagamento');" readonly></input>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +163,7 @@
                 $('input[name="entidadeCNPJ"]').val(''); $('input[name="entidadeNome"]').val('');
             }
 
-            $('.busca').unbind('click');
+            $('.entidade').unbind('click');
             if(value == 'avulso'){
                 $('input[name="entidadeCNPJ"]').attr('required', false);
                 $('input[name="entidadeNome"]').attr('required', false);
@@ -150,11 +173,11 @@
             }
             
             if(value == 'usuario'){
-                $('.busca').click(function(){
+                $('.entidade').click(function(){
                     abreBusca('usuario', 'Busca usuário');
                 });
             }else if(value == 'cliente'){
-                $('.busca').click(function(){
+                $('.entidade').click(function(){
                     abreBusca('cliente', 'Busca cliente');
                 });
             }
@@ -181,6 +204,5 @@
                     }
                 }
             });
-            c  
         });
     </script>

@@ -14,4 +14,4 @@
     $('#userMenu').click(function(){
 		openForm('usuario_form.php', 'Cadastro usuário', 'edit', true);
 	});
-</script>>
+</script>
