@@ -4,8 +4,9 @@
 	session_start();
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
-	$sql = "SELECT receita.*, baixa_lancamento.dataBaixa, SUM(baixa_lancamento.valorBaixa) valorPago FROM receita 
+	$sql = "SELECT receita.*, cliente.nome AS clienteNome, baixa_lancamento.dataBaixa, SUM(baixa_lancamento.valorBaixa) valorPago FROM receita 
 	LEFT JOIN baixa_lancamento ON baixa_lancamento.tipoLancamento = 'receita' AND baixa_lancamento.lancamento = receita.id
+	LEFT JOIN cliente ON cliente.CNPJ = receita.entidadeCNPJ AND receita.entidadeTipo = 'cliente'
 	GROUP BY receita.id ORDER BY receita.id DESC";
 	$dados = $conn->getSelect($sql,'', TRUE);
 	
@@ -18,7 +19,7 @@
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
 		$data[] = $value->id;
 		$data[] = $value->entidadeCNPJ;
-		$data[] = $value->entidadeNome;
+		$data[] = $value->clienteNome;
 		$data[] = $value->historico;
 		$data[] = formataReal($value->valor);
 		$data[] = formataReal($value->valor - $value->valorPago);

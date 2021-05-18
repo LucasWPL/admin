@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control busca entidade" name="entidadeNome" readonly></input>
+                                        <input type="text" class="form-control busca entidade" id="entidadeNome" readonly></input>
                                     </div>
                                 </div>
                             </div>
@@ -138,7 +138,7 @@
                     },
                     success : function(data){
                         $('input[name="entidadeCNPJ"]').val(data.id);
-                        $('input[name="entidadeNome"]').val(data.userName);
+                        $('#entidadeNome').val(data.userName);
                     }
                 });
             }else if(arquivo == 'cliente'){
@@ -151,7 +151,7 @@
                     },
                     success : function(data){
                         $('input[name="entidadeCNPJ"]').val(data.CNPJ);
-                        $('input[name="entidadeNome"]').val(data.nome);
+                        $('#entidadeNome').val(data.nome);
                     }
                 });
             }
@@ -160,16 +160,16 @@
             if(value == 'inicial') {
                 value = $('select[name="entidadeTipo"]').val();
             }else{
-                $('input[name="entidadeCNPJ"]').val(''); $('input[name="entidadeNome"]').val('');
+                $('input[name="entidadeCNPJ"]').val(''); $('#entidadeNome').val('');
             }
 
             $('.entidade').unbind('click');
             if(value == 'avulso'){
                 $('input[name="entidadeCNPJ"]').attr('required', false);
-                $('input[name="entidadeNome"]').attr('required', false);
+                $('#entidadeNome').attr('required', false);
             }else{
                 $('input[name="entidadeCNPJ"]').attr('required', true);
-                $('input[name="entidadeNome"]').attr('required', true);
+                $('#entidadeNome').attr('required', true);
             }
             
             if(value == 'usuario'){
@@ -194,9 +194,9 @@
                     id : get.id
                 },
                 success : function(data){
-                    console.log(data.status)
                     if(data.status == 'aberta' || get.action != 'edit'){
                         $('input[name="valor"]').val(real(data.valor));
+                        $('#entidadeNome').val(data.entidadeNome);
                         changeEntidadeTipo('inicial');
                     }else{
                         toLastGrid();
