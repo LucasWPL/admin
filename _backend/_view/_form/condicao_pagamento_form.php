@@ -1,3 +1,6 @@
+<?php
+    require_once("../../_class/global.php");
+?>
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -43,7 +46,9 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label>Forma de pagamento</label>
-                                        <input type="text" class="form-control" name="formaPagamento" required></input>
+                                        <select class="form-control" name="formaPagamento" required>
+                                            <?=selectFormaPagamento()?>
+                                        </select>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Parcelas</label>

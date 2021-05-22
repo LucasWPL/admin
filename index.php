@@ -1,8 +1,8 @@
 <?php
   	require_once('_backend/_class/global.php');
-  	require_once('_frontend/_layout/head.html');
-  	require_once('_frontend/_layout/menu.html');
-  	require_once('_frontend/_layout/footer.html');
+  	require_once('_frontend/_layout/head.php');
+  	require_once('_frontend/_layout/menu.php');
+  	require_once('_frontend/_layout/footer.php');
 ?>
 <script>
 	sessionStorage.setItem('userId', '<?=$_SESSION["userId"]?>');

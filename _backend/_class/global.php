@@ -1,5 +1,6 @@
 <?php
-    session_start();
+    session_start(); error_reporting(0);
+    require_once('crud.php');
     if(!isset($_SESSION['logValidated'])){
         header('Location: login');
     }
@@ -8,6 +9,16 @@
         $aux = str_replace('.', '',$valor);
         $aux = str_replace(',', '.',$aux);
         return $aux;
+    }
+
+    function selectFormaPagamento(){
+        $conn = new Crud();
+        $dados = $conn->getSelect("SELECT * FROM forma_pagamento", '', TRUE);
+        $html = '';
+        foreach ($dados as $value) {
+            $html .= "<option value='{$value->numReceita}'>{$value->descricao}</option>";
+        }
+        return $html;
     }
     
     function formataReal($valor){
