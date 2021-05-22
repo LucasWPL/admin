@@ -109,6 +109,7 @@
                                     <div class="col-md-12">
                                         <label>Condição de pagamento</label>
                                         <input type="text" class="form-control busca" id="condicaoPagamento" onclick="abreBusca('condicao_pagamento', 'Busca condição de pagamento');" readonly></input>
+                                        <input type="hidden" name="condicaoPagamento"></input>
                                     </div>
                                 </div>
                             </div>
@@ -120,7 +121,7 @@
                 
                 <div class="botoesBase">
                     <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
-                    <button type="submit" class="btn btn-primary submitFormPrincipal">Salvar</button>
+                    <button type="submit" class="btn btn-primary submitFormPrincipal" id="salvarReceita">Salvar</button>
                 </div>
             </form>
         </div>
@@ -154,6 +155,20 @@
                         $('#entidadeNome').val(data.nome);
                     }
                 });
+            }else if(arquivo == 'condicao_pagamento'){
+                $.ajax({
+                    url : "_backend/_controller/_select/_ajax/condicao_pagamento_select_ajax.php",
+                    type : 'get',
+                    dataType: "json",
+                    data : {
+                        id : $(selecionados).get(0)
+                    },
+                    success : function(data){
+                        $('input[name="condicaoPagamento"]').val(data.id);
+                        $('#condicaoPagamento').val(data.descricao);
+                        toast('warning', "Lançamentos manuais com condição de pagamento não poderão ser alterados posteriormente.");
+                    }
+                });
             }
         }
         function changeEntidadeTipo(value){
@@ -185,7 +200,7 @@
 
         $(document).ready(function() {
             verifyURLForm();
-            var get = getURLParams();
+            get = getURLParams();
             $.ajax({
                 url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
                 type : 'get',
@@ -194,15 +209,49 @@
                     id : get.id
                 },
                 success : function(data){
-                    if(data.status == 'aberta' || get.action != 'edit'){
-                        $('input[name="valor"]').val(real(data.valor));
-                        $('#entidadeNome').val(data.entidadeNome);
-                        changeEntidadeTipo('inicial');
-                    }else{
-                        toLastGrid();
-                        toast('error', "Só é possível editar lançamentos em aberto.");
-                    }
+                    if(get.action == 'edit'){
+                        if(data.condicaoPagamento == 0){
+                            if(data.status == 'aberta'){
+                                $('input[name="valor"]').val(real(data.valor));
+                                $('#entidadeNome').val(data.entidadeNome);
+                                $('#condicaoPagamento').val(data.condicaoDesc);
+                                changeEntidadeTipo('inicial');
+                            }else{
+                                toLastGrid();
+                                toast('error', "Só é possível editar lançamentos em aberto.");
+                            }
+                        }else{
+                            toLastGrid();
+                            toast('error', "Não é permitido a alteração de lançamento com condições de pagamento.");
+                        }
+                    }                    
                 }
             });
         });
+
+        function removerCondicao(acao){
+            $('input[name="condicaoPagamento"]').val(0);
+            $('#condicaoPagamento').val('');
+            toast('success', "Condição de pagamento removida com sucesso.");
+            if(acao == 23) $('#formPrincipal').submit();
+        }
+        $('#salvarReceita').click(function(e){
+            e.preventDefault();
+            if($('#condicaoPagamento').val() != ''){
+                var adicional = '';
+                if(get.action == 'edit') adicional = " Por se tratar de uma edição, o atual lançamento será apagado e será gerado novos com as novas condições de pagamento.";
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Atenção...',
+                    text: 'Ao salvar um lançamento com uma condição de pagamento você não poderá editá-lo posteriormente.' + adicional,
+                    footer: '<a onclick="removerCondicao(23);" href="javascript:;">Remover condição</a>'
+                });
+                $('.swal2-confirm').click(function(){
+                    $('#formPrincipal').submit();
+                });
+            }else{
+                $('#formPrincipal').submit();
+            }
+        });        
+        
     </script>

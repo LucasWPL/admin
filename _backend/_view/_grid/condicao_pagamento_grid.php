@@ -24,6 +24,8 @@
                             <th class="thCkechboxGrid"></th>
                             <th>Id</th>
                             <th>Descrição</th>
+                            <th>Forma de pagamento</th>
+                            <th>(%) Desconto</th>
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
