@@ -200,6 +200,7 @@
 
         $(document).ready(function() {
             verifyURLForm();
+            
             get = getURLParams();
             $.ajax({
                 url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
@@ -209,22 +210,20 @@
                     id : get.id
                 },
                 success : function(data){
-                    if(get.action == 'edit'){
-                        if(data.condicaoPagamento == 0){
-                            if(data.status == 'aberta'){
-                                $('input[name="valor"]').val(real(data.valor));
-                                $('#entidadeNome').val(data.entidadeNome);
-                                $('#condicaoPagamento').val(data.condicaoDesc);
-                                changeEntidadeTipo('inicial');
-                            }else{
-                                toLastGrid();
-                                toast('error', "Só é possível editar lançamentos em aberto.");
-                            }
-                        }else{
-                            toLastGrid();
-                            toast('error', "Não é permitido a alteração de lançamento com condições de pagamento.");
-                        }
-                    }                    
+                    if(data.status == 'aberta' || get.action != 'edit'){
+                        $('input[name="valor"]').val(real(data.valor));
+                        $('#entidadeNome').val(data.entidadeNome);
+                        $('#condicaoPagamento').val(data.condicaoDesc);
+                        changeEntidadeTipo('inicial');
+                    }else{
+                        toLastGrid();
+                        toast('error', "Só é possível editar lançamentos em aberto.");
+                    }                        
+
+                    if(data.condicaoPagamento != 0 && get.action == 'edit'){
+                        toLastGrid();
+                        toast('error', "Não é permitido a alteração de lançamento com condições de pagamento.");
+                    }                  
                 }
             });
         });

@@ -261,16 +261,15 @@ function formView(id, url){
 				$('select[name="'+k+'"]').val(v);
 			});
 			$('input[name="id"]').attr('disabled', false);
+			$(".form-control").each(function(){
+				$(this).attr('disabled', true);
+			});
 		}
 	});
 
 	$('.submitFormPrincipal').remove();
 	
-	$("#formPrincipal").submit(function(e){
-		e.preventDefault();
-		toLastGrid();
-		toast('warning', 'Nenhuma alteração foi salva.');
-	});
+	
 }
 
 //FUNÇÃO PARA ESTRUTURAÇÃO DO INSERT DO FORM
