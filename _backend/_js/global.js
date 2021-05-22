@@ -41,6 +41,7 @@ function loadGrid(grid, status = false){
 	});
 }
 
+
 //FUNÇÃO USADA PARA A ABERTURA DO MODAL ONDE TERÁ A GRID DE BUSCA
 function abreBusca(arquivo, titulo){
 	$('#modalBusca').modal('show');
@@ -112,6 +113,11 @@ function setMask(){
 	$(".inputDinheiro").maskMoney({
 		thousands: '.', 
 		decimal: ','
+	});
+	//ATRIBUIÇÃO DE UM READONLY FAKE POIS NÃO FUNCIONA COM O REQUIRED
+	$(".readonly").on('keydown paste focus mousedown', function(e){
+		if(e.keyCode != 9) // ignore tab
+			e.preventDefault();
 	});
 }
 

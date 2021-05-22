@@ -85,11 +85,11 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>CPF/CNPJ</label>
-                                        <input type="text" class="form-control busca entidade" name="entidadeCNPJ" readonly></input>
+                                        <input type="text" class="form-control busca entidade readonly" name="entidadeCNPJ"></input>
                                     </div>
                                     <div class="col-md-6">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control busca entidade" id="entidadeNome" readonly></input>
+                                        <input type="text" class="form-control busca entidade readonly" id="entidadeNome"></input>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Condição de pagamento</label>
-                                        <input type="text" class="form-control busca" id="condicaoPagamento" onclick="abreBusca('condicao_pagamento', 'Busca condição de pagamento');" readonly></input>
+                                        <input type="text" class="form-control busca readonly" id="condicaoPagamento" onclick="abreBusca('condicao_pagamento', 'Busca condição de pagamento');"></input>
                                         <input type="hidden" name="condicaoPagamento"></input>
                                     </div>
                                 </div>
@@ -136,7 +136,7 @@
             if($('#condicaoPagamento').val() != ''){
                 $('input[name="dataVencimento"]').val('').attr('readonly', true);
             }else{
-                $('input[name="dataVencimento"]').val('').attr('readonly', true);
+                $('input[name="dataVencimento"]').val('').attr('readonly', false);
             }
         }
         function selecionadosBusca(selecionados, arquivo){
@@ -212,7 +212,7 @@
 
         $(document).ready(function() {
             verifyURLForm();
-            
+            confirmCondicao = false;
             get = getURLParams();
             $.ajax({
                 url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
@@ -245,11 +245,11 @@
             $('#condicaoPagamento').val('');
             toast('success', "Condição de pagamento removida com sucesso.");
             changeVencimento();
-            if(acao == 23) $('#formPrincipal').submit();
+            //if(acao == 23) $('#formPrincipal').submit();
         }
         $('#salvarReceita').click(function(e){
-            e.preventDefault();
-            if($('#condicaoPagamento').val() != ''){
+            if($('#condicaoPagamento').val() != '' && confirmCondicao == false){
+                e.preventDefault();
                 var adicional = '';
                 if(get.action == 'edit') adicional = " Por se tratar de uma edição, o atual lançamento será apagado e será gerado novos com as novas condições de pagamento.";
                 Swal.fire({
@@ -259,10 +259,8 @@
                     footer: '<a onclick="removerCondicao(23);" href="javascript:;">Remover condição</a>'
                 });
                 $('.swal2-confirm').click(function(){
-                    $('#formPrincipal').submit();
+                    confirmCondicao = true;
                 });
-            }else{
-                $('#formPrincipal').submit();
             }
         });        
         

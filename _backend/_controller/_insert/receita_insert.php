@@ -14,7 +14,7 @@
             $_POST['valor'] = $value['valor'];
             $_POST['dataVencimento'] = $value['vencimento'];
             $_POST['parcela'] = $value['parcela'];
-            //$return = $conn->insert($_POST, 'receita');
+            $return = $conn->insert($_POST, 'receita');
         }
     }
 
