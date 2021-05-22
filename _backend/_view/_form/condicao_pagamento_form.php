@@ -69,6 +69,7 @@
                                     <div class="col-md-2">
                                         <label>Dias bloqueados</label>
                                         <input type="button" class="form-control btn-primary" id="diasBloqueados" value="Configurar"></input>
+                                        <input type="hidden" name="diasBloqueados"></input>
                                     </div>
                                 </div>
                             </div>
@@ -132,17 +133,25 @@
     <script>
         $('#modalDias').focusout(function(){
             var semana = '';
-            $('.semanaAtivo').each(function(){
+            $('.semanaInativo').each(function(){
                 semana += $(this).attr('id') + '; ';
             });
-            console.log(semana.substring(0, semana.length -2));
+            $('input[name="diasBloqueados"]').val(semana.substring(0, semana.length -2));
         });
+
         function verificaDiasAtivos(){
             var cont = 0;
             $('.semanaAtivo').each(function(){
                 cont++;
             });
             if(cont > 1) return true;
+        }
+
+        function desativarDias(){
+            var dia = $('input[name="diasBloqueados"]').val().split('; ');
+            $(dia).each(function(k,v){
+                $('#'+v).removeClass('semanaAtivo').addClass('semanaInativo');
+            });
         }
 
         $('.semanaButtons').click(function(){
@@ -163,5 +172,6 @@
 
         $(document).ready(function() {
             verifyURLForm();
+            setTimeout(function(){ desativarDias(); }, 100);
         });
     </script>
