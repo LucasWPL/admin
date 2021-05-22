@@ -11,7 +11,7 @@
         $return = $conn->update($_POST, 'receita', $param);
     }else{
         $return = $conn->sql("UPDATE receita SET status = 'apagada' WHERE id = :id", $param);
-        $parcelas = calculaCondicao($_POST['valor'], $_POST['condicaoPagamento']); unset($_POST['id']);
+        $parcelas = calculaCondicao($_POST['valor'], $_POST['condicaoPagamento'], $_POST['dataEmissao']); unset($_POST['id']);
         $_POST['totalParcelas'] = count($parcelas); $_POST['usuarioCadastro'] = $_SESSION['userId']; $_POST['usuarioCadastroNome'] = $_SESSION['userName']; 
         foreach ($parcelas as $value) {
             $_POST['valor'] = $value['valor'];

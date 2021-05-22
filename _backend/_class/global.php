@@ -13,32 +13,58 @@
         return number_format($valor, 2, '.', '');
     }
 
-    function calculaCondicao($valor, $condicao){
+    function getCondicao($condicao){
         $param = [
             ":ID" => $condicao
         ];
         $conn = new Crud();
-        $dados = $conn->getSelect("SELECT * FROM condicao_pagamento WHERE id = :ID", $param);
-        $arrayBloqueados = explode('; ', $dados-> diasBloqueados); $hoje = date('Y-m-d'); $arrayData = array();
-        $valorParcela = $valor / $dados->parcelas;
-        for($i = 1; $i <= $dados->parcelas; $i++){
-            $i > 1 ? $calc = $dados->intervalo * ($i - 1) : $calc = 0;
-            $aux = 1;
-            $data = date('Y-m-d', strtotime($hoje . ' + ' . ($dados->carencia + $calc) . " days"));
-            
-            while(in_array(date('w', strtotime($data)), $arrayBloqueados)){
-                $aux2 = $calc + $aux;
-                $data = date('Y-m-d', strtotime($hoje . ' + ' . ($dados-> carencia + $aux2) . " days")); $aux++;
-            }
-            
-            if($i == $dados->parcelas){
-                $resto = formataFloat($valor) - (formataFloat($valorParcela) * $dados->parcelas);
-                $valorParcela += $resto;
-            }
+        $dados = $conn->getSelect("SELECT carencia, parcelas, intervalo, diasBloqueados FROM condicao_pagamento WHERE id = :ID", $param);
+        return $dados;
+    }
 
-            $arrayInfo = array("parcela" => $i, "vencimento" => $data, "valor" => formataFloat($valorParcela));
+    function getBloqueados($dados){
+        return explode('; ', $dados-> diasBloqueados); $arrayData = array();
+    }
+
+    function adicionarDias($diasAdd, $inicio){
+        return date('Y-m-d', strtotime($inicio . ' + ' . ($diasAdd) . " days"));
+    }
+
+    function getValorParcela($total, $parcela, $totalParcelas){ 
+        $valorParcela = $total / $totalParcelas;
+
+        if($totalParcelas == $parcela){
+            $resto = formataFloat($valor) - (formataFloat($valorParcela) * $dados->parcelas);
+            $valorParcela += $resto;
+        }
+        return formataFloat($valorParcela);
+    }
+
+    function getDataFinal($inicio, $condicao, $parcela){
+        $dados = getCondicao($condicao);
+        $parcela > 1 ? $calc = $dados->intervalo * ($parcela - 1) : $calc = 0; $aux = 1;
+        $data = adicionarDias(($dados->carencia + $calc), $inicio);
+        
+        $arrayBloqueados = getBloqueados($dados); 
+        while(in_array(getDiaSemana($data), $arrayBloqueados) && $aux <= 7){
+            $aux2 = $calc + $aux;
+            $data = adicionarDias(($dados->carencia + $aux2), $inicio); $aux++;
+        }
+
+        return $data;
+    }
+
+    function calculaCondicao($valor, $condicao, $inicio = 'hoje'){
+        if($inicio == 'hoje') $inicio = date('Y-m-d');
+        $arrayData = array();
+        $dados = getCondicao($condicao);
+
+        for($i = 1; $i <= $dados->parcelas; $i++){     
+            $data = getDataFinal($inicio, $condicao, $i);
+            $arrayInfo = array("parcela" => $i, "vencimento" => $data, "valor" => getValorParcela($valor, $i, $dados->parcelas));
             array_push($arrayData, $arrayInfo);
         }
+        
         return $arrayData;
     }
 

@@ -41,15 +41,19 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>NF-e</label>
                                         <input type="text" class="form-control" name="nfe"></input>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label>Valor</label>
                                         <input type="text" class="form-control inputDinheiro" name="valor" required></input>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <label>Emissão</label>
+                                        <input type="date" class="form-control" name="dataEmissao" required value="<?=date('Y-m-d')?>"></input>
+                                    </div>
+                                    <div class="col-md-3">
                                         <label>Vencimento</label>
                                         <input type="date" class="form-control" name="dataVencimento" required></input>
                                     </div>
@@ -128,6 +132,13 @@
     </section>
 
     <script>
+        function changeVencimento(){
+            if($('#condicaoPagamento').val() != ''){
+                $('input[name="dataVencimento"]').val('').attr('readonly', true);
+            }else{
+                $('input[name="dataVencimento"]').val('').attr('readonly', true);
+            }
+        }
         function selecionadosBusca(selecionados, arquivo){
             if(arquivo == 'usuario'){
                 $.ajax({
@@ -167,6 +178,7 @@
                         $('input[name="condicaoPagamento"]').val(data.id);
                         $('#condicaoPagamento').val(data.descricao);
                         toast('warning', "Lançamentos manuais com condição de pagamento não poderão ser alterados posteriormente.");
+                        changeVencimento();
                     }
                 });
             }
@@ -232,6 +244,7 @@
             $('input[name="condicaoPagamento"]').val(0);
             $('#condicaoPagamento').val('');
             toast('success', "Condição de pagamento removida com sucesso.");
+            changeVencimento();
             if(acao == 23) $('#formPrincipal').submit();
         }
         $('#salvarReceita').click(function(e){

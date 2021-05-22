@@ -31,9 +31,11 @@
                             <th>CPF/CNPJ</th>
                             <th>Nome</th>
                             <th>Histórico</th>
+                            <th>Parcela</th>
                             <th>Valor</th>
                             <th>Saldo devedor</th>
-                            <th id="colunaStatus">Status</th>
+                            <th>Status</th>
+                            <th>Emissão</th>
                             <th>Vencimento</th>
                             <th>Pagamento</th>
                             <th>Cadastro</th>
