@@ -93,13 +93,13 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="domingo" value="Domingo"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="segunda" value="Segunda"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="terca" value="Terça"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="quarta" value="Quarta"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="quinta" value="Quinta"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="sexta" value="Sexta"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="sabado" value="Sábado"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="1" value="Segunda"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="2" value="Terça"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="3" value="Quarta"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="4" value="Quinta"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="5" value="Sexta"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="6" value="Sábado"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="7" value="Domingo"></input>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
@@ -125,10 +125,13 @@
         }
     </style>
     <script>
-        $('#submitFormPrincipal').click(function(){
-
+        $('#modalDias').focusout(function(){
+            var semana = '';
+            $('.semanaAtivo').each(function(){
+                semana += $(this).attr('id') + '; ';
+            });
+            console.log(semana.substring(0, semana.length -2));
         });
-
         function verificaDiasAtivos(){
             var cont = 0;
             $('.semanaAtivo').each(function(){
