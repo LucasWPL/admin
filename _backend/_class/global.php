@@ -5,6 +5,43 @@
         header('Location: login');
     }
 
+    function getDiaSemana($data){
+        return date('w', strtotime($data));
+    }
+
+    function formataFloat($valor){
+        return number_format($valor, 2, '.', '');
+    }
+
+    function calculaCondicao($valor, $condicao){
+        $param = [
+            ":ID" => $condicao
+        ];
+        $conn = new Crud();
+        $dados = $conn->getSelect("SELECT * FROM condicao_pagamento WHERE id = :ID", $param);
+        $arrayBloqueados = explode('; ', $dados-> diasBloqueados); $hoje = date('Y-m-d'); $arrayData = array();
+        $valorParcela = $valor / $dados->parcelas;
+        for($i = 1; $i <= $dados->parcelas; $i++){
+            $i > 1 ? $calc = $dados->intervalo * ($i - 1) : $calc = 0;
+            $aux = 1;
+            $data = date('Y-m-d', strtotime($hoje . ' + ' . ($dados->carencia + $calc) . " days"));
+            
+            while(in_array(date('w', strtotime($data)), $arrayBloqueados)){
+                $aux2 = $calc + $aux;
+                $data = date('Y-m-d', strtotime($hoje . ' + ' . ($dados-> carencia + $aux2) . " days")); $aux++;
+            }
+            
+            if($i == $dados->parcelas){
+                $resto = formataFloat($valor) - (formataFloat($valorParcela) * $dados->parcelas);
+                $valorParcela += $resto;
+            }
+
+            $arrayInfo = array("parcela" => $i, "vencimento" => $data, "valor" => formataFloat($valorParcela));
+            array_push($arrayData, $arrayInfo);
+        }
+        return $arrayData;
+    }
+
     function limpaMoeda($valor){
         $aux = str_replace('.', '',$valor);
         $aux = str_replace(',', '.',$aux);

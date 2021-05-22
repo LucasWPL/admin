@@ -105,7 +105,7 @@
                             <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="4" value="Quinta"></input>
                             <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="5" value="Sexta"></input>
                             <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="6" value="Sábado"></input>
-                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="7" value="Domingo"></input>
+                            <input type="button" class="form-control btn-primary semanaButtons semanaAtivo" id="0" value="Domingo"></input>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
