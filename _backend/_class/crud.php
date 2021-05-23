@@ -1,5 +1,7 @@
 <?php
     session_start(); error_reporting(0);
+    date_default_timezone_set('America/Sao_Paulo');
+    setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
     class Crud extends \PDO{
         private $db = 'sistema';
         private $username = 'root';
@@ -94,6 +96,22 @@
             }
             $retorno = $this->sql(substr($sql, 0, -2));
             return $retorno;
+        }
+
+        public function backup(){
+            $arquivo = fopen('../../estrutura_banco/'.date('d-m-Y').'.sql','wt'); 
+            $tables = parent::query('SHOW TABLES');
+
+            foreach ($tables as $table) {
+                $sql = '-- TABLE: '.$table[0].PHP_EOL; 
+                $create = parent::query('SHOW CREATE TABLE `'.$table[0].'`')->fetch(); 
+                $sql.=$create['Create Table'].';'.PHP_EOL;
+                fwrite($arquivo, $sql); 
+                $sql = PHP_EOL; 
+                $resultado = fwrite($arquivo, $sql); 
+                flush();          
+            }            
+            fclose($arquivo); 
         }
     }
 ?>

@@ -119,6 +119,7 @@ function setMask(){
 		if(e.keyCode != 9) // ignore tab
 			e.preventDefault();
 	});
+	$('.readonly').attr('autocomplete', 'off');
 }
 
 //ESTORNO DE LANCAMENTOS FINANCEIROS

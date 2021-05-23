@@ -1,12 +1,12 @@
 <?php
-	error_reporting(0); session_start();
+	session_start(); error_reporting(0);
 	require_once('../../_backend/_class/crud.php');
 	$conn = new Crud();
 	$params = array(
 		':userLogin' => 	$_POST['userLogin']
 	);
 	$dados = $conn->getSelect('SELECT * FROM user WHERE userLogin = :userLogin', $params);
-	
+	$conn->backup();
 	$return = password_verify($_POST['userPass'], $dados->userPass);
 	if($return != false){
 		$_SESSION['userId'] = $dados->id;
