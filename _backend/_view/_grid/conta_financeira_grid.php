@@ -38,5 +38,5 @@
     </section>
     <script>
         loadGrid('conta_financeira_select_grid.php');
-        setBotoes('conta_financeira', 'conta financeira', 'Cadastro conta financeira');
+        setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);
     </script>

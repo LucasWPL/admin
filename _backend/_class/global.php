@@ -18,7 +18,7 @@
             ":ID" => $condicao
         ];
         $conn = new Crud();
-        $dados = $conn->getSelect("SELECT carencia, parcelas, intervalo, diasBloqueados FROM condicao_pagamento WHERE id = :ID", $param);
+        $dados = $conn->getSelect("SELECT carencia, parcelas, intervalo, diasBloqueados, desconto FROM condicao_pagamento WHERE id = :ID", $param);
         return $dados;
     }
 
@@ -54,11 +54,15 @@
         return $data;
     }
 
+    function setDesconto($valor, $desconto){
+        return ($valor - (($valor / 100) * $desconto));
+    }
+
     function calculaCondicao($valor, $condicao, $inicio = 'hoje'){
         if($inicio == 'hoje') $inicio = date('Y-m-d');
         $arrayData = array();
         $dados = getCondicao($condicao);
-
+        $valor = setDesconto($valor, $dados->desconto);
         for($i = 1; $i <= $dados->parcelas; $i++){     
             $data = getDataFinal($inicio, $condicao, $i);
             $arrayInfo = array("parcela" => $i, "vencimento" => $data, "valor" => getValorParcela($valor, $i, $dados->parcelas));

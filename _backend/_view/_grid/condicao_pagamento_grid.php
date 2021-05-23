@@ -40,5 +40,5 @@
     </section>
     <script>
         loadGrid('condicao_pagamento_select_grid.php');
-        setBotoes('condicao_pagamento', 'condição de pagamento', 'Cadastro condição de pagamento');
+        setBotoes('condicao_pagamento', 'condicao_pagamento', 'Cadastro condição de pagamento');
     </script>
