@@ -51,7 +51,7 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('receita_select_grid.php', 7);
+        loadGrid('receita_select_grid.php', 8);
         setBotoes('receita', 'receita', 'Cadastro receita');
 
         function baixarReceita(){

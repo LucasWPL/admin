@@ -249,6 +249,12 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'conta_financeira_grid.php','Conta financeira')" class="nav-link">
+                  <i class="fas fa-wallet nav-icon"></i>
+                  <p>Conta financeira</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita')" class="nav-link">
                   <i class="fas fa-money-bill-wave-alt nav-icon"></i>
                   <p>Receita</p>

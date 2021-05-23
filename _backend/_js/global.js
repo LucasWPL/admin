@@ -33,6 +33,7 @@ function loadGrid(grid, status = false){
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			if(status != false){
 				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
+				if(aData[status] == 'Apagada') $('td', nRow).css('background-color', '#f2f2f2');
 				if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#99ffbb');
 				if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#ccffdd');
 				if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
