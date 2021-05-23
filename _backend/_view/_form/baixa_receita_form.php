@@ -17,18 +17,10 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-8">
                                         <label>Observação de baixa</label>
                                         <input type="text" class="form-control" name="obsBaixa"></input>
                                         <input type="hidden" class="form-control" name="lancamento"></input>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Saldo restante</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valor" readonly></input>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Valor baixa</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" required></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
@@ -36,7 +28,24 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Data baixa</label>
-                                        <input type="date" class="form-control" name="dataBaixa" value="<?=date('Y-m-d')?>"></input>
+                                        <input type="date" class="form-control" name="dataBaixa" value="<?=date('Y-m-d')?>" max="<?=date('Y-m-d')?>"></input>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Conta origem</label>
+                                        <input type="text" class="form-control inputDinheiro" id="contaOrigem" disabled></input>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Conta baixa</label>
+                                        <input type="text" class="form-control busca readonly" id="contaBaixa" required onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
+                                        <input name="contaBaixa" type="hidden">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Saldo restante</label>
+                                        <input type="text" class="form-control inputDinheiro" name="valor" readonly></input>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label>Valor baixa</label>
+                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" required></input>
                                     </div>
                                 </div>
                             </div>
@@ -55,6 +64,22 @@
     </section>
 
     <script>
+        function selecionadosBusca(selecionados, arquivo){
+            if(arquivo == 'conta_financeira'){
+                $.ajax({
+                    url : "_backend/_controller/_select/_ajax/conta_financeira_select_ajax.php",
+                    type : 'get',
+                    dataType: "json",
+                    data : {
+                        id : $(selecionados).get(0)
+                    },
+                    success : function(data){
+                        $('input[name="contaBaixa"]').val(data.id);
+                        $('#contaBaixa').val(data.descricao);
+                    }
+                });
+            }
+        }
         $(document).ready(function() {
             var get = getURLParams();
             $.ajax({
@@ -72,6 +97,7 @@
                         $('input[name="valorBaixa"]').val(real(valor));
                         $('input[name="valor"]').val(real(valor));
                         $('input[name="lancamento"]').val(data.id);
+                        $('#contaOrigem').val(data.contaDesc);
                     }else{
                         toLastGrid();
                         toast('error', "O lançamento selecionado já foi baixado.");

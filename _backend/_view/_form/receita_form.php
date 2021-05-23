@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Emissão</label>
-                                        <input type="date" class="form-control" name="dataEmissao" required value="<?=date('Y-m-d')?>"></input>
+                                        <input type="date" class="form-control" name="dataEmissao" required value="<?=date('Y-m-d')?>" max="<?=date('Y-m-d')?>"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
