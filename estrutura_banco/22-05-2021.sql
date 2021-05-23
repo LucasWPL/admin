@@ -11,7 +11,7 @@ CREATE TABLE `baixa_lancamento` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: bancos
 CREATE TABLE `bancos` (
@@ -53,11 +53,14 @@ CREATE TABLE `condicao_pagamento` (
 CREATE TABLE `conta_financeira` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `descricao` varchar(63) NOT NULL,
+  `banco` varchar(64) DEFAULT NULL,
+  `agencia` varchar(32) DEFAULT NULL,
+  `conta` varchar(32) DEFAULT NULL,
   `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
   `usuarioCadastro` int(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: forma_pagamento
 CREATE TABLE `forma_pagamento` (

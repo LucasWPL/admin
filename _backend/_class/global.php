@@ -5,6 +5,15 @@
         header('Location: login');
     }
 
+    function getContaDesc($conta){
+        $param = [
+            ":ID" => $conta
+        ];
+        $conn = new Crud();
+        $dados = $conn->getSelect("SELECT descricao FROM conta_financeira WHERE id = :ID", $param);
+        return $dados->descricao;
+    }
+
     function getDiaSemana($data){
         return date('w', strtotime($data));
     }
