@@ -106,7 +106,8 @@
                 $sql = '-- TABLE: '.$table[0].PHP_EOL; 
                 $create = parent::query('SHOW CREATE TABLE `'.$table[0].'`')->fetch(); 
                 $sql.=$create['Create Table'].';'.PHP_EOL;
-                fwrite($arquivo, $sql); 
+                fwrite($arquivo, $sql);              
+
                 $sql = PHP_EOL; 
                 $resultado = fwrite($arquivo, $sql); 
                 flush();          

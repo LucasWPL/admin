@@ -22,15 +22,12 @@
                     <thead>
                         <tr>
                             <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>Descrição</th>
+                            <th>Cód</th>
                             <th>Banco</th>
-                            <th>Data cadastro</th>
-                            <th>Usuário cadastro</th>
                         </tr>
                     </thead>
                     <tbody>
-                    </tbody>
+                    <tbody>
                 </table>
             </div>
         </div>
@@ -38,6 +35,6 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('conta_financeira_select_grid.php');
-        setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);
+        loadGrid('bancos_select_grid.php');
+        setBotoes('bancos', 'bancos', 'Cadastro bancos');
     </script>

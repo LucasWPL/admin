@@ -248,6 +248,7 @@ function formEdit(id, url){
 			$.each(data, function (k,v) {
 				$('input[name="'+k+'"]').val(v);
 				$('select[name="'+k+'"]').val(v);
+				$('#'+k+'').val(v);
 			});
 			$('input[name="id"]').attr('disabled', false);
 		}

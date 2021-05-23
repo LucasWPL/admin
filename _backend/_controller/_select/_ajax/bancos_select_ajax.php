@@ -5,6 +5,6 @@
     $param = [
         ":ID" => $_GET['id']
     ];
-	$dados = $conn->getSelect("SELECT * FROM cliente WHERE id = :ID", $param);
+	$dados = $conn->getSelect("SELECT * FROM bancos WHERE id = :ID", $param);
 	echo json_encode($dados);
 ?>

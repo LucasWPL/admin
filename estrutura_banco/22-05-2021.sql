@@ -5,12 +5,21 @@ CREATE TABLE `baixa_lancamento` (
   `lancamento` int(11) NOT NULL,
   `obsBaixa` text DEFAULT NULL,
   `valorBaixa` decimal(15,4) NOT NULL,
+  `contaBaixa` int(11) NOT NULL,
   `dataBaixa` date NOT NULL,
   `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4;
+
+-- TABLE: bancos
+CREATE TABLE `bancos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cod` int(11) NOT NULL,
+  `banco` varchar(64) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=253 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: cliente
 CREATE TABLE `cliente` (
@@ -40,6 +49,16 @@ CREATE TABLE `condicao_pagamento` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
+-- TABLE: conta_financeira
+CREATE TABLE `conta_financeira` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `descricao` varchar(63) NOT NULL,
+  `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
+  `usuarioCadastro` int(16) NOT NULL,
+  `usuarioCadastroNome` varchar(32) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
 -- TABLE: forma_pagamento
 CREATE TABLE `forma_pagamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -58,6 +77,7 @@ CREATE TABLE `receita` (
   `entidadeTipo` varchar(32) DEFAULT NULL,
   `entidadeCNPJ` varchar(16) DEFAULT NULL,
   `condicaoPagamento` int(11) NOT NULL,
+  `contaFinanceira` int(11) DEFAULT NULL,
   `parcela` int(11) NOT NULL DEFAULT 1,
   `totalParcelas` int(11) NOT NULL DEFAULT 1,
   `dataEmissao` date DEFAULT NULL,
@@ -66,7 +86,7 @@ CREATE TABLE `receita` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: user
 CREATE TABLE `user` (
