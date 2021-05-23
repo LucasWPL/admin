@@ -4,7 +4,7 @@
             <!-- Main row -->
             <form id="formPrincipal">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="card card-default">
                             <div class="card-header">
                                 <h3 class="card-title">Dados cadastrais</h3>
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="card card-default">
                             <div class="card-header">
                                 <h3 class="card-title">Informações fiscais</h3>
@@ -41,19 +41,24 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4">
+                                        <label>Conta financeira</label>
+                                        <input type="text" class="form-control busca readonly" id="contaFinanceira" onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
+                                        <input name="contaFinanceira" type="hidden">
+                                    </div>
+                                    <div class="col-md-2">
                                         <label>NF-e</label>
                                         <input type="text" class="form-control" name="nfe"></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Valor</label>
                                         <input type="text" class="form-control inputDinheiro" name="valor" required></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Emissão</label>
                                         <input type="date" class="form-control" name="dataEmissao" required value="<?=date('Y-m-d')?>"></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Vencimento</label>
                                         <input type="date" class="form-control" name="dataVencimento" required></input>
                                     </div>
@@ -181,6 +186,19 @@
                         changeVencimento();
                     }
                 });
+            }else if(arquivo == 'conta_financeira'){
+                $.ajax({
+                    url : "_backend/_controller/_select/_ajax/conta_financeira_select_ajax.php",
+                    type : 'get',
+                    dataType: "json",
+                    data : {
+                        id : $(selecionados).get(0)
+                    },
+                    success : function(data){
+                        $('input[name="contaFinanceira"]').val(data.id);
+                        $('#contaFinanceira').val(data.descricao);
+                    }
+                });
             }
         }
         function changeEntidadeTipo(value){
@@ -226,12 +244,13 @@
                         $('input[name="valor"]').val(real(data.valor));
                         $('#entidadeNome').val(data.entidadeNome);
                         $('#condicaoPagamento').val(data.condicaoDesc);
+                        $('#contaFinanceira').val(data.contaDesc);
                         changeEntidadeTipo('inicial');
                     }else{
                         toLastGrid();
                         toast('error', "Só é possível editar lançamentos em aberto.");
                     }                        
-
+                    console.log(data);
                     if(data.condicaoPagamento != 0 && get.action == 'edit'){
                         toLastGrid();
                         toast('error', "Não é permitido a alteração de lançamento com condições de pagamento.");
