@@ -32,7 +32,10 @@
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-  <script type="text/javascript" src="_backend/_js/global.js"></script></head>
+  <script type="text/javascript" src="_backend/_js/global.js"></script>
+  
+  <script type="text/javascript" src="_backend/_js/makeTable.js"></script></head>
+  </head>
 
 <style>
 	.blocoBotoes{

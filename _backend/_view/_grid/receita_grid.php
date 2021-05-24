@@ -23,7 +23,7 @@
         <!-- Main row -->
         <div class="row tabelasScroll">
             <div class="col-md-12">
-                <table id="gridPrincipal" class="table table-bordered table-hover">
+                <table id="gridPrincipal" class="table table-hover table-stripe">
                     <thead>
                         <tr>
                             <th class="thCkechboxGrid"></th>
@@ -41,6 +41,7 @@
                             <th>Cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     <tbody>
@@ -51,6 +52,26 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
+        var colunas = [
+            'id', 
+            'entidadeCNPJ', 
+            'entidadeNome', 
+            'historico', 
+            'parcela', 
+            'valor', 
+            'valor', 
+            'status', 
+            'dataEmissao', 
+            'dataVencimento', 
+            'dataBaixa', 
+            'dataCadastro', 
+            'usuarioCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
+        tabela.make();
+
         loadGrid('receita_select_grid.php', 8);
         setBotoes('receita', 'receita', 'Cadastro receita');
 

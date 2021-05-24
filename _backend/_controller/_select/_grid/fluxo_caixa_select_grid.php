@@ -1,7 +1,7 @@
 <?php
 	require_once('../../../_class/crud.php');
 	require_once('../../../_class/global.php');
-    
+
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
 	$sql = "SELECT baixa_lancamento.*, 
@@ -35,6 +35,6 @@
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
 
-	$reponse = ['data' => $fullData];//RESPOSTA ESPERADA PELO DATATABLE
+	$reponse = ['data' => $fullData, 'sql' => $sql];//RESPOSTA ESPERADA PELO DATATABLE
 	echo json_encode($reponse);
 ?>

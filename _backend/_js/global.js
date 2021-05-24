@@ -30,6 +30,12 @@ function loadGrid(grid, status = false){
 		"ordering": true,
 		"info": true,
 		"autoWidth": false,
+		"processing": true,
+		"language": {
+			"processing": "Aguarde...",
+			"infoFiltered": "(Filtrando _MAX_ registros)"
+		},
+		"serverSide": true,
 		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
 			if(status != false ){
 				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
@@ -40,7 +46,7 @@ function loadGrid(grid, status = false){
 					if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
 				}else if(grid == 'fluxo_caixa_select_grid.php'){
 					if(aData[status] == 'Receita') $('td', nRow).css('background-color', '#ccffdd');
-					if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ff9980');
+					if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ffc2b3');
 				}			
 			}
 		}
