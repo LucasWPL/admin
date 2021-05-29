@@ -22,7 +22,7 @@ function loadPage(type, page, title){
 		
 */
 function loadGrid(grid, status = false){
-	$('#gridPrincipal').DataTable({
+	return $('#gridPrincipal').DataTable({
 		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
 		"paging": true,
 		"lengthChange": true,

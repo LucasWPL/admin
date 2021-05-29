@@ -20,7 +20,7 @@ class makeTable {
         var html = '<td><input type="checkbox"  id="bulkDelete"  /></td>';
         $(this.colunas).each(function(k,v){
             if(v[2] == 'input') {
-                html += '<td><input type="'+v[3]+'" class="form-control" id="'+v[1]+'"></td>';
+                html += '<td><input type="'+v[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+v[1]+'"></td>';
             }else if(v[2] == 'select'){
                 var aux = v[3].split('; ');
                 html += '<td><select id="'+v[1]+'" class="form-control">';

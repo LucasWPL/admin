@@ -59,7 +59,7 @@
             'historico', 
             'parcela', 
             'valor', 
-            'valor', 
+            'saldoDevedor', 
             'status', 
             'dataEmissao', 
             'dataVencimento', 
@@ -72,7 +72,7 @@
         tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
         tabela.make();
 
-        loadGrid('receita_select_grid.php', 8);
+        var dataTables = loadGrid('receita_select_grid.php', 8);
         setBotoes('receita', 'receita', 'Cadastro receita');
 
         function baixarReceita(){
