@@ -40,7 +40,7 @@
     </section>
     <script>
         var colunas = [
-            'id', 
+            'cliente.id', 
             'CNPJ', 
             'nome', 
             'dataCadastro', 

@@ -40,7 +40,7 @@
     </section>
     <script>
         var colunas = [
-            'id', 
+            'conta_financeira.id', 
             'descricao', 
             'bancoDesc', 
             'dataCadastro', 

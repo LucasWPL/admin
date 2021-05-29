@@ -53,7 +53,7 @@
     </section>
     <script>
         var colunas = [
-            'id', 
+            'receita.id', 
             'entidadeCNPJ', 
             'entidadeNome', 
             'historico', 

@@ -27,51 +27,49 @@ class makeTable {
     }
 
     setDate(ids){
-        setTimeout(function(){ 
-            $(ids).each(function(){
-                $('#'+this).daterangepicker({
-                    "locale": {
-                        "format": "DD/MM/YYYY",
-                        "separator": " - ",
-                        "applyLabel": "Aplicar",
-                        "cancelLabel": "Cancelar",
-                        "daysOfWeek": [
-                        "Dom",
-                        "Seg",
-                        "Ter",
-                        "Qua",
-                        "Qui",
-                        "Sex",
-                        "Sab"
-                    ],
-                    "monthNames": [
-                        "Janeiro",	
-                        "Fevereiro",
-                        "Março",
-                        "Abril",
-                        "Maio",
-                        "Junho",
-                        "Julho",
-                        "Agosto",
-                        "Setembro",
-                        "Outubro",
-                        "Novembro",
-                        "Dezembro"
-                    ],
-                    "firstDay": 1
-                    }
-                });
-                $('#'+this).attr('autocomplete', 'off');
-                
-                $('#'+this).on('apply.daterangepicker', function (ev, picker) {
-                    $(this).val(picker.startDate.format('L') + ' - ' + picker.endDate.format('L'));
-                });
-    
-                $('#'+this).on('cancel.daterangepicker', function (ev, picker) {
-                    $(this).val('');
-                });
+        $(ids).each(function(){
+            $('#'+this).daterangepicker({
+                "locale": {
+                    "format": "DD/MM/YYYY",
+                    "separator": " - ",
+                    "applyLabel": "Aplicar",
+                    "cancelLabel": "Cancelar",
+                    "daysOfWeek": [
+                    "Dom",
+                    "Seg",
+                    "Ter",
+                    "Qua",
+                    "Qui",
+                    "Sex",
+                    "Sab"
+                ],
+                "monthNames": [
+                    "Janeiro",	
+                    "Fevereiro",
+                    "Março",
+                    "Abril",
+                    "Maio",
+                    "Junho",
+                    "Julho",
+                    "Agosto",
+                    "Setembro",
+                    "Outubro",
+                    "Novembro",
+                    "Dezembro"
+                ],
+                "firstDay": 1
+                }
             });
-         }, 100);        
+            $('#'+this).attr('autocomplete', 'off');
+            
+            $('#'+this).on('apply.daterangepicker', function (ev, picker) {
+                $(this).val(picker.startDate.format('L') + ' - ' + picker.endDate.format('L')).change();
+            });
+
+            $('#'+this).on('cancel.daterangepicker', function (ev, picker) {
+                $(this).val('').change();
+            });
+        });       
     }
     
     setAttr(){

@@ -49,7 +49,7 @@
     </section>
     <script>
         var colunas = [
-            'id', 
+            'baixa_lancamento.id', 
             'tipoLancamento', 
             'lancamento', 
             'historico', 

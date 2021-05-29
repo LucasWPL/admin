@@ -41,7 +41,7 @@
     </section>
     <script>
         var colunas = [
-            'id', 
+            'condicao_pagamento.id', 
             'descricao', 
             'formaPagamentoDesc', 
             'desconto', 

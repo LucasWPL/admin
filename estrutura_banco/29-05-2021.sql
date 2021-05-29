@@ -79,6 +79,7 @@ CREATE TABLE `receita` (
   `status` varchar(32) NOT NULL DEFAULT 'aberta',
   `entidadeTipo` varchar(32) DEFAULT NULL,
   `entidadeCNPJ` varchar(16) DEFAULT NULL,
+  `entidadeNome` varchar(64) DEFAULT NULL,
   `condicaoPagamento` int(11) NOT NULL,
   `contaFinanceira` int(11) DEFAULT NULL,
   `parcela` int(11) NOT NULL DEFAULT 1,
@@ -89,7 +90,7 @@ CREATE TABLE `receita` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: user
 CREATE TABLE `user` (
