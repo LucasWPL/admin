@@ -4,8 +4,7 @@
 	session_start();
 
 	$sql = 'SELECT conta_financeira.*, bancos.banco AS bancoDesc FROM conta_financeira 
-	LEFT JOIN bancos ON bancos.id = conta_financeira.banco
-	ORDER BY conta_financeira.id DESC';	
+	LEFT JOIN bancos ON bancos.id = conta_financeira.banco';	
 	$dados = json_decode(getDados($sql, $_REQUEST));
 
 	$array = array(); $fullData = array();

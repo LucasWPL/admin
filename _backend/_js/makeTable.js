@@ -99,6 +99,13 @@ class makeTable {
                 }
             }
         });
+        
+        $('.employee-search-gridPrincipal-input').on('keyup change', function (event) {
+            var i = $(this).attr('id'); // getting column index
+            var v = $(this).val(); // getting search input value
+            i = colunas.indexOf(i);
+            tabela.columns(i).search(v).draw();
+        });
 
         return tabela;
     }

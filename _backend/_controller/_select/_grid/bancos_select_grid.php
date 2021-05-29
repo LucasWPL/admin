@@ -3,7 +3,7 @@
 	require_once('../../../_class/makeTables.php');
 	session_start();
 	
-	$sql = 'SELECT * FROM bancos ORDER BY id DESC';
+	$sql = 'SELECT * FROM bancos';
 	$dados = json_decode(getDados($sql, $_REQUEST));
 	
 	$array = array(); $fullData = array();

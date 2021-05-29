@@ -9,8 +9,7 @@
     CASE baixa_lancamento.tipoLancamento WHEN 'receita' THEN receita.dataVencimento END AS dataVencimento,
     CASE baixa_lancamento.tipoLancamento WHEN 'receita' THEN receita.contaFinanceira END AS contaFinanceira
     FROM baixa_lancamento 
-    LEFT JOIN receita ON receita.id = baixa_lancamento.lancamento
-    ORDER BY baixa_lancamento.id DESC";
+    LEFT JOIN receita ON receita.id = baixa_lancamento.lancamento";
 	$dados = json_decode(getDados($sql, $_REQUEST));
 	
 	$array = array(); $fullData = array();

@@ -2,7 +2,7 @@
 	require_once('../../../_class/global.php');
 	require_once('../../../_class/makeTables.php');
 	session_start();
-	$sql = 'SELECT * FROM cliente ORDER BY id DESC';	
+	$sql = 'SELECT * FROM cliente';	
 	$dados = json_decode(getDados($sql, $_REQUEST));
 
 	$array = array(); $fullData = array();
