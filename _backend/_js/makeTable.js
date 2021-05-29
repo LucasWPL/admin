@@ -74,6 +74,9 @@ class makeTable {
     
     setAttr(){
         $('.employee-search-gridPrincipal-input').css('min-width', '100px');
+        $('.employee-search-gridPrincipal-input').click(function(){
+            return false;
+        });
         $('#id').attr('style', '');
         $('#id').css('min-width', '50px');
     }
