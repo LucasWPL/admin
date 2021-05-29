@@ -27,14 +27,24 @@
         return $sql;
     }
 
-    function getDados($sql, $request, $group = false){
+    function getRegistros($sql, $request){
         //CONEXÃO E REQUISIÇÃO AO BDD
         $conn = new Crud();
-        $sql = getFullSql($sql, $group, $request);
         $dados = $conn->getSelect($sql . " LIMIT {$request['start']} , {$request['length']}",'', TRUE);
         $dadosTotais = $conn->getSelect($sql,'', TRUE);
-        $retorno = array("data" => $dados, "filtrados"=> count($dados),"totais" => count($dadosTotais));
-        return json_encode($retorno);
+        $retorno = array("dados" => $dados, "dadosTotais" => $dadosTotais);
+        return $retorno;
+    }
+
+    function getRetorno($sql, $request){
+        $dados = getRegistros($sql, $request);
+        $retorno = array("data" => $dados['dados'], "filtrados"=> count($dados['dadosTotais']),"totais" => count($dados['dadosTotais']));
+        return $retorno;
+    }
+
+    function getDados($sql, $request, $group = false){
+        $sql = getFullSql($sql, $group, $request);
+        return json_encode(getRetorno($sql, $request));
     }
 
     function getResponse($data, $full, $request){
