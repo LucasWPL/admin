@@ -18,7 +18,7 @@
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
 		$data[] = $value->id;
 		$data[] = $value->entidadeCNPJ;
-		$data[] = $value->clienteNome;
+		$data[] = $value->entidadeNome;
 		$data[] = $value->historico;
 		$data[] = $value->parcela .'/'. $value->totalParcelas;
 		$data[] = formataReal($value->valor);

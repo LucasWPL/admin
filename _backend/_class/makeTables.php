@@ -2,7 +2,18 @@
     session_start(); error_reporting(0);
     require_once('crud.php');
     
-    
+    function getWhere($sql, $request, $colunas){
+        $where = ' WHERE 1=1 ';
+        foreach ($request as $key => $value) {
+            if(!empty($value['search']['value'])){
+                $where .= " AND {$colunas[$value['data']][1]} LIKE '%{$value['search']['value']}%'";
+            }
+        }
+        if($where == ' WHERE 1=1 ') $where = '';
+        $retorno = $sql . $where;
+        return $retorno;
+    }
+
     function getOrderBy($sql, $order, $colunas){
         if($order['column'] > 0){ 
             $index = $order['column'] - 1;
@@ -21,13 +32,14 @@
         return $sql;
     }
     
-    function getFullSql($sql, $group, $request){
+    function getFullSql($sql, $group, $request){//MONTA TODAS AS CLÁUSULAS DA QUERY
+        $sql = getWhere($sql, $request['columns'], $request['colunas']);
         $sql = getGroupBy($sql, $group);
         $sql = getOrderBy($sql, $request['order'][0], $request['colunas']);
         return $sql;
     }
 
-    function getRegistros($sql, $request){
+    function getRegistros($sql, $request){//PEGA OS DADOS COM A QUERY PRONTA
         //CONEXÃO E REQUISIÇÃO AO BDD
         $conn = new Crud();
         $dados = $conn->getSelect($sql . " LIMIT {$request['start']} , {$request['length']}",'', TRUE);
@@ -36,9 +48,9 @@
         return $retorno;
     }
 
-    function getRetorno($sql, $request){
+    function getRetorno($sql, $request){//MONTA A ARRAY DE RETORNO QUE O SELECT GRID ESTÁ ESPERANDO
         $dados = getRegistros($sql, $request);
-        $retorno = array("data" => $dados['dados'], "filtrados"=> count($dados['dadosTotais']),"totais" => count($dados['dadosTotais']));
+        $retorno = array("data" => $dados['dados'], "filtrados"=> count($dados['dadosTotais']),"totais" => count($dados['dadosTotais']), "sql" => $sql);
         return $retorno;
     }
 
@@ -53,7 +65,7 @@
             "recordsTotal" => $data->totais, // total number of records
             "recordsFiltered" => $data->totais, // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "dev" => $request   // total data array
+            "dev" => $data   // total data array
         ];
         return $response;
     }

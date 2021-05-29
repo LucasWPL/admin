@@ -28,7 +28,7 @@ class makeTable {
 
     setDate(ids){
         $(ids).each(function(){
-            $('#'+this).daterangepicker().val('');
+            $('#'+this).daterangepicker().val('').change();
             $('#'+this).attr('autocomplete', 'off');
         });
     }
