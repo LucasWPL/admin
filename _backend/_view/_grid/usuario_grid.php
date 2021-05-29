@@ -49,6 +49,7 @@
         
         var tabela = new makeTable(colunas);
         tabela.make();
+        tabela.setDate(['userDataCadastro']);
 
         var dataTables = loadGrid('usuario_select_grid.php');
         setBotoes('usuario', 'user', 'Cadastro usuário');

@@ -66,6 +66,7 @@
         var tabela = new makeTable(colunas);
         tabela.setSelect('tipoLancamento', 'Receita; Despesa');
         tabela.make();
+        tabela.setDate(['dataVencimento', 'dataBaixa']);
 
         var dataTables = loadGrid('fluxo_caixa_select_grid.php', 2);
         setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento');

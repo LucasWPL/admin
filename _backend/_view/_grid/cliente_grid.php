@@ -49,6 +49,7 @@
         
         var tabela = new makeTable(colunas);
         tabela.make();
+        tabela.setDate(['dataCadastro']);
 
         var dataTables = loadGrid('cliente_select_grid.php');
         setBotoes('cliente', 'cliente', 'Cadastro cliente');

@@ -49,6 +49,7 @@
         
         var tabela = new makeTable(colunas);
         tabela.make();
+        tabela.setDate(['dataCadastro']);
 
         var dataTables = loadGrid('conta_financeira_select_grid.php');
         setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);

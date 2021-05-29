@@ -1,12 +1,13 @@
 <?php
-	require_once('../../../_class/crud.php');
+	require_once('../../../_class/global.php');
+	require_once('../../../_class/makeTables.php');
 	session_start();
-	//CONEXÃO E REQUISIÇÃO AO BDD
-	$conn = new Crud();
-	$dados = $conn->getSelect('SELECT * FROM bancos ORDER BY id DESC','', TRUE);
+	
+	$sql = 'SELECT * FROM bancos ORDER BY id DESC';
+	$dados = json_decode(getDados($sql, $_REQUEST));
 	
 	$array = array(); $fullData = array();
-	foreach ($dados as $key => $value) {//COLUNA
+	foreach ($dados->data as $key => $value) {//COLUNA
 		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";
 		$data[] = $value->cod;
@@ -15,6 +16,5 @@
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
 
-	$reponse = ['data' => $fullData];//RESPOSTA ESPERADA PELO DATATABLE
-	echo json_encode($reponse);
+	echo json_encode(getResponse($dados, $fullData, $_REQUEST));
 ?>

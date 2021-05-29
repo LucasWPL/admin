@@ -25,6 +25,7 @@
                             <th>Cód</th>
                             <th>Banco</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     <tbody>
@@ -35,6 +36,14 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('bancos_select_grid.php');
+        var colunas = [
+            'cod', 
+            'bancoDesc', 
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.make();
+
+        var dataTables = loadGrid('bancos_select_grid.php');
         setBotoes('bancos', 'bancos', 'Cadastro bancos');
     </script>
