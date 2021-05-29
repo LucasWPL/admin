@@ -23,7 +23,7 @@ class makeTable {
                 html += '<td><input type="'+v[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+v[1]+'"></td>';
             }else if(v[2] == 'select'){
                 var aux = v[3].split('; ');
-                html += '<td><select id="'+v[1]+'" class="form-control">';
+                html += '<td><select id="'+v[1]+'" class="form-control employee-search-gridPrincipal-input">';
                 $(aux).each(function(){
                     html += '<option value="'+this+'">'+this+'</option>';
                 });

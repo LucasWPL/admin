@@ -59,9 +59,7 @@ function abreBusca(arquivo, titulo){
 	$('#modalBusca').modal('show');
 	$('#modalBuscaTitulo').html(titulo);
 	$('#modalBuscaCorpo').load('_backend/_view/_grid/'+arquivo+'_grid.php?busca=S', function() {
-		$('#gridPrincipal').attr('id', 'formBusca');		
-		$('.blocoBotoes').html('');
-		$('#modalBuscaSubmit').unbind('click');
+		setModoBusca();		
 		$('#modalBuscaSubmit').click(function(){
 			//FUNÇÃO QUE DEVE SER REESCRITA NAS GRIDS PARA ATENDER AS NECESSIDADES ESPECÍFICAS
 			$('.checkboxGrids').addClass('checkboxBuscas').removeClass('checkboxGrids');
@@ -71,6 +69,18 @@ function abreBusca(arquivo, titulo){
 	});    
 }
 
+function setModoBusca(){
+	$('.blocoBotoes').html('');
+	$('#modalBuscaSubmit').unbind('click');
+	$('#gridPrincipal').attr('id', 'formBusca');		
+	$('#gridPrincipal_wrapper').attr('id', 'formBusca_wrapper');		
+	$('#gridPrincipal_length').attr('id', 'formBusca_length');		
+	$('#gridPrincipal_filter').attr('id', 'formBusca_filter');		
+	$('#camposPesquisa').attr('id', 'formBusca_camposPesquisa');		
+	$('#gridPrincipal_processing').attr('id', 'formBusca_processing');		
+	$('#gridPrincipal_info').attr('id', 'formBusca_info');		
+	$('#gridPrincipal_paginate').attr('id', 'formBusca_paginate');	
+}
 //BOTÕES GENÉRICOS GRID
 function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
 	//INÍCIO
