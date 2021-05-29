@@ -47,10 +47,9 @@
             'userUserCadastroNome'
         ];
         
-        var tabela = new makeTable(colunas);
-        tabela.make();
+        var tabela = new makeTable(colunas, 'usuario_select_grid.php');
+        var dataTables = tabela.make();
         tabela.setDate(['userDataCadastro']);
-
-        var dataTables = loadGrid('usuario_select_grid.php', colunas);
+        
         setBotoes('usuario', 'user', 'Cadastro usuário');
     </script>

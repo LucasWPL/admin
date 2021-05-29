@@ -49,10 +49,9 @@
             'usuarioCadastroNome'
         ];
         
-        var tabela = new makeTable(colunas);
-        tabela.make();
+        var tabela = new makeTable(colunas, 'condicao_pagamento_select_grid.php');
+        var dataTables = tabela.make();
         tabela.setDate(['dataCadastro']);
-
-        var dataTables = loadGrid('condicao_pagamento_select_grid.php', colunas);
+        
         setBotoes('condicao_pagamento', 'condicao_pagamento', 'Cadastro condição de pagamento');
     </script>
