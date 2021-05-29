@@ -72,7 +72,7 @@
         tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
         tabela.make();
         tabela.setDate(['dataEmissao', 'dataVencimento']);
-        var dataTables = loadGrid('receita_select_grid.php', 8);
+        var dataTables = loadGrid('receita_select_grid.php', colunas, 8);
         setBotoes('receita', 'receita', 'Cadastro receita');
 
         function baixarReceita(){

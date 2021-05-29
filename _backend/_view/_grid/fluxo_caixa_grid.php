@@ -68,6 +68,6 @@
         tabela.make();
         tabela.setDate(['dataVencimento', 'dataBaixa']);
 
-        var dataTables = loadGrid('fluxo_caixa_select_grid.php', 2);
+        var dataTables = loadGrid('fluxo_caixa_select_grid.php', colunas, 2);
         setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento');
     </script>

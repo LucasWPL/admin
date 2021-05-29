@@ -21,9 +21,14 @@ function loadPage(type, page, title){
 		"responsive": true,
 		
 */
-function loadGrid(grid, status = false){
+function loadGrid(grid, colunas, status = false){
 	return $('#gridPrincipal').DataTable({
-		"ajax": '_backend/_controller/_select/_grid/'+grid+'',
+		"ajax":
+		{
+			"url": '_backend/_controller/_select/_grid/'+grid+'',
+			"data": {
+			"colunas": colunas
+		}},
 		"paging": true,
 		"lengthChange": true,
 		"searching": true,

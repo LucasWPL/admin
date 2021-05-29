@@ -44,6 +44,6 @@
         var tabela = new makeTable(colunas);
         tabela.make();
 
-        var dataTables = loadGrid('bancos_select_grid.php');
+        var dataTables = loadGrid('bancos_select_grid.php', colunas);
         setBotoes('bancos', 'bancos', 'Cadastro bancos');
     </script>
