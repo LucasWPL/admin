@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control busca entidade readonly" id="entidadeNome"></input>
+                                        <input type="text" class="form-control busca entidade readonly" id="entidadeNome" name="entidadeNome"></input>
                                     </div>
                                 </div>
                             </div>

@@ -52,7 +52,7 @@
         this.timePickerIncrement = 1;
         this.timePickerSeconds = false;
         this.linkedCalendars = true;
-        this.autoUpdateInput = true;
+        this.autoUpdateInput = false;
         this.alwaysShowCalendars = false;
         this.ranges = {};
 
@@ -69,17 +69,35 @@
         this.cancelButtonClasses = 'btn-default';
 
         this.locale = {
-            direction: 'ltr',
-            format: moment.localeData().longDateFormat('L'),
-            separator: ' - ',
-            applyLabel: 'Apply',
-            cancelLabel: 'Cancel',
-            weekLabel: 'W',
-            customRangeLabel: 'Custom Range',
-            daysOfWeek: moment.weekdaysMin(),
-            monthNames: moment.monthsShort(),
-            firstDay: moment.localeData().firstDayOfWeek()
-        };
+			"format": "DD/dd/YYYY",
+			"separator": " - ",
+			"applyLabel": "Aplicar",
+			"cancelLabel": "Cancelar",
+			"daysOfWeek": [
+			"Dom",
+			"Seg",
+			"Ter",
+			"Qua",
+			"Qui",
+			"Sex",
+			"Sab"
+		],
+		"monthNames": [
+			"Janeiro",	
+			"Fevereiro",
+			"Março",
+			"Abril",
+			"Maio",
+			"Junho",
+			"Julho",
+			"Agosto",
+			"Setembro",
+			"Outubro",
+			"Novembro",
+			"Dezembro"
+		],
+		"firstDay": 1
+		};
 
         this.callback = function() { };
 

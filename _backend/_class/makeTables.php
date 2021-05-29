@@ -65,7 +65,7 @@
             "recordsTotal" => $data->totais, // total number of records
             "recordsFiltered" => $data->totais, // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "dev" => $data   // total data array
+            "dev" => $request   // total data array
         ];
         return $response;
     }

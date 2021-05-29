@@ -72,7 +72,7 @@
         tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
         
         var dataTables = tabela.make();
-        tabela.setDate(['dataEmissao', 'dataVencimento']);
+        tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         setBotoes('receita', 'receita', 'Cadastro receita');
         
