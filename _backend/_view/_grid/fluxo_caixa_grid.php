@@ -37,6 +37,7 @@
                             <th>Conta baixa</th>
                             <th>Usuário baixa</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     <tbody>
@@ -47,6 +48,25 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('fluxo_caixa_select_grid.php', 2);
+        var colunas = [
+            'id', 
+            'tipoLancamento', 
+            'lancamento', 
+            'historico', 
+            'obsBaixa',
+            'valor',
+            'valorBaixa',
+            'dataVencimento',
+            'dataBaixa',
+            'contaFinanceira',
+            'contaBaixa',
+            'usuarioCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.setSelect('tipoLancamento', 'Receita; Despesa');
+        tabela.make();
+
+        var dataTables = loadGrid('fluxo_caixa_select_grid.php', 2);
         setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento');
     </script>

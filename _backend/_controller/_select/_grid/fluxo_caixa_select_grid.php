@@ -1,9 +1,8 @@
 <?php
-	require_once('../../../_class/crud.php');
 	require_once('../../../_class/global.php');
+	require_once('../../../_class/makeTables.php');
+	session_start();
 
-	//CONEXÃO E REQUISIÇÃO AO BDD
-	$conn = new Crud();
 	$sql = "SELECT baixa_lancamento.*, 
     CASE baixa_lancamento.tipoLancamento WHEN 'receita' THEN receita.valor END AS valor,
     CASE baixa_lancamento.tipoLancamento WHEN 'receita' THEN receita.historico END AS historico,
@@ -12,10 +11,10 @@
     FROM baixa_lancamento 
     LEFT JOIN receita ON receita.id = baixa_lancamento.lancamento
     ORDER BY baixa_lancamento.id DESC";
-	$dados = $conn->getSelect($sql,'', TRUE);
+	$dados = json_decode(getDados($sql, $_REQUEST));
 	
 	$array = array(); $fullData = array();
-	foreach ($dados as $key => $value) {//COLUNA
+	foreach ($dados->data as $key => $value) {//COLUNA
 
 		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
@@ -35,6 +34,5 @@
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
 
-	$reponse = ['data' => $fullData, 'sql' => $sql];//RESPOSTA ESPERADA PELO DATATABLE
-	echo json_encode($reponse);
+	echo json_encode(getResponse($dados, $fullData, $_REQUEST));
 ?>

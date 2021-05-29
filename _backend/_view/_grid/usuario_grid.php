@@ -28,6 +28,7 @@
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     <tbody>
@@ -38,6 +39,17 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('usuario_select_grid.php');
+        var colunas = [
+            'id', 
+            'userName', 
+            'userLogin', 
+            'userDataCadastro', 
+            'userUserCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.make();
+
+        var dataTables = loadGrid('usuario_select_grid.php');
         setBotoes('usuario', 'user', 'Cadastro usuário');
     </script>

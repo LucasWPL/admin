@@ -28,6 +28,7 @@
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     </tbody>
@@ -38,6 +39,17 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('conta_financeira_select_grid.php');
+        var colunas = [
+            'id', 
+            'descricao', 
+            'bancoDesc', 
+            'dataCadastro', 
+            'usuarioCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.make();
+
+        var dataTables = loadGrid('conta_financeira_select_grid.php');
         setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);
     </script>

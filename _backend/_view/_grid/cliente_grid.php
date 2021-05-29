@@ -28,6 +28,7 @@
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     <tbody>
@@ -38,6 +39,17 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('cliente_select_grid.php');
+        var colunas = [
+            'id', 
+            'CNPJ', 
+            'nome', 
+            'dataCadastro', 
+            'usuarioCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.make();
+
+        var dataTables = loadGrid('cliente_select_grid.php');
         setBotoes('cliente', 'cliente', 'Cadastro cliente');
     </script>

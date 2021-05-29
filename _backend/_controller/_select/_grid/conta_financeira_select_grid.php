@@ -1,15 +1,15 @@
 <?php
-	require_once('../../../_class/crud.php');
 	require_once('../../../_class/global.php');
+	require_once('../../../_class/makeTables.php');
 	session_start();
-	//CONEXÃO E REQUISIÇÃO AO BDD
-	$conn = new Crud();
-	$dados = $conn->getSelect('SELECT conta_financeira.*, bancos.banco AS bancoDesc FROM conta_financeira 
+
+	$sql = 'SELECT conta_financeira.*, bancos.banco AS bancoDesc FROM conta_financeira 
 	LEFT JOIN bancos ON bancos.id = conta_financeira.banco
-	ORDER BY conta_financeira.id DESC','', TRUE);
-	
+	ORDER BY conta_financeira.id DESC';	
+	$dados = json_decode(getDados($sql, $_REQUEST));
+
 	$array = array(); $fullData = array();
-	foreach ($dados as $key => $value) {//COLUNA
+	foreach ($dados->data as $key => $value) {//COLUNA
 		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}'>";
 		$data[] = $value->id;
@@ -21,6 +21,5 @@
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
 
-	$reponse = ['data' => $fullData];//RESPOSTA ESPERADA PELO DATATABLE
-	echo json_encode($reponse);
+	echo json_encode(getResponse($dados, $fullData, $_REQUEST));
 ?>

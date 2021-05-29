@@ -29,6 +29,7 @@
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
+                        <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
                     </tbody>
@@ -39,6 +40,18 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
-        loadGrid('condicao_pagamento_select_grid.php');
+        var colunas = [
+            'id', 
+            'descricao', 
+            'formaPagamentoDesc', 
+            'desconto', 
+            'dataCadastro',
+            'usuarioCadastroNome'
+        ];
+        
+        var tabela = new makeTable(colunas);
+        tabela.make();
+
+        var dataTables = loadGrid('condicao_pagamento_select_grid.php');
         setBotoes('condicao_pagamento', 'condicao_pagamento', 'Cadastro condição de pagamento');
     </script>

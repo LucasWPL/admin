@@ -1,5 +1,4 @@
 <?php
-	require_once('../../../_class/crud.php');
 	require_once('../../../_class/global.php');
 	require_once('../../../_class/makeTables.php');
 	session_start();
@@ -34,6 +33,5 @@
 
 		$fullData[] = $data;//ARRAY DE COLUNAS
 	}
-	$teste = getResponse($dados, $fullData, $_REQUEST);
-	echo json_encode($teste);
+	echo json_encode(getResponse($dados, $fullData, $_REQUEST));
 ?>
