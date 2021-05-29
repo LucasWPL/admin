@@ -68,13 +68,18 @@
             'usuarioCadastroNome'
         ];
         
-        var tabela = new makeTable(colunas);
+        var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);
         tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
-        tabela.make();
+        
+        var dataTables = tabela.make();
         tabela.setDate(['dataEmissao', 'dataVencimento']);
-        var dataTables = loadGrid('receita_select_grid.php', colunas, 8);
+        
         setBotoes('receita', 'receita', 'Cadastro receita');
-
+        $('.employee-search-gridPrincipal-input').on('keyup change', function (event) {
+            var i = $(this).attr('id'); // getting column index
+            var v = $(this).val(); // getting search input value
+            dataTables.columns(5).search(v).draw();
+        });
         function baixarReceita(){
             selecionado = getSelectedFromGrid();
             if(selecionado != undefined){

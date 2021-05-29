@@ -8,57 +8,6 @@ function loadPage(type, page, title){
 	if(type == 'grid' || type == 'dashboard') setLastGrid(type, page, title);
 }
 
-//FUNÇÃO DE CARREGAMENTO DOS DADOS DA GRID
-/*
-	parametros retirados
-	
-		"paging": true,
-		"lengthChange": true,
-		"searching": true,
-		"ordering": true,
-		"info": true,
-		"autoWidth": false,
-		"responsive": true,
-		
-*/
-function loadGrid(grid, colunas, status = false){
-	return $('#gridPrincipal').DataTable({
-		"ajax":
-		{
-			"url": '_backend/_controller/_select/_grid/'+grid+'',
-			"data": {
-			"colunas": colunas
-		}},
-		"paging": true,
-		"lengthChange": true,
-		"searching": true,
-		"ordering": true,
-		"info": true,
-		"autoWidth": false,
-		"processing": true,
-		"language": {
-			"processing": "Aguarde...",
-			"infoFiltered": "(Filtrando _MAX_ registros)"
-		},
-		"serverSide": true,
-		"fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
-			if(status != false ){
-				//MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
-				if(grid == 'receita_select_grid.php'){
-					if(aData[status] == 'Apagada') $('td', nRow).css('background-color', '#f2f2f2');
-					if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#ccffdd');
-					if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#e6ffee');
-					if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
-				}else if(grid == 'fluxo_caixa_select_grid.php'){
-					if(aData[status] == 'Receita') $('td', nRow).css('background-color', '#ccffdd');
-					if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ffc2b3');
-				}			
-			}
-		}
-	});
-}
-
-
 //FUNÇÃO USADA PARA A ABERTURA DO MODAL ONDE TERÁ A GRID DE BUSCA
 function abreBusca(arquivo, titulo){
 	$('#modalBusca').modal('show');

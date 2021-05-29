@@ -1,14 +1,24 @@
 class makeTable {
-    constructor(colunas) {
+    constructor(colunas, url, status = false) {
         var array = [];
         $(colunas).each(function(k,v){
             array.push([k, v, 'input', 'text']);
         });
         this.colunas = array;
+        this.grid = url;
+        this.status = status;
     }
 
     get getColunas() {
         return this.colunas;
+    }
+
+    get getGrid() {
+        return this.grid;
+    }
+
+    get getStatus() {
+        return this.status;
     }
     
     setSelect(coluna, options){
@@ -52,7 +62,49 @@ class makeTable {
         this.setAttr();
     }
 
+    loadTable(){
+        let grid = this.grid;
+        let status = this.status;
+        var tabela = $('#gridPrincipal').DataTable({
+            "ajax":
+            {
+                "url": '_backend/_controller/_select/_grid/'+this.grid+'',
+                "data": {
+                "colunas": this.colunas
+            }},
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "processing": true,
+            "language": {
+                "processing": "Aguarde...",
+                "infoFiltered": "(Filtrando _MAX_ registros)"
+            },
+            "serverSide": true,
+            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                if(status != false ){
+                    //MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
+                    if(grid == 'receita_select_grid.php'){
+                        if(aData[status] == 'Apagada') $('td', nRow).css('background-color', '#f2f2f2');
+                        if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#ccffdd');
+                        if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#e6ffee');
+                        if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
+                    }else if(grid == 'fluxo_caixa_select_grid.php'){
+                        if(aData[status] == 'Receita') $('td', nRow).css('background-color', '#ccffdd');
+                        if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ffc2b3');
+                    }			
+                }
+            }
+        });
+
+        return tabela;
+    }
+
     make(){        
         this.setCamposPesquisas();
+        this.loadTable();
     }
 }
