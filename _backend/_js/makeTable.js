@@ -141,7 +141,12 @@ class makeTable {
                 }
             }
         });
-        
+        $('#gridPrincipal_filter').css('display', 'none');
+        $('#gridPrincipal').css({
+            "border-color": "#d1d1d1", 
+            "border-width":"1px", 
+            "border-style":"solid"
+        });
         $('.employee-search-gridPrincipal-input').on('keyup change', function (event) {
             var i = $(this).attr('id'); // getting column index
             var v = $(this).val(); // getting search input value

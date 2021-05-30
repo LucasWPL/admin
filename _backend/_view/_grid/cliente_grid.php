@@ -24,7 +24,12 @@
                             <th class="thCkechboxGrid"></th>
                             <th>Id</th>
                             <th>CNPJ</th>
+                            <th>IE</th>
                             <th>Nome</th>
+                            <th>Email</th>
+                            <th>Telefone</th>
+                            <th>Cidade</th>
+                            <th>UF</th>
                             <th>Data cadastro</th>
                             <th>Usuário cadastro</th>
                         </tr>
@@ -42,7 +47,12 @@
         var colunas = [
             'cliente.id', 
             'cliente.CNPJ', 
+            'cliente.IE', 
             'cliente.nome', 
+            'cliente.email', 
+            'cliente.telefone', 
+            'cliente_endereco.xMun', 
+            'cliente_endereco.UF', 
             'cliente.dataCadastro', 
             'cliente.usuarioCadastroNome'
         ];
