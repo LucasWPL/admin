@@ -13,7 +13,6 @@
             unset($_POST[$key]);
         }
     }
-
     $_ENDERECO['CNPJ'] = $_POST['CNPJ'];
 
     $return = $conn->insert($_POST, 'cliente');

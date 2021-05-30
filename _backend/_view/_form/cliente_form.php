@@ -19,7 +19,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CPF/CNPJ</label>
-                                        <input type="number" class="form-control" name="CNPJ" required onchange="buscaCNPJ(this.value)"></input>
+                                        <input type="number" class="form-control" name="CNPJ" required onblur="buscaCNPJ(this.value)"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>IE</label>
@@ -42,7 +42,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Telefone</label>
-                                        <input type="text" class="form-control" name="telefone" required></input>
+                                        <input type="text" class="form-control telefone" name="telefone" required></input>
                                     </div>
                                     <div class="col-md-8">
                                         <label>Email</label>
@@ -52,7 +52,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Celular</label>
-                                        <input type="text" class="form-control" name="celular"></input>
+                                        <input type="text" class="form-control telefone" name="celular"></input>
                                     </div>
                                     <div class="col-md-8">
                                         <label>Contato comercial</label>
@@ -79,11 +79,11 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CEP</label>
-                                        <input type="text" class="form-control" name="endereco_CEP" required onchange="buscaCEP(this.value)"></input>
+                                        <input type="text" class="form-control" name="endereco_CEP" required onblur="buscaCEP(this.value)"></input>
                                     </div>
                                     <div class="col-md-7">
                                         <label>Logradouro</label>
-                                        <input type="text" class="form-control" name="endereco_xLgr" required></input>
+                                        <input type="text" class="form-control readonly" name="endereco_xLgr" required></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>N°</label>
@@ -93,15 +93,16 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Bairro</label>
-                                        <input type="text" class="form-control" name="endereco_xBairro" required></input>
+                                        <input type="text" class="form-control readonly" name="endereco_xBairro" required ></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Município</label>
-                                        <input type="text" class="form-control" name="endereco_xMun" required></input>
+                                        <input type="text" class="form-control readonly" name="endereco_xMun" required></input>
+                                        <input type="hidden" class="form-control" name="endereco_cMun"></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Estado</label>
-                                        <select class="form-control" name="endereco_UF" required>
+                                        <select class="form-control readonly" name="endereco_UF" required>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>
                                             <option value="AP">Amapá</option>
@@ -174,21 +175,48 @@
         });
 
         function buscaCNPJ(CNPJ){
-            if(CNPJ != ''){
+            if(jsbrasil.validateBr.cnpj(CNPJ) || jsbrasil.validateBr.cpf(CNPJ)){
+                if(jsbrasil.validateBr.cnpj(CNPJ)){
+                    $.ajax({
+                        type: "GET",
+                        url: "https://www.receitaws.com.br/v1/cnpj/" + CNPJ,
+                        dataType: "jsonp",
+                        success: function (data) {
+                            if(data.status == 'ERROR'){
+                                toast('error', "Houve um erro na requisição dos dados do CNPJ informado.");
+                            }else{
+                                setDadosWs(data);
+                            }                            
+                        }
+                    });
+                }
+            }else{
+                toast('error', "O CPF/CNPJ informado não é válido.");
+            }                       
+        }
+
+        function buscaCEP(CEP){
+            if(jsbrasil.validateBr.cep(CEP)){
                 $.ajax({
                     type: "GET",
-                    url: "https://www.receitaws.com.br/v1/cnpj/" + CNPJ,
-                    dataType: "jsonp",
+                    url: "https://viacep.com.br/ws/"+ CEP +"/json/?callback=?",
+                    dataType: "json",
                     success: function (data) {
-                        if(data.status == 'ERROR'){
-                            toast('error', "Houve um erro na requisição dos dados do CNPJ informado, verifique se o mesmo é válido.");
-                        }else{
-                            setDadosWs(data);
-                        }
-                        
+                        setEnderecoVia(data);                        
                     }
                 });
-            }            
+            }else{
+                toast('error', "O CEP informado é inválido.");
+            }         
+        }
+
+        function setEnderecoVia(data){
+            $('input[name="endereco_CEP"]').val(data.cep);
+            $('input[name="endereco_xLgr"]').val(data.logradouro);
+            $('input[name="endereco_xMun"]').val(data.localidade);
+            $('input[name="endereco_cMun"]').val(data.ibge);
+            $('select[name="endereco_UF"]').val(data.uf);
+            $('input[name="endereco_xBairro"]').val(data.bairro);
         }
 
         function setDadosWs(data){
@@ -200,13 +228,8 @@
         }
 
         function setEnderecoWs(data){
-            $('input[name="endereco_CEP"]').val(data.cep);
-            $('input[name="endereco_xLgr"]').val(data.logradouro);
             $('input[name="endereco_nro"]').val(data.numero);
-            $('input[name="endereco_xBairro"]').val(data.bairro);
-            $('input[name="endereco_xMun"]').val(data.municipio);
             $('input[name="endereco_xCpl"]').val(data.complemento);
-            $('select[name="endereco_UF"]').val(data.uf);
-            console.log(data);
+            buscaCEP(data.cep.replace('.', ''));
         }
     </script>

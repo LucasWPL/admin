@@ -62,5 +62,7 @@
 <script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- date-range-picker -->
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<!-- JS-BRASIL -->
+<script src="../../apis/js-brasil-master/js-brasil.js"></script>
 </body>
 </html>

@@ -95,7 +95,8 @@ function setMask(){
 		if(e.keyCode != 9) // ignore tab
 			e.preventDefault();
 	});
-	$('.readonly').attr('autocomplete', 'off');
+	$('.readonly').attr('autocomplete', 'off').css('background-color', '#E9ECEF');
+	$('.telefone').inputmask("(99) 9{1,9}");
 }
 
 //ESTORNO DE LANCAMENTOS FINANCEIROS
