@@ -41,10 +41,10 @@
     <script>
         var colunas = [
             'cliente.id', 
-            'CNPJ', 
-            'nome', 
-            'dataCadastro', 
-            'usuarioCadastroNome'
+            'cliente.CNPJ', 
+            'cliente.nome', 
+            'cliente.dataCadastro', 
+            'cliente.usuarioCadastroNome'
         ];
         
         var tabela = new makeTable(colunas, 'cliente_select_grid.php');   
