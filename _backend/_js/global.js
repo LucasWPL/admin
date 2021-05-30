@@ -96,8 +96,8 @@ function setMask(){
 			e.preventDefault();
 	});
 	$('.readonly').attr('autocomplete', 'off').css('background-color', '#E9ECEF');
-	$('.telefone').inputmask("(99) 9{1,9}");
-	$('.cep').inputmask("9{1,5}-9{1,3}");
+	$('.telefone').inputmask("(99) 999999999");
+	$('.cep').inputmask("99999-999");
 }
 
 //ESTORNO DE LANCAMENTOS FINANCEIROS
@@ -359,6 +359,11 @@ function toast(type, message){
 //CONVERSÃO DO VALOR FLOAT QUE VEM DO BANCO PARA REAL USO USUÁRIO
 function real(value, casas = 2){
 	return number_format(value, casas, ',', '.');
+}
+
+function limpaMoeda(value){
+	if(value == '') value = '0';
+	return parseFloat(value.replace('.', '').replace(',', '.'));
 }
 
 //NUMBER FORMAT EQUIVALENTE DO PHP

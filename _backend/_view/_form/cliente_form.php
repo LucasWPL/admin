@@ -103,6 +103,7 @@
                                     <div class="col-md-4">
                                         <label>Estado</label>
                                         <select class="form-control readonly" name="endereco_UF" required>
+                                            <option value=""></option>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>
                                             <option value="AP">Amapá</option>
@@ -207,7 +208,17 @@
                 });
             }else{
                 toast('error', "O CEP informado é inválido.");
+                limpaEndereco();
             }         
+        }
+
+        function limpaEndereco(){
+            $('input[name="endereco_CEP"]').val('');
+            $('input[name="endereco_xLgr"]').val('');
+            $('input[name="endereco_xMun"]').val('');
+            $('input[name="endereco_cMun"]').val('');
+            $('select[name="endereco_UF"]').val('');
+            $('input[name="endereco_xBairro"]').val('');
         }
 
         function setEnderecoVia(data){

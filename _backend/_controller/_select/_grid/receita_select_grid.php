@@ -3,8 +3,10 @@
 	require_once('../../../_class/makeTables.php');
 	session_start();
 
-	$sql = "SELECT receita.*, baixa_lancamento.dataBaixa, SUM(baixa_lancamento.valorBaixa) valorPago FROM receita 
-	LEFT JOIN baixa_lancamento ON baixa_lancamento.tipoLancamento = 'receita' AND baixa_lancamento.lancamento = receita.id";
+	$sql = "SELECT receita.*, baixa_lancamento.dataBaixa, valorPago FROM receita
+	LEFT JOIN (
+		SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) + SUM(baixa_lancamento.desconto) - SUM(baixa_lancamento.juros)) AS valorPago FROM baixa_lancamento WHERE tipoLancamento = 'receita' GROUP BY baixa_lancamento.lancamento
+		) AS baixa_lancamento ON baixa_lancamento.lancamento = receita.id";
 	
 	$dados = json_decode(getDados($sql, $_REQUEST, 'receita.id'));
 	

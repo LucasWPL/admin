@@ -11,7 +11,7 @@ CREATE TABLE `baixa_lancamento` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: bancos
 CREATE TABLE `bancos` (
@@ -26,12 +26,33 @@ CREATE TABLE `cliente` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `CNPJ` varchar(16) NOT NULL,
   `nome` varchar(64) NOT NULL,
+  `IE` int(11) DEFAULT NULL,
+  `celular` varchar(64) DEFAULT NULL,
+  `contatoComercial` varchar(64) DEFAULT NULL,
+  `email` varchar(64) NOT NULL,
+  `telefone` varchar(64) NOT NULL,
+  `tipo` varchar(16) NOT NULL,
   `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(64) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `CNPJ` (`CNPJ`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
+
+-- TABLE: cliente_endereco
+CREATE TABLE `cliente_endereco` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `CNPJ` varchar(32) NOT NULL,
+  `CEP` varchar(10) NOT NULL,
+  `UF` varchar(2) NOT NULL,
+  `nro` int(11) NOT NULL,
+  `xBairro` varchar(32) NOT NULL,
+  `xCpl` text DEFAULT NULL,
+  `xLgr` text NOT NULL,
+  `xMun` varchar(32) NOT NULL,
+  `cMun` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: condicao_pagamento
 CREATE TABLE `condicao_pagamento` (
@@ -47,7 +68,7 @@ CREATE TABLE `condicao_pagamento` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: conta_financeira
 CREATE TABLE `conta_financeira` (
@@ -90,7 +111,7 @@ CREATE TABLE `receita` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: user
 CREATE TABLE `user` (

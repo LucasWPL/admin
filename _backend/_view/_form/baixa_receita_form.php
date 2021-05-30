@@ -17,7 +17,14 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-2">
+                                        <label>Tipo de baixa</label>
+                                        <select name="tipoBaixa" class="form-control" onchange="verificaModo()">
+                                            <option value="completa">Baixa completa</option>
+                                            <option value="parcial">Baixa parcial</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6">
                                         <label>Observação de baixa</label>
                                         <input type="text" class="form-control" name="obsBaixa"></input>
                                         <input type="hidden" class="form-control" name="lancamento"></input>
@@ -30,22 +37,30 @@
                                         <label>Data baixa</label>
                                         <input type="date" class="form-control" name="dataBaixa" value="<?=date('Y-m-d')?>" max="<?=date('Y-m-d')?>"></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Conta origem</label>
                                         <input type="text" class="form-control inputDinheiro" id="contaOrigem" disabled></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Conta baixa</label>
                                         <input type="text" class="form-control busca readonly" id="contaBaixa" required onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
                                         <input name="contaBaixa" type="hidden">
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Saldo restante</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valor" readonly></input>
+                                        <input type="text" class="form-control inputDinheiro readonly" name="valor"></input>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                         <label>Valor baixa</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" required></input>
+                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" onchange="verificaModo()" required></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Desconto</label>
+                                        <input type="text" class="form-control inputDinheiro" name="desconto" onkeyup="recalcular()"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Juros</label>
+                                        <input type="text" class="form-control inputDinheiro" name="juros" onkeyup="recalcular()"></input>
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +79,51 @@
     </section>
 
     <script>
+        function calcular(){
+            let juros = limpaMoeda($('input[name="juros"]').val());
+            let desconto = limpaMoeda($('input[name="desconto"]').val());
+            let valor = limpaMoeda($('input[name="valor"]').val());
+            let resultado = parseFloat(valor - desconto) + juros;
+
+            return resultado;            
+        }
+        function recalcular(){
+            let resultado = calcular();
+            let valor = limpaMoeda($('input[name="valor"]').val());
+
+            if(resultado != valor && $('select[name="tipoBaixa"]').val() == 'completa'){
+                $('input[name="valorBaixa"]').attr('readonly', true);
+            }else{
+                $('input[name="valorBaixa"]').attr('readonly', false);
+            }
+            
+            $('input[name="valorBaixa"]').val(real(resultado));
+        }
+
+        function verificaModo(){
+            backup = limpaMoeda($('input[name="valorBaixa"]').val());
+            valor = limpaMoeda($('input[name="valor"]').val());
+
+            if($('select[name="tipoBaixa"]').val() == 'parcial'){
+                $('input[name="juros"]').attr('readonly', true).val('');
+                $('input[name="desconto"]').attr('readonly', true).val('');
+                $('input[name="valorBaixa"]').attr('readonly', false);
+            }else{
+                $('input[name="juros"]').attr('readonly', false);
+                $('input[name="desconto"]').attr('readonly', false);
+                $('input[name="valorBaixa"]').attr('readonly', true);
+                if(backup > valor){
+                    let diferenca = backup - valor;
+                    $('input[name="juros"]').val(real(diferenca));
+                }else if(backup < valor){
+                    let diferenca = valor - backup;
+                    $('input[name="desconto"]').val(real(diferenca));
+                }else{
+                    $('input[name="valorBaixa"]').attr('readonly', false);
+                }
+            }
+        }
+
         function selecionadosBusca(selecionados, arquivo){
             if(arquivo == 'conta_financeira'){
                 $.ajax({
@@ -110,13 +170,13 @@
                 type: 'POST',
                 dataType: "json",
                 success: (function(data){
-                    console.log(data);
                     if(data.retorno == true){
                         toast('success', data.mensagem);
                         toLastGrid();
                     }else{
                         toast('error', data.mensagem);
                     }
+                    console.log(data);
                 })
             });
 

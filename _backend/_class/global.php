@@ -43,7 +43,7 @@
         $valorParcela = $total / $totalParcelas;
 
         if($totalParcelas == $parcela){
-            $resto = formataFloat($valor) - (formataFloat($valorParcela) * $dados->parcelas);
+            $resto = formataFloat($total) - (formataFloat($valorParcela) * $totalParcelas->parcelas);
             $valorParcela += $resto;
         }
         return formataFloat($valorParcela);
@@ -84,7 +84,7 @@
     function limpaMoeda($valor){
         $aux = str_replace('.', '',$valor);
         $aux = str_replace(',', '.',$aux);
-        return $aux;
+        return floatval($aux);
     }
 
     function selectFormaPagamento(){
