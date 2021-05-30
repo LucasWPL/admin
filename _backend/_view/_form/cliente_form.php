@@ -79,7 +79,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CEP</label>
-                                        <input type="text" class="form-control" name="endereco_CEP" required onblur="buscaCEP(this.value)"></input>
+                                        <input type="text" class="form-control cep" name="endereco_CEP" required onblur="buscaCEP(this.value)"></input>
                                     </div>
                                     <div class="col-md-7">
                                         <label>Logradouro</label>
