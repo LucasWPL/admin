@@ -3,13 +3,15 @@
     require_once('crud.php');
     
     function getWhere($sql, $request, $colunas){
-        $where = ' WHERE 1=1 ';
+        $where = '';
         foreach ($request as $key => $value) {
             if(!empty($value['search']['value'])){
-                $where .= " AND {$colunas[$value['data']][1]} LIKE '%{$value['search']['value']}%'";
+                $where .= " {$colunas[$value['data']][1]} LIKE '%{$value['search']['value']}%' AND";
             }
         }
-        if($where == ' WHERE 1=1 ') $where = '';
+        if(!empty($where)){
+            $where = " WHERE " . substr($where, 0, -3);
+        }
         $retorno = $sql . $where;
         return $retorno;
     }

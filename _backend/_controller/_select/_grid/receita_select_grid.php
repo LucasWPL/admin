@@ -28,7 +28,7 @@
 		$data[] = $value->dataEmissao != '' ? date('d/m/Y', strtotime($value->dataEmissao)) : '';
 		$data[] = date('d/m/Y', strtotime($value->dataVencimento));
 		$data[] = $value->dataBaixa != '' ? date('d/m/Y', strtotime($value->dataBaixa)) : '';
-		$data[] = date('d/m/Y', strtotime($value->dataCadastro));
+		$data[] = date('d/m/Y H:i:s', strtotime($value->dataCadastro));
 		$data[] = $value->usuarioCadastroNome;
 
 		$fullData[] = $data;//ARRAY DE COLUNAS

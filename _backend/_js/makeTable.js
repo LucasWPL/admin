@@ -63,7 +63,7 @@ class makeTable {
             $('#'+this).attr('autocomplete', 'off');
             
             $('#'+this).on('apply.daterangepicker', function (ev, picker) {
-                $(this).val(picker.startDate.format('L') + ' - ' + picker.endDate.format('L')).change();
+                $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY')).change();
             });
 
             $('#'+this).on('cancel.daterangepicker', function (ev, picker) {

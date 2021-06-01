@@ -69,7 +69,7 @@
         this.cancelButtonClasses = 'btn-default';
 
         this.locale = {
-			"format": "DD/dd/YYYY",
+			"format": "DD/MM/YYYY",
 			"separator": " - ",
 			"applyLabel": "Aplicar",
 			"cancelLabel": "Cancelar",

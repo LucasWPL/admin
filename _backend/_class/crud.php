@@ -22,7 +22,7 @@
         }
         
         
-        private function setParams($statement, $parameters = '')
+        private function setParams($statement, $parameters = array())
         {
             if($parameters != ''){
                 foreach ($parameters as $key => $value) {
