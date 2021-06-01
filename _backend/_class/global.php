@@ -43,7 +43,7 @@
         $valorParcela = $total / $totalParcelas;
 
         if($totalParcelas == $parcela){
-            $resto = formataFloat($total) - (formataFloat($valorParcela) * $totalParcelas->parcelas);
+            $resto = formataFloat($total) - (formataFloat($valorParcela) * $totalParcelas);
             $valorParcela += $resto;
         }
         return formataFloat($valorParcela);
