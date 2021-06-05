@@ -31,6 +31,9 @@ class MakeTable{
     }
 
     public function setColunas(){
+        foreach ($this->request['colunas'] as $key => $value) {
+            $this->request['colunas'][$key] = str_replace('-', '.', $value);
+        }
         $this->columns = $this->request['colunas'];
     }
 
@@ -53,21 +56,25 @@ class MakeTable{
         return $coluna[4][$referencia] . ' AND';
     }
 
+    private function getClause($column, $value){
+        $where = '';
+        if($column[2] == 'date'){
+            $where .= $this->getDateSql($value, $column[1]);
+        }elseif($column[2] == 'select' && $column[4] != "false"){
+            $where .= $this->getSelectSql($value, $column[1]);
+        }else{
+            $where .= " {$column[1]} LIKE '%{$value}%' AND";
+        }
+        return $where;
+    }
+
     private function getWhere(){
         $where = '';
         $colunas = $this-> getColunas();
         foreach ($this->request['columns'] as $key => $value) {
             $indexColuna = $colunas[$value['data']];
             if(!empty($value['search']['value'])){
-                //DÁ PRA BOTAR ESSE BLOCO PARA OUTRA FUNÇÃO
-                if($indexColuna[2] == 'date'){
-                    $where .= $this->getDateSql($value['search']['value'], $indexColuna[1]);
-                }elseif($indexColuna[2] == 'select' && $indexColuna[4] != "false"){
-                    $where .= $this->getSelectSql($value['search']['value'], $indexColuna);
-                }else{
-                    $where .= " {$indexColuna[1]} LIKE '%{$value['search']['value']}%' AND";
-                }
-                //
+                $where .= $this->getClause($indexColuna, $value['search']['value']);
             }
         }
         if(!empty($where)){

@@ -45,20 +45,20 @@
     </section>
     <script>
         var colunas = [
-            'cliente.id', 
-            'cliente.CNPJ', 
-            'cliente.IE', 
-            'cliente.nome', 
-            'cliente.email', 
-            'cliente.telefone', 
-            'cliente_endereco.xMun', 
-            'cliente_endereco.UF', 
-            'cliente.dataCadastro', 
-            'cliente.usuarioCadastroNome'
+            'cliente-id', 
+            'cliente-CNPJ', 
+            'cliente-IE', 
+            'cliente-nome', 
+            'cliente-email', 
+            'cliente-telefone', 
+            'cliente_endereco-xMun', 
+            'cliente_endereco-UF', 
+            'cliente-dataCadastro', 
+            'cliente-usuarioCadastroNome'
         ];
         
         var tabela = new makeTable(colunas, 'cliente_select_grid.php');   
-        tabela.setDate(['cliente.dataCadastro']);
+        tabela.setDate(['cliente-dataCadastro']);
         var dataTables = tabela.make();
         
         setBotoes('cliente', 'cliente', 'Cadastro cliente');
