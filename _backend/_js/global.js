@@ -1,3 +1,7 @@
+//FUNÇÃO PARA DEIXAR A PRIMEIRA LETRA MAIÚSCULA
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}
 //FUNÇÃO PARA DESTRUIR A SESSÃO
 function logout(){
 	window.location.replace("login/_controller/logout.php");

@@ -69,7 +69,15 @@
         ];
         
         var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);
-        tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
+        var arrayStatus = ['aberta', 'baixada', 'baixa parcial', 'vencida'];
+        var arrayCondicoes = [
+            'receita.status = "aberta"', 
+            'receita.status = "baixada"', 
+            'receita.status = "baixa parcial"',
+            'receita.dataVencimento < DATE(NOW()) AND receita.status = "aberta"'
+        ];
+        tabela.setSelect('status', arrayStatus, arrayCondicoes);
+        
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();

@@ -50,6 +50,11 @@ class MakeTable{
         return " {$column} BETWEEN '".$this->formatDate($aux[0])." 00:00:00' AND '".$this->formatDate($aux[1])." 23:59:59' AND";
     }
 
+    private function getSelectSql($value, $coluna){
+        $referencia = array_search($value, $coluna[3]);
+        return $coluna[4][$referencia] . ' AND';
+    }
+
     private function getWhere(){
         $where = '';
         $colunas = $this-> getColunas();
@@ -58,6 +63,12 @@ class MakeTable{
             if(!empty($value['search']['value'])){
                 if($indexColuna[2] == 'date'){
                     $where .= $this->getDateSql($value['search']['value'], $indexColuna[1]);
+                }elseif($indexColuna[2] == 'select'){
+                    if($indexColuna[4] == false) {
+                        $where .= $this->getDateSql($value['search']['value'], $indexColuna[1]);
+                    }else{
+                        $where .= $this->getSelectSql($value['search']['value'], $indexColuna);
+                    }
                 }else{
                     $where .= " {$indexColuna[1]} LIKE '%{$value['search']['value']}%' AND";
                 }
@@ -125,7 +136,7 @@ class MakeTable{
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "dev" => $this->getSql()   // total data array
+            "dev" => $this-> getColunas()   // total data array
         ];
         return $response;
     }

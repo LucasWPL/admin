@@ -40,9 +40,9 @@ class makeTable {
     }
     
     
-    setSelect(coluna, options){
+    setSelect(coluna, options, condicoes = false){
         var found = this.colunas.find(element => element[1]  === coluna);
-        if(found) this.colunas[found[0]] = [found[0], found[1], 'select', options];
+        if(found) this.colunas[found[0]] = [found[0], found[1], 'select', options, condicoes];
     }
 
     setDateColumn(){
@@ -114,11 +114,10 @@ class makeTable {
             if(v[2] == 'input' || v[2] == 'date') {
                 html += '<td><input type="'+v[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+v[1]+'"></td>';
             }else if(v[2] == 'select'){
-                var aux = v[3].split('; ');
                 html += '<td><select id="'+v[1]+'" class="form-control employee-search-gridPrincipal-input">';
                 html += '<option></option>';
-                $(aux).each(function(){
-                    html += '<option value="'+this+'">'+this+'</option>';
+                $(v[3]).each(function(){
+                    html += '<option value="'+this+'">'+this.capitalize()+'</option>';
                 });
                 html += '</select>';
             }
