@@ -8,7 +8,15 @@
         $param = [
             ":id" => $value
         ];
-        $return = $conn->sql("UPDATE receita SET status = 'apagada' WHERE id = :id", $param);
+        
+        $dados = $conn->getSelect("SELECT status FROM receita WHERE id = :id", $param);
+
+        if($dados->status == 'aberta'){
+            $return = $conn->sql("UPDATE receita SET status = 'apagada' WHERE id = :id", $param);
+        }else{
+            $return = false;
+        }
+        
         if($return){
             $success++;
         }else{

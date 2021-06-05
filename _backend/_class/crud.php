@@ -35,9 +35,7 @@
 
         private function bindParam($statement, $key, $value)
         {
-
             $statement->bindParam($key, $value);
-
         }
 
         public function getSelect($sql, $params = '', $multi = FALSE){
