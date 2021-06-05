@@ -4,30 +4,49 @@ class makeTable {
         $(colunas).each(function(k,v){
             array.push([k, v, 'input', 'text']);
         });
-        this.colunas = array;
-        this.grid = url;
-        this.status = status;
+        this._colunas = array;
+        this._grid = url;
+        this._status = status;
     }
 
-    get getColunas() {
-        return this.colunas;
+    get colunas() {
+        return this._colunas;
+    }
+    set colunas(value) {
+        this._colunas = value;
     }
 
-    get getGrid() {
-        return this.grid;
+    get grid() {
+        return this._grid;
+    }
+    set grid(value) {
+        this._grid = value;
     }
 
-    get getStatus() {
-        return this.status;
+    get status() {
+        return this._status;
     }
+
+    set status(value) {
+        this._status = value;
+    }
+
+    get dateIds(){
+        return this._dateIds;
+    }
+    
+    set dateIds(ids){
+        this._dateIds = ids;
+    }
+    
     
     setSelect(coluna, options){
         var found = this.colunas.find(element => element[1]  === coluna);
-        this.colunas[found[0]] = [found[0], found[1], 'select', options];
+        if(found) this.colunas[found[0]] = [found[0], found[1], 'select', options];
     }
 
-    setDate(ids){
-        $(ids).each(function(){
+    setDateColumn(){
+        $(this.dateIds).each(function(){
             $('#'+this).daterangepicker({
                 "locale": {
                     "format": "DD/MM/YYYY",
@@ -69,7 +88,15 @@ class makeTable {
             $('#'+this).on('cancel.daterangepicker', function (ev, picker) {
                 $(this).val('').change();
             });
-        });       
+        });
+    }
+
+    setDate(ids, format = 'range'){
+        $(ids).each((index, value)=>{
+            var found = this.colunas.find(element => element[1]  === value);
+            if(found) this.colunas[found[0]] = [found[0], found[1], 'date', 'text', format];
+        });
+        this.dateIds = ids;               
     }
     
     setAttr(){
@@ -84,7 +111,7 @@ class makeTable {
     getHtml(){
         var html = '<td><input type="checkbox"  id="bulkDelete"  /></td>';
         $(this.colunas).each(function(k,v){
-            if(v[2] == 'input') {
+            if(v[2] == 'input' || v[2] == 'date') {
                 html += '<td><input type="'+v[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+v[1]+'"></td>';
             }else if(v[2] == 'select'){
                 var aux = v[3].split('; ');
@@ -141,6 +168,9 @@ class makeTable {
                 }
             }
         });
+        
+        this.setDateColumn();
+        
         $('#gridPrincipal_filter').css('display', 'none');
         $('#gridPrincipal').css({
             "border-color": "#d1d1d1", 

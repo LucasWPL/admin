@@ -48,8 +48,8 @@
         ];
         
         var tabela = new makeTable(colunas, 'conta_financeira_select_grid.php');
+        tabela.setDate(['conta_financeira.dataCadastro']);
         var dataTables = tabela.make();
-        tabela.setDate(['dataCadastro']);
         
         setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);
     </script>

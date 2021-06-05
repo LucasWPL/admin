@@ -70,9 +70,9 @@
         
         var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);
         tabela.setSelect('status', 'Baixada; Baixa parcial; Vencida; Aberta');
+        tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();
-        tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         setBotoes('receita', 'receita', 'Cadastro receita');
         

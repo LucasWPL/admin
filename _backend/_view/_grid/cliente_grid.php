@@ -58,8 +58,8 @@
         ];
         
         var tabela = new makeTable(colunas, 'cliente_select_grid.php');   
+        tabela.setDate(['cliente.dataCadastro']);
         var dataTables = tabela.make();
-        tabela.setDate(['dataCadastro']);
         
         setBotoes('cliente', 'cliente', 'Cadastro cliente');
     </script>

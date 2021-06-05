@@ -2,11 +2,26 @@
     session_start(); error_reporting(0);
     require_once('crud.php');
     
+    function formatDate($date){
+        $aux = explode('/', $date);
+        return $aux[2].'-'.$aux[1].'-'.$aux[0];
+    }
+
+    function getDateSql($date, $column){
+        $aux = explode(' - ', $date);
+        return " {$column} BETWEEN '".formatDate($aux[0])." 00:00:00' AND '".formatDate($aux[1])." 23:59:59' AND";
+    }
+
     function getWhere($sql, $request, $colunas){
         $where = '';
         foreach ($request as $key => $value) {
+            $indexColuna = $colunas[$value['data']];
             if(!empty($value['search']['value'])){
-                $where .= " {$colunas[$value['data']][1]} LIKE '%{$value['search']['value']}%' AND";
+                if($indexColuna[2] == 'date'){
+                    $where .= getDateSql($value['search']['value'], $indexColuna[1]);
+                }else{
+                    $where .= " {$indexColuna[1]} LIKE '%{$value['search']['value']}%' AND";
+                }
             }
         }
         if(!empty($where)){
