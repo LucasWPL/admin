@@ -8,8 +8,9 @@
 		SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) + SUM(baixa_lancamento.desconto) - SUM(baixa_lancamento.juros)) AS valorPago FROM baixa_lancamento WHERE tipoLancamento = 'receita' GROUP BY baixa_lancamento.lancamento
 		) AS baixa_lancamento ON baixa_lancamento.lancamento = receita.id";
 	
-	$table = new makeTable($sql, $_REQUEST, 'receita.id');
+	$table = new MakeTable($sql, $_REQUEST, 'receita.id');
 	$dados = $table->getDados();
+	
 	$array = array(); $fullData = array();
 	foreach ($dados->data as $key => $value) {//COLUNA
 		$value->status != 'apagada' ? $disabled = "" : $disabled = "disabled";

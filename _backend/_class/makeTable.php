@@ -1,6 +1,6 @@
 <?php
-    session_start(); error_reporting(0);
-    //require_once('crud.php');
+session_start(); error_reporting(0);
+//require_once('crud.php');
 class MakeTable{
     private $sql;
     private $request;
@@ -8,6 +8,12 @@ class MakeTable{
     private $columns;
     private $totais;
 
+    function __construct($sql, $request, $group = false) {
+        $this->setSql($sql);
+        $this->request = $request;
+        $this->group = $group;
+    }
+    
     public function getTotais(){
         return $this->totais;
     }
@@ -32,11 +38,7 @@ class MakeTable{
         return $this->columns;
     }
 
-    function __construct($sql, $request, $group) {
-        $this->setSql($sql);
-        $this->request = $request;
-        $this->group = $group;
-    }
+    
     
     private function formatDate($date){
         $aux = explode('/', $date);
@@ -85,8 +87,8 @@ class MakeTable{
     private function getGroupBy(){
         if($this->group != false){
             $sql = $this->sql . " GROUP BY {$this->group}";
+            $this->setSql($sql);
         }
-        $this->setSql($sql);
     }
     
     private function setFullSql(){//MONTA TODAS AS CLÁUSULAS DA QUERY
