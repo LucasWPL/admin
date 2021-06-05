@@ -60,11 +60,14 @@
             'dataBaixa',
             'contaFinanceira',
             'contaBaixa',
-            'baixa_lancamento.usuarioCadastroNome'
+            'baixa_lancamento.usuarioCadastroNome' 
         ];
         
         var tabela = new makeTable(colunas, 'fluxo_caixa_select_grid.php', 2);
-        tabela.setSelect('tipoLancamento', 'Receita; Despesa');
+
+        var arrayStatus = ['receita', 'despesa'];
+        tabela.setSelect('tipoLancamento', arrayStatus);
+        
         tabela.setDate(['dataVencimento', 'dataBaixa']);
 
         var dataTables = tabela.make();

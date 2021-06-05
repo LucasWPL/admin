@@ -36,9 +36,7 @@ class MakeTable{
 
     public function getColunas(){
         return $this->columns;
-    }
-
-    
+    }    
     
     private function formatDate($date){
         $aux = explode('/', $date);
@@ -61,17 +59,15 @@ class MakeTable{
         foreach ($this->request['columns'] as $key => $value) {
             $indexColuna = $colunas[$value['data']];
             if(!empty($value['search']['value'])){
+                //DÁ PRA BOTAR ESSE BLOCO PARA OUTRA FUNÇÃO
                 if($indexColuna[2] == 'date'){
                     $where .= $this->getDateSql($value['search']['value'], $indexColuna[1]);
-                }elseif($indexColuna[2] == 'select'){
-                    if($indexColuna[4] == false) {
-                        $where .= $this->getDateSql($value['search']['value'], $indexColuna[1]);
-                    }else{
-                        $where .= $this->getSelectSql($value['search']['value'], $indexColuna);
-                    }
+                }elseif($indexColuna[2] == 'select' && $indexColuna[4] != "false"){
+                    $where .= $this->getSelectSql($value['search']['value'], $indexColuna);
                 }else{
                     $where .= " {$indexColuna[1]} LIKE '%{$value['search']['value']}%' AND";
                 }
+                //
             }
         }
         if(!empty($where)){
@@ -136,7 +132,7 @@ class MakeTable{
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "dev" => $this-> getColunas()   // total data array
+            "dev" => $this-> getSql()   // total data array
         ];
         return $response;
     }
