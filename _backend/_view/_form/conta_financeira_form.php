@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Banco</label>
-                                        <input type="text" class="form-control busca readonly" id="bancoDesc" onclick="abreBusca('bancos', 'Busca banco');"></input>
+                                        <input type="text" class="form-control busca readonly" id="descricaoBanco" onclick="abreBusca('bancos', 'Busca banco');"></input>
                                         <input type="hidden" name="banco"></input>
                                     </div>
                                     <div class="col-md-4">
@@ -83,8 +83,9 @@
                         id : $(selecionados).get(0)
                     },
                     success : function(data){
+                        console.log(data);
                         $('input[name="banco"]').val(data.id);
-                        $('#bancoDesc').val(data.banco);
+                        $('#descricaoBanco').val(data.banco);
                     }
                 });
             }
