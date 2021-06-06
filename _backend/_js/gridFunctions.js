@@ -103,7 +103,6 @@ function setMask(){
 //ESTORNO DE LANCAMENTOS FINANCEIROS
 function estornarLancamento(tipo){
 	var selecionados = getSelectedFromGrid(true);
-	console.log(selecionados);
 	$.ajax({
 		url : "_backend/_controller/_update/estornar_lancamento_update.php",
 		type : 'post',
@@ -204,7 +203,6 @@ function formEdit(id, url){
 		type: 'POST',
 		dataType: "json",
 		success: (function(data){
-			console.log(data);
 			if(data.retorno == true){
 				toast('success', data.mensagem);
 				toLastGrid();
@@ -265,7 +263,6 @@ function formInsert(url){
 		type: 'POST',
 		dataType: "json",
 		success: (function(data){
-			console.log(data);
 			if(data.retorno == true){
 				toast('success', data.mensagem);
 				toLastGrid();
@@ -288,6 +285,7 @@ function verifyURLForm(){
 	}else{
 		formInsert(get.url);
 	}
+	return getURLParams();
 }
 
 //FUNÇÕES SET E GET PARÂMETROS ENVIADOS POR URL

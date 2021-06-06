@@ -61,7 +61,7 @@ class MakeTable{
         if($column[2] == 'date'){
             $where .= $this->getDateSql($value, $column[1]);
         }elseif($column[2] == 'select' && $column[4] != "false"){
-            $where .= $this->getSelectSql($value, $column[1]);
+            $where .= $this->getSelectSql($value, $column);
         }else{
             $where .= " {$column[1]} LIKE '%{$value}%' AND";
         }

@@ -38,7 +38,7 @@
     <script>
         var colunas = [
             'cod', 
-            'bancoDesc', 
+            'banco', 
         ];
         
         var tabela = new makeTable(colunas, 'bancos_select_grid.php');  

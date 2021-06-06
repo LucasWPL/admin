@@ -53,7 +53,7 @@
     </section>
     <script>
         var colunas = [
-            'receita.id', 
+            'receita-id', 
             'entidadeCNPJ', 
             'entidadeNome', 
             'historico', 
@@ -65,7 +65,7 @@
             'dataVencimento', 
             'dataBaixa', 
             'dataCadastro', 
-            'receita.usuarioCadastroNome'
+            'receita-usuarioCadastroNome'
         ];
         
         var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);

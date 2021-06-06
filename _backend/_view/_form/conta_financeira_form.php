@@ -83,7 +83,6 @@
                         id : $(selecionados).get(0)
                     },
                     success : function(data){
-                        console.log(data);
                         $('input[name="banco"]').val(data.id);
                         $('#descricaoBanco').val(data.banco);
                     }
@@ -91,6 +90,11 @@
             }
         }
         $(document).ready(function() {
-            verifyURLForm();
+            get = verifyURLForm();
+            if(get.action == 'edit' || get.action == 'view'){
+                setTimeout(()=>{
+                    selecionadosBusca([$('input[name="banco"]').val()], 'bancos');
+                }, 100);
+            }
         });
     </script>

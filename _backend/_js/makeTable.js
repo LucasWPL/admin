@@ -46,7 +46,6 @@ class makeTable {
     }
 
     setDateColumn(){
-        console.log(this.dateIds);
         $(this.dateIds).each(function(){
             $('#'+this).daterangepicker({
                 "locale": {
