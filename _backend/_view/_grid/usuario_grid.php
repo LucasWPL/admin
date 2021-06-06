@@ -20,18 +20,10 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>Nome</th>
-                            <th>Login</th>
-                            <th>Data cadastro</th>
-                            <th>Usuário cadastro</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
-                    <tbody>
-                    <tbody>
+                    <tbody><tbody>
                 </table>
             </div>
         </div>
@@ -40,11 +32,11 @@
     </section>
     <script>
         var colunas = [
-            'user.id', 
-            'userName', 
-            'userLogin', 
-            'userDataCadastro', 
-            'userUserCadastroNome'
+            ['user-id', 'ID'],
+            ['userName', 'Nome'],
+            ['userLogin', 'Login'],
+            ['userDataCadastro', 'Data cadastro'],
+            ['userUserCadastroNome', 'Usuário cadastro']
         ];
         
         var tabela = new makeTable(colunas, 'usuario_select_grid.php');

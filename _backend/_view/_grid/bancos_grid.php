@@ -20,15 +20,10 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Cód</th>
-                            <th>Banco</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
-                    <tbody>
-                    <tbody>
+                    <tbody><tbody>
                 </table>
             </div>
         </div>
@@ -37,8 +32,8 @@
     </section>
     <script>
         var colunas = [
-            'cod', 
-            'banco', 
+            ['cod', 'Código'],
+            ['banco', 'Banco']
         ];
         
         var tabela = new makeTable(colunas, 'bancos_select_grid.php');  

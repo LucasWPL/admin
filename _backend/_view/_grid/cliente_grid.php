@@ -20,19 +20,7 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>CNPJ</th>
-                            <th>IE</th>
-                            <th>Nome</th>
-                            <th>Email</th>
-                            <th>Telefone</th>
-                            <th>Cidade</th>
-                            <th>UF</th>
-                            <th>Data cadastro</th>
-                            <th>Usuário cadastro</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
@@ -45,16 +33,16 @@
     </section>
     <script>
         var colunas = [
-            'cliente-id', 
-            'cliente-CNPJ', 
-            'cliente-IE', 
-            'cliente-nome', 
-            'cliente-email', 
-            'cliente-telefone', 
-            'cliente_endereco-xMun', 
-            'cliente_endereco-UF', 
-            'cliente-dataCadastro', 
-            'cliente-usuarioCadastroNome'
+            ['cliente-id', 'ID'],
+            ['cliente-CNPJ', 'CNPJ'],
+            ['cliente-IE', 'IE'],
+            ['cliente-nome', 'Nome'],
+            ['cliente-email', 'Email'],
+            ['cliente-telefone', 'Telefone'],
+            ['cliente_endereco-xMun', 'Cidade'],
+            ['cliente_endereco-UF', 'UF'],
+            ['cliente-dataCadastro', 'Data cadastro'],
+            ['cliente-usuarioCadastroNome', 'Usuário cadastro']
         ];
         
         var tabela = new makeTable(colunas, 'cliente_select_grid.php');   

@@ -22,21 +22,7 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover ">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>Tipo</th>
-                            <th>Lançamento</th>
-                            <th>Histórico</th>
-                            <th>Obs. baixa</th>
-                            <th>Valor orig.</th>
-                            <th>Valor baixado</th>
-                            <th>Vencimento</th>
-                            <th>Pagamento</th>
-                            <th>Conta origem</th>
-                            <th>Conta baixa</th>
-                            <th>Usuário baixa</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
                     <tbody>
@@ -49,18 +35,18 @@
     </section>
     <script>
         var colunas = [
-            'baixa_lancamento-id', 
-            'tipoLancamento', 
-            'lancamento', 
-            'historico', 
-            'obsBaixa',
-            'valor',
-            'valorBaixa',
-            'dataVencimento',
-            'dataBaixa',
-            'contaFinanceira',
-            'contaBaixa',
-            'baixa_lancamento-usuarioCadastroNome' 
+            ['baixa_lancamento-id','ID'],
+            ['tipoLancamento','Tipo'],
+            ['lancamento','Lançamento'],
+            ['historico','Histórico'],
+            ['obsBaixa','Obs. baixa'],
+            ['valor','Valor orig'],
+            ['valorBaixa','Valor baixado'],
+            ['dataVencimento','Vencimento'],
+            ['dataBaixa','Pagamento'],
+            ['contaFinanceira','Conta origem'],
+            ['contaBaixa','Conta baixa'],
+            ['baixa_lancamento-usuarioCadastroNome','Usuário baixa']
         ];
         
         var tabela = new makeTable(colunas, 'fluxo_caixa_select_grid.php', 2);

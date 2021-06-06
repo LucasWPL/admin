@@ -20,19 +20,10 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>Descrição</th>
-                            <th>Forma de pagamento</th>
-                            <th>(%) Desconto</th>
-                            <th>Data cadastro</th>
-                            <th>Usuário cadastro</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
-                    <tbody>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
@@ -41,12 +32,12 @@
     </section>
     <script>
         var colunas = [
-            'condicao_pagamento-id', 
-            'condicao_pagamento-descricao', 
-            'formaPagamentoDesc', 
-            'condicao_pagamento-desconto', 
-            'condicao_pagamento-dataCadastro',
-            'condicao_pagamento-usuarioCadastroNome'
+            ['condicao_pagamento-id', 'ID'],
+            ['condicao_pagamento-descricao', 'Descrição'],
+            ['formaPagamentoDesc', 'Forma de pagamento'],
+            ['condicao_pagamento-desconto', '(%) Desconto'],
+            ['condicao_pagamento-dataCadastro', 'Data cadastro'],
+            ['condicao_pagamento-usuarioCadastroNome', 'Usuário cadastro']
         ];
         
         var tabela = new makeTable(colunas, 'condicao_pagamento_select_grid.php');
