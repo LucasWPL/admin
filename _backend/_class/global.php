@@ -1,6 +1,10 @@
 <?php
     session_start(); error_reporting(0);
     require_once('crud.php');
+    define('SEP', DIRECTORY_SEPARATOR);
+    define('SITEROOT', 'http://local.bi.com' . SEP);
+    define('ROOT', $_SERVER['DOCUMENT_ROOT'] . SEP);
+    
     if(!isset($_SESSION['logValidated'])){
         header('Location: login');
     }

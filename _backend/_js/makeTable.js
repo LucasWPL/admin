@@ -241,6 +241,8 @@ class makeTable {
     }
 
     relatorio(){
-        console.log(this);
+        $('#formulario-relatorio input[name=sql]').val(this.sql);
+        $('#formulario-relatorio input[name=colunas]').val(JSON.stringify(this.colunas));
+        $('#formulario-relatorio').submit();
     }
 }

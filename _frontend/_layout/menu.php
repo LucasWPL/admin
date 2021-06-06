@@ -23,6 +23,13 @@
   </div>
   <!-- /.modal -->
 
+	<!-- FORM PARA CRIAR UM RELATÓRIO VIA POST-->
+	<form action="<?=SITEROOT?>_backend/_view/_relatorio/relatorio.php" target="_blank" style="display:none" id="formulario-relatorio" method="POST">
+		<input type="hidden" name="sql">
+		<input type="hidden" name="colunas">
+	</form>
+	<!-- FORM PARA CRIAR UM RELATÓRIO VIA POST-->
+
 <div class="wrapper">
 
   <!-- Preloader -->
