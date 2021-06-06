@@ -49,7 +49,7 @@
     </section>
     <script>
         var colunas = [
-            'baixa_lancamento.id', 
+            'baixa_lancamento-id', 
             'tipoLancamento', 
             'lancamento', 
             'historico', 
@@ -60,7 +60,7 @@
             'dataBaixa',
             'contaFinanceira',
             'contaBaixa',
-            'baixa_lancamento.usuarioCadastroNome' 
+            'baixa_lancamento-usuarioCadastroNome' 
         ];
         
         var tabela = new makeTable(colunas, 'fluxo_caixa_select_grid.php', 2);

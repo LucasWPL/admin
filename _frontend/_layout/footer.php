@@ -12,7 +12,7 @@
 
   <!-- Main Footer -->
   <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2021 <a href="/">WPL BI</a>.</strong>
+    <strong>Copyright &copy; 2021-2021 <a href="/" onclick="refreshSession()">WPL BI</a>.</strong>
     Todos os direitos reservados.
     <div class="float-right d-none d-sm-inline-block">
       <b>Versão</b> 1.0.0
@@ -64,5 +64,11 @@
 <script src="../../plugins/daterangepicker/daterangepicker.js"></script>
 <!-- JS-BRASIL -->
 <script src="../../apis/js-brasil-master/js-brasil.js"></script>
+
+<script>
+	$(document).ready(function(){
+		toLastPage();
+	})
+</script>
 </body>
 </html>

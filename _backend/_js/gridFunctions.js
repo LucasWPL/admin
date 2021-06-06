@@ -4,12 +4,18 @@ function loadPage(type, page, title){
 	
 	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
 		setMask();
+		getSavedValues(page);
 	});
 	$('.titlePage').html(title);
 	
 	setCurrentPage([type, page, title]);
 	if(type == 'form') setURLParams(page, type);
 	if(type == 'grid' || type == 'dashboard') setLastGrid(page, title);
+}
+
+function refreshSession(){
+	unsetCurrentPage();
+	unsetLastPage();
 }
 
 //SET, GET E RETURN CURRENT PAGE 
@@ -22,6 +28,11 @@ function setCurrentPage([type, page, title]){
 	sessionStorage.setItem('currentPageTitle', title);
 }
 
+function unsetCurrentPage(){
+	sessionStorage.setItem('currentPageType', null);
+	sessionStorage.setItem('currentPage', null);
+	sessionStorage.setItem('currentPageTitle', null);
+}
 function getCurrentPage(){
 	return [sessionStorage.getItem('currentPageType'),sessionStorage.getItem('currentPage'),sessionStorage.getItem('currentPageTitle')];
 }
@@ -38,6 +49,12 @@ function setLastPage([type, page, title]){
 	sessionStorage.setItem('lastPageTitle', title);
 }
 
+function unsetLastPage(){
+	sessionStorage.setItem('lastPageType', null);
+	sessionStorage.setItem('lastPage', null);
+	sessionStorage.setItem('lastPageTitle', null);
+}
+
 function getLastPage(){
 	if(sessionStorage.getItem('lastPage') == 'null') return false;
 	return [sessionStorage.getItem('lastPageType'),sessionStorage.getItem('lastPage'),sessionStorage.getItem('lastPageTitle')];
@@ -50,7 +67,39 @@ function toLastPage(){
 
 //FUNÇÃO PARA SALVAR TODOS OS VALUES DOS INPUTS ANTES DE RECARREGAR A GRID
 function saveValues(){
+	let page = getCurrentPage();
+	if(page[0] == 'grid'){
+		setValues(page[1]);
+	}
+}
 
+function setValues(page){
+	let values = [];
+	$('.employee-search-gridPrincipal-input').each(function(){
+		if(this.value){
+			values.push([this.id, this.value]);
+		}
+	});
+	if(values.length == 0) values = null;
+	sessionStorage.setItem(page+'-values', JSON.stringify(values));
+}
+
+function deleteSavedValues(page){
+	$('.employee-search-gridPrincipal-input').each(function(){
+		if(this.value){
+			$(this).val('');
+		}
+	});
+	sessionStorage.setItem(page+'-values', 'null');
+}
+
+function getSavedValues(page){
+	data = JSON.parse(sessionStorage.getItem(page+'-values'));
+	if(data){
+		$(data).each((key, value)=>{
+			$('#'+value[0]).val(value[1]).change();
+		});
+	}
 }
 
 //FUNÇÃO USADA PARA A ABERTURA DO MODAL ONDE TERÁ A GRID DE BUSCA
@@ -125,7 +174,7 @@ function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
 		}
 	});
 	$('#refreshGrid').click(function(){
-		toLastGrid();
+		toLastGrid(true);
 	});
 }
 
@@ -232,7 +281,8 @@ function getLastGridTitle(){
 	return sessionStorage.getItem('lastGridTitle');
 }
 
-function toLastGrid(){
+function toLastGrid(refresh = false){
+	if(refresh) deleteSavedValues(getLastGrid());
 	loadPage('grid', getLastGrid(), getLastGridTitle());
 }
 

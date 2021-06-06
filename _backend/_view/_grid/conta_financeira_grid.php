@@ -40,11 +40,11 @@
     </section>
     <script>
         var colunas = [
-            'conta_financeira.id', 
-            'conta_financeira.descricao', 
+            'conta_financeira-id', 
+            'conta_financeira-descricao', 
             'bancoDesc', 
-            'conta_financeira.dataCadastro', 
-            'conta_financeira.usuarioCadastroNome'
+            'conta_financeira-dataCadastro', 
+            'conta_financeira-usuarioCadastroNome'
         ];
         
         var tabela = new makeTable(colunas, 'conta_financeira_select_grid.php');

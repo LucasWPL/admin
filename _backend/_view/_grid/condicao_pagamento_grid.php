@@ -41,12 +41,12 @@
     </section>
     <script>
         var colunas = [
-            'condicao_pagamento.id', 
-            'condicao_pagamento.descricao', 
+            'condicao_pagamento-id', 
+            'condicao_pagamento-descricao', 
             'formaPagamentoDesc', 
-            'condicao_pagamento.desconto', 
-            'condicao_pagamento.dataCadastro',
-            'condicao_pagamento.usuarioCadastroNome'
+            'condicao_pagamento-desconto', 
+            'condicao_pagamento-dataCadastro',
+            'condicao_pagamento-usuarioCadastroNome'
         ];
         
         var tabela = new makeTable(colunas, 'condicao_pagamento_select_grid.php');

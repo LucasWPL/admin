@@ -4,6 +4,7 @@ String.prototype.capitalize = function() {
 }
 //FUNÇÃO PARA DESTRUIR A SESSÃO
 function logout(){
+	refreshSession();
 	window.location.replace("login/_controller/logout.php");
 }
 
