@@ -148,7 +148,7 @@ class MakeTable{
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "dev" => $this-> getSql()   // total data array
+            "sql" => $this-> getSql()   // retornando a query para o objeto datatable
         ];
         return $response;
     }

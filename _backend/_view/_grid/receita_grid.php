@@ -69,19 +69,20 @@
         ];
         
         var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);
-        var arrayStatus = ['aberta', 'baixada', 'baixa parcial', 'vencida'];
+        var arrayStatus = ['aberta', 'baixada', 'baixa parcial', 'vencida', 'apagada'];
         var arrayCondicoes = [
             'receita.status = "aberta"', 
             'receita.status = "baixada"', 
             'receita.status = "baixa parcial"',
-            'receita.dataVencimento < DATE(NOW()) AND receita.status = "aberta"'
+            'receita.dataVencimento < DATE(NOW()) AND (receita.status = "aberta" OR receita.status = "baixa parcial")',
+            'receita.status = "apagada"'
         ];
         tabela.setSelect('status', arrayStatus, arrayCondicoes);
         tabela.setMoney(['valor', 'valorPago']);
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();
-        
+        console.log(tabela);
         setBotoes('receita', 'receita', 'Cadastro receita');
         
         function baixarReceita(){

@@ -52,6 +52,7 @@
 
     <script>
         $(document).ready(function() {
-            verifyURLForm();
+            let get = verifyURLForm();
+            if(get.action == 'edit') $('input[name=userLogin]').attr('readonly', true);
         });
     </script>

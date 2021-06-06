@@ -19,8 +19,17 @@ class makeTable {
     get grid() {
         return this._grid;
     }
+    
     set grid(value) {
         this._grid = value;
+    }
+
+    get sql() {
+        return this._sql;
+    }
+    
+    set sql(value) {
+        this._sql = value.replaceAll("\t", ' ').replaceAll("\r\n", '');
     }
 
     get status() {
@@ -190,6 +199,9 @@ class makeTable {
                         if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ffc2b3');
                     }			
                 }
+            },
+            "fnDrawCallback": (data)=>{
+                this.sql = data.json.sql;
             }
         });
         
@@ -214,6 +226,6 @@ class makeTable {
 
     make(){        
         this.setCamposPesquisas();
-        this.loadTable();
+        return this.loadTable();
     }
 }
