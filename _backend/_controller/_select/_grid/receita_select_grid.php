@@ -4,9 +4,12 @@
 	session_start();
 
 	$sql = "SELECT receita.*, baixa_lancamento.dataBaixa, valorPago FROM receita
-	LEFT JOIN (
-		SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) + SUM(baixa_lancamento.desconto) - SUM(baixa_lancamento.juros)) AS valorPago FROM baixa_lancamento WHERE tipoLancamento = 'receita' GROUP BY baixa_lancamento.lancamento
-		) AS baixa_lancamento ON baixa_lancamento.lancamento = receita.id";
+			LEFT JOIN (
+				SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) 
+				+ CASE WHEN SUM(baixa_lancamento.desconto) IS NULL THEN 0 ELSE SUM(baixa_lancamento.desconto) END
+				- CASE WHEN SUM(baixa_lancamento.juros) IS NULL THEN 0 ELSE SUM(baixa_lancamento.juros) END ) AS valorPago 
+				FROM baixa_lancamento WHERE tipoLancamento = 'receita' GROUP BY baixa_lancamento.lancamento
+			) AS baixa_lancamento ON baixa_lancamento.lancamento = receita.id";
 	
 	$table = new MakeTable($sql, $_REQUEST, 'receita.id');
 	$dados = $table->getDados();
@@ -24,7 +27,7 @@
 		$data[] = $value->historico;
 		$data[] = $value->parcela .'/'. $value->totalParcelas;
 		$data[] = formataReal($value->valor);
-		$data[] = formataReal($value->valor - $value->valorPago);
+		$data[] = formataReal($value->valorPago);
 		$data[] = ucfirst($value->status);
 		$data[] = $value->dataEmissao != '' ? date('d/m/Y', strtotime($value->dataEmissao)) : '';
 		$data[] = date('d/m/Y', strtotime($value->dataVencimento));

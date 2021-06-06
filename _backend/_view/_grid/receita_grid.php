@@ -33,7 +33,7 @@
                             <th>Histórico</th>
                             <th>Parcela</th>
                             <th>Valor</th>
-                            <th>Saldo devedor</th>
+                            <th>Valor pago</th>
                             <th>Status</th>
                             <th>Emissão</th>
                             <th>Vencimento</th>
@@ -59,7 +59,7 @@
             'historico', 
             'parcela', 
             'valor', 
-            'saldoDevedor', 
+            'valorPago', 
             'status', 
             'dataEmissao', 
             'dataVencimento', 
@@ -77,7 +77,7 @@
             'receita.dataVencimento < DATE(NOW()) AND receita.status = "aberta"'
         ];
         tabela.setSelect('status', arrayStatus, arrayCondicoes);
-        tabela.setMoney(['valor', 'saldoDevedor']);
+        tabela.setMoney(['valor', 'valorPago']);
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();
