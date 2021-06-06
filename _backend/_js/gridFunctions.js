@@ -1,11 +1,56 @@
 //FUNÇÃO GLOBAL DE CARREGAMENTO DE PÁGINAS
 function loadPage(type, page, title){
+	saveValues();
+	
 	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
 		setMask();
 	});
 	$('.titlePage').html(title);
+	
+	setCurrentPage([type, page, title]);
 	if(type == 'form') setURLParams(page, type);
-	if(type == 'grid' || type == 'dashboard') setLastGrid(type, page, title);
+	if(type == 'grid' || type == 'dashboard') setLastGrid(page, title);
+}
+
+//SET, GET E RETURN CURRENT PAGE 
+function setCurrentPage([type, page, title]){
+	let last = getCurrentPage();
+	if(last[1] != page) setLastPage(getCurrentPage());
+	 
+	sessionStorage.setItem('currentPageType', type);
+	sessionStorage.setItem('currentPage', page);
+	sessionStorage.setItem('currentPageTitle', title);
+}
+
+function getCurrentPage(){
+	return [sessionStorage.getItem('currentPageType'),sessionStorage.getItem('currentPage'),sessionStorage.getItem('currentPageTitle')];
+}
+
+function toCurrentPage(){	
+	let page = getCurrentPage();
+	loadPage(page[0], page[1], page[2]);
+}
+
+//SET, GET E RETURN LAST PAGE 
+function setLastPage([type, page, title]){
+	sessionStorage.setItem('lastPageType', type);
+	sessionStorage.setItem('lastPage', page);
+	sessionStorage.setItem('lastPageTitle', title);
+}
+
+function getLastPage(){
+	if(sessionStorage.getItem('lastPage') == 'null') return false;
+	return [sessionStorage.getItem('lastPageType'),sessionStorage.getItem('lastPage'),sessionStorage.getItem('lastPageTitle')];
+}
+
+function toLastPage(){
+	let page = getLastPage();
+	if(page) loadPage(page[0], page[1], page[2]);
+}
+
+//FUNÇÃO PARA SALVAR TODOS OS VALUES DOS INPUTS ANTES DE RECARREGAR A GRID
+function saveValues(){
+
 }
 
 //FUNÇÃO USADA PARA A ABERTURA DO MODAL ONDE TERÁ A GRID DE BUSCA
@@ -174,10 +219,9 @@ function getSelectedFromGrid(multi = false, classe = 'checkboxGrids'){
 }
 
 //SET, GET E RETURN LAST GRID 
-function setLastGrid(type, page, title){
+function setLastGrid(page, title){
 	sessionStorage.setItem('lastGrid', page);
 	sessionStorage.setItem('lastGridTitle', title);
-	sessionStorage.setItem('lastGridType', type);
 }
 
 function getLastGrid(){
@@ -188,12 +232,8 @@ function getLastGridTitle(){
 	return sessionStorage.getItem('lastGridTitle');
 }
 
-function getLastGridType(){
-	return sessionStorage.getItem('lastGridType');
-}
-
 function toLastGrid(){
-	loadPage(getLastGridType(), getLastGrid(), getLastGridTitle());
+	loadPage('grid', getLastGrid(), getLastGridTitle());
 }
 
 //FUNÇÃO PARA TRAZER AS INFORMAÇÕES REFERENTES AO REGISTRO QUE ESTÁ SENDO EDITADO
