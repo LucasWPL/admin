@@ -38,6 +38,14 @@ class makeTable {
     set dateIds(ids){
         this._dateIds = ids;
     }
+
+    get moneyIds(){
+        return this._moneyIds;
+    }
+    
+    set moneyIds(ids){
+        this._moneyIds = ids;
+    }
     
     
     setSelect(coluna, options, condicoes = false){
@@ -98,6 +106,23 @@ class makeTable {
         });
         this.dateIds = ids;               
     }
+
+    setMoneyColumn(){
+        $(this.moneyIds).each(function(){
+            $('#'+this).maskMoney({
+                thousands: '.', 
+                decimal: ','
+            });
+        });
+    }
+
+    setMoney(ids, casas = 2){
+        $(ids).each((index, value)=>{
+            var found = this.colunas.find(element => element[1]  === value);
+            if(found) this.colunas[found[0]] = [found[0], found[1], 'money', 'text', casas];
+        });   
+        this.moneyIds = ids;         
+    }
     
     setAttr(){
         $('.employee-search-gridPrincipal-input').css('min-width', '100px');
@@ -111,7 +136,7 @@ class makeTable {
     getHtml(){
         var html = '<td><input type="checkbox"  id="bulkDelete"  /></td>';
         $(this.colunas).each(function(k,v){
-            if(v[2] == 'input' || v[2] == 'date') {
+            if(v[2] == 'input' || v[2] == 'date' || v[2] == 'money') {
                 html += '<td><input type="'+v[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+v[1]+'"></td>';
             }else if(v[2] == 'select'){
                 html += '<td><select id="'+v[1]+'" class="form-control employee-search-gridPrincipal-input">';
@@ -169,6 +194,7 @@ class makeTable {
         });
         
         this.setDateColumn();
+        this.setMoneyColumn();
         
         $('#gridPrincipal_filter').css('display', 'none');
         $('#gridPrincipal').css({

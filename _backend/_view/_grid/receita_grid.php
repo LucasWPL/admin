@@ -77,7 +77,7 @@
             'receita.dataVencimento < DATE(NOW()) AND receita.status = "aberta"'
         ];
         tabela.setSelect('status', arrayStatus, arrayCondicoes);
-        
+        tabela.setMoney(['valor', 'saldoDevedor']);
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();

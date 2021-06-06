@@ -14,6 +14,12 @@ class MakeTable{
         $this->group = $group;
     }
     
+    public static function limpaMoeda($value) {
+        $aux = str_replace('.', '',$value);
+        $aux = str_replace(',', '.',$aux);
+        return floatval($aux);
+    }
+
     public function getTotais(){
         return $this->totais;
     }
@@ -62,6 +68,9 @@ class MakeTable{
             $where .= $this->getDateSql($value, $column[1]);
         }elseif($column[2] == 'select' && $column[4] != "false"){
             $where .= $this->getSelectSql($value, $column);
+        }elseif($column[2] == 'money'){
+            $value = MakeTable::limpaMoeda($value);
+            $where .= " {$column[1]} LIKE '%{$value}%' AND";
         }else{
             $where .= " {$column[1]} LIKE '%{$value}%' AND";
         }

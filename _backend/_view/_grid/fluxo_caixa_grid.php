@@ -67,7 +67,7 @@
 
         var arrayStatus = ['receita', 'despesa'];
         tabela.setSelect('tipoLancamento', arrayStatus);
-        
+        tabela.setMoney(['valor', 'valorBaixa']);
         tabela.setDate(['dataVencimento', 'dataBaixa']);
 
         var dataTables = tabela.make();
