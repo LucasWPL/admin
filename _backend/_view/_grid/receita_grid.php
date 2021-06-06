@@ -25,26 +25,10 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover table-stripe">
                     <thead>
-                        <tr>
-                            <th class="thCkechboxGrid"></th>
-                            <th>Id</th>
-                            <th>CPF/CNPJ</th>
-                            <th>Nome</th>
-                            <th>Histórico</th>
-                            <th>Parcela</th>
-                            <th>Valor</th>
-                            <th>Valor pago</th>
-                            <th>Status</th>
-                            <th>Emissão</th>
-                            <th>Vencimento</th>
-                            <th>Pagamento</th>
-                            <th>Cadastro</th>
-                            <th>Usuário cadastro</th>
-                        </tr>
+                        <tr id="camposTitulo"></tr>
                         <tr id="camposPesquisa"></tr>
                     </thead>
-                    <tbody>
-                    <tbody>
+                    <tbody><tbody>
                 </table>
             </div>
         </div>
@@ -53,19 +37,19 @@
     </section>
     <script>
         var colunas = [
-            'receita-id', 
-            'entidadeCNPJ', 
-            'entidadeNome', 
-            'historico', 
-            'parcela', 
-            'valor', 
-            'valorPago', 
-            'status', 
-            'dataEmissao', 
-            'dataVencimento', 
-            'dataBaixa', 
-            'dataCadastro', 
-            'receita-usuarioCadastroNome'
+            ['receita-id', 'ID'],
+            ['entidadeCNPJ', 'CPF/CNPJ'],
+            ['entidadeNome', 'Nome'],
+            ['historico', 'Histórico'],
+            ['parcela', 'Parcela'],
+            ['valor', 'Valor'],
+            ['valorPago', 'Valor pago'],
+            ['status', 'Status'],
+            ['dataEmissao', 'Emissão'],
+            ['dataVencimento', 'Vencimento'],
+            ['dataBaixa', 'Pagamento'],
+            ['dataCadastro', 'Cadastro'],
+            ['receita-usuarioCadastroNome', 'Usuário cadastro']
         ];
         
         var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);

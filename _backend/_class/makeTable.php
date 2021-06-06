@@ -38,7 +38,7 @@ class MakeTable{
 
     public function setColunas(){
         foreach ($this->request['colunas'] as $key => $value) {
-            $this->request['colunas'][$key] = str_replace('-', '.', $value);
+            $this->request['colunas'][$key][1] = str_replace('-', '.', $this->request['colunas'][$key][1][0]);
         }
         $this->columns = $this->request['colunas'];
     }
@@ -148,7 +148,8 @@ class MakeTable{
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "sql" => $this-> getSql()   // retornando a query para o objeto datatable
+            "sql" => $this-> getSql(),   // retornando a query para o objeto datatable
+            "dev" => $this->request  // retornando a query para o objeto datatable
         ];
         return $response;
     }
