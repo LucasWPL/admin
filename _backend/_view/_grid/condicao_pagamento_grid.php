@@ -44,5 +44,5 @@
         tabela.setDate(['dataCadastro']);
         var dataTables = tabela.make();
         
-        setBotoes('condicao_pagamento', 'condicao_pagamento', 'Cadastro condição de pagamento');
+        setBotoes('condicao_pagamento', 'condicao_pagamento', 'Cadastro condição de pagamento', false, tabela);
     </script>

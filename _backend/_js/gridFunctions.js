@@ -134,7 +134,7 @@ function setModoBusca(){
 	$('#gridPrincipal_paginate').attr('id', 'formBusca_paginate');	
 }
 //BOTÕES GENÉRICOS GRID
-function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
+function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false, tabelaObj = false){
 	//INÍCIO
 	botoesInicio = "<a class='btn btn-app bg-primary' id='formInsert'>";
 		botoesInicio += "<i class='fas fa-plus'></i> Novo";
@@ -149,7 +149,11 @@ function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
 	botoesInicio += "</a>";
 
 	//FIM
-	botoesFim = "<a class='btn btn-app bg-danger' id='gridDelete'>";
+	botoesFim = "<a class='btn btn-app bg-lightblue' id='relatorio'>";
+		botoesFim += "<i class='fas fa-list'></i> Relatório";
+	botoesFim += '</a>';
+	
+	botoesFim += "<a class='btn btn-app bg-danger' id='gridDelete'>";
 		botoesFim += "<i class='fas fa-trash'></i> Deletar";
 	botoesFim += '</a>';
 
@@ -179,6 +183,10 @@ function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false){
 	});
 	$('#refreshGrid').click(function(){
 		toLastGrid(true);
+	});
+	
+	$('#relatorio').click(function(){
+		tabelaObj.relatorio();
 	});
 }
 

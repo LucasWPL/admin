@@ -58,5 +58,5 @@
 
         var dataTables = tabela.make();
 
-        setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento');
+        setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento', false, tabela);
     </script>

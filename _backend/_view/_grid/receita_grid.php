@@ -66,8 +66,7 @@
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         
         var dataTables = tabela.make();
-        console.log(tabela);
-        setBotoes('receita', 'receita', 'Cadastro receita');
+        setBotoes('receita', 'receita', 'Cadastro receita', false, tabela);
         
         function baixarReceita(){
             selecionado = getSelectedFromGrid();

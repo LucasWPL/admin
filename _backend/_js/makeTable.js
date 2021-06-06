@@ -239,4 +239,8 @@ class makeTable {
         this.setCamposPesquisas();
         return this.loadTable();
     }
+
+    relatorio(){
+        console.log(this);
+    }
 }

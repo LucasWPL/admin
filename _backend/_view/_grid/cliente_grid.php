@@ -49,5 +49,5 @@
         tabela.setDate(['cliente-dataCadastro']);
         var dataTables = tabela.make();
         
-        setBotoes('cliente', 'cliente', 'Cadastro cliente');
+        setBotoes('cliente', 'cliente', 'Cadastro cliente', false, tabela);
     </script>

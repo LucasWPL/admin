@@ -43,5 +43,5 @@
         tabela.setDate(['userDataCadastro']);
         var dataTables = tabela.make();
         
-        setBotoes('usuario', 'user', 'Cadastro usuário');
+        setBotoes('usuario', 'user', 'Cadastro usuário', false, tabela);
     </script>

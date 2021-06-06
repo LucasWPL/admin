@@ -44,5 +44,5 @@
         tabela.setDate(['conta_financeira.dataCadastro']);
         var dataTables = tabela.make();
         
-        setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true);
+        setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true, tabela);
     </script>

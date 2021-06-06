@@ -39,5 +39,5 @@
         var tabela = new makeTable(colunas, 'bancos_select_grid.php');  
         var dataTables = tabela.make();
         
-        setBotoes('bancos', 'bancos', 'Cadastro bancos');
+        setBotoes('bancos', 'bancos', 'Cadastro bancos', false, tabela);
     </script>
