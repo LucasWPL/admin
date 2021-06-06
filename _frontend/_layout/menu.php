@@ -220,19 +220,19 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'cliente_grid.php','Cliente')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'cliente_grid.php','Cliente', 'menu')" class="nav-link">
                   <i class="fas fa-user nav-icon"></i>
                   <p>Cliente</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'condicao_pagamento_grid.php','Condição de pagamento')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'condicao_pagamento_grid.php','Condição de pagamento', 'menu')" class="nav-link">
                   <i class="fas fa-money-check-alt nav-icon"></i>
                   <p>Condição de pagamento</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'usuario_grid.php','Usuário')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'usuario_grid.php','Usuário', 'menu')" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>Usuário</p>
                 </a>
@@ -249,25 +249,25 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'conta_financeira_grid.php','Conta financeira')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'conta_financeira_grid.php','Conta financeira', 'menu')" class="nav-link">
                   <i class="fas fa-wallet nav-icon"></i>
                   <p>Conta financeira</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita', 'menu')" class="nav-link">
                   <i class="fas fa-money-bill-wave-alt nav-icon"></i>
                   <p>Receita</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'despesa_grid.php','Despesa')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'despesa_grid.php','Despesa', 'menu')" class="nav-link">
                   <i class="fas fa-hand-holding-usd nav-icon"></i>
                   <p>Despesa</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'fluxo_caixa_grid.php','Fluxo de caixa')" class="nav-link">
+                <a href="javascript:;" onclick="loadPage('grid', 'fluxo_caixa_grid.php','Fluxo de caixa', 'menu')" class="nav-link">
                   <i class="fas fa-file-invoice-dollar nav-icon"></i>
                   <p>Fluxo de caixa</p>
                 </a>

@@ -1,10 +1,10 @@
 //FUNÇÃO GLOBAL DE CARREGAMENTO DE PÁGINAS
-function loadPage(type, page, title){
-	saveValues();
+function loadPage(type, page, title, origem = null){
+	if(origem != 'menu') saveValues();
 	
 	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
 		setMask();
-		getSavedValues(page);
+		getSavedValues(page, origem);
 	});
 	$('.titlePage').html(title);
 	
@@ -93,7 +93,11 @@ function deleteSavedValues(page){
 	sessionStorage.setItem(page+'-values', 'null');
 }
 
-function getSavedValues(page){
+function getSavedValues(page, origem){
+	if(origem == 'menu'){
+		sessionStorage.setItem(page+'-values', null);
+		return false;
+	}
 	data = JSON.parse(sessionStorage.getItem(page+'-values'));
 	if(data){
 		$(data).each((key, value)=>{
