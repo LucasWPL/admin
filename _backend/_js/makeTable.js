@@ -55,10 +55,18 @@ class makeTable {
     set moneyIds(ids){
         this._moneyIds = ids;
     }
+
+    get id(){
+        return this._id;
+    }
+    
+    set id(id){
+        this._id = id;
+    }
     
     
     setSelect(coluna, options, condicoes = false){
-        var found = this.colunas.find(element => element[1]  === coluna);
+        var found = this.colunas.find(element => element[1][0]  === coluna);
         if(found) this.colunas[found[0]] = [found[0], found[1], 'select', options, condicoes];
     }
 
@@ -134,8 +142,8 @@ class makeTable {
     }
     
     setAttr(){
-        $('.employee-search-gridPrincipal-input').css('min-width', '100px');
-        $('.employee-search-gridPrincipal-input').click(function(){
+        $('.employee-search-'+this.id+'-input').css('min-width', '100px');
+        $('.employee-search-'+this.id+'-input').click(function(){
             return false;
         });
         $('#id').attr('style', '');
@@ -144,11 +152,12 @@ class makeTable {
 
     getCamposPesquisa(){
         var html = '<td><input type="checkbox"  id="bulkDelete"  /></td>';
+        var id = this.id;
         $(this.colunas).each(function(key, value){
             if(value[2] == 'input' || value[2] == 'date' || value[2] == 'money') {
-                html += '<td><input type="'+value[3]+'" class="form-control employee-search-gridPrincipal-input" id="'+value[1][0]+'"></td>';
+                html += '<td><input type="'+value[3]+'" class="form-control employee-search-'+id+'-input" name="'+value[1][0]+'" style="height: 33px !important; width: 100% !important;"></td>';
             }else if(value[2] == 'select'){
-                html += '<td><select id="'+value[1][0]+'" class="form-control employee-search-gridPrincipal-input">';
+                html += '<td><select name="'+value[1][0]+'" class="form-control employee-search-'+id+'-input" style="height: 33px !important; width: 100% !important;">';
                 html += '<option></option>';
                 $(value[3]).each(function(){
                     html += '<option value="'+this+'">'+this.capitalize()+'</option>';
@@ -168,15 +177,20 @@ class makeTable {
     }
 
     setCamposPesquisas(){
-        $('#camposTitulo').html(this.getCamposTitulo());
-        $('#camposPesquisa').html(this.getCamposPesquisa());
+        $('#'+this.id+'_camposTitulo').html(this.getCamposTitulo());
+        $('#'+this.id+'_camposPesquisa').html(this.getCamposPesquisa());
         this.setAttr();
     }
 
     loadTable(){
         let grid = this.grid;
         let status = this.status;
-        var tabela = $('#gridPrincipal').DataTable({
+        let sX = true;
+        let sY = '475px';
+        if(this.id == 'formBusca'){
+            sX = ''; sY = '';
+        }
+        var tabela = $('#'+this.id).DataTable({
             "ajax":
             {
                 "url": '_backend/_controller/_select/_grid/'+this.grid+'',
@@ -189,6 +203,8 @@ class makeTable {
             "ordering": true,
             "info": true,
             "autoWidth": false,
+            "scrollX": sX,
+            "scrollY": sY,
             "processing": true,
             "language": {
                 "processing": "Aguarde...",
@@ -217,14 +233,14 @@ class makeTable {
         this.setDateColumn();
         this.setMoneyColumn();
         
-        $('#gridPrincipal_filter').css('display', 'none');
-        $('#gridPrincipal').css({
+        $('#'+this.id+'_filter').css('display', 'none');
+        $('#'+this.id+'').css({
             "border-color": "#d1d1d1", 
             "border-width":"1px", 
             "border-style":"solid"
         });
-        $('.employee-search-gridPrincipal-input').on('keyup change', function (event) {
-            var i = $(this).attr('id'); // getting column index
+        $('.employee-search-'+this.id+'-input').on('keyup change', function (event) {
+            var i = $(this).attr('name'); // getting column index
             var v = $(this).val(); // getting search input value
             $(colunas).each((key, value)=>{
                 if(value[0].indexOf(i) > -1) i = key;
@@ -235,7 +251,8 @@ class makeTable {
         return tabela;
     }
 
-    make(){        
+    make(id = 'gridPrincipal'){       
+        this.id = id; 
         this.setCamposPesquisas();
         return this.loadTable();
     }

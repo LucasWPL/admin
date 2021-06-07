@@ -1,7 +1,7 @@
 //FUNÇÃO GLOBAL DE CARREGAMENTO DE PÁGINAS
 function loadPage(type, page, title, origem = null){
 	if(origem != 'menu') saveValues();
-	
+	$('#tela').html('');
 	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
 		setMask();
 		getSavedValues(page, origem);
@@ -79,6 +79,7 @@ function setValues(page){
 		if(this.value){
 			values.push([this.id, this.value]);
 		}
+		$(this).remove();
 	});
 	if(values.length == 0) values = null;
 	sessionStorage.setItem(page+'-values', JSON.stringify(values));
@@ -124,15 +125,19 @@ function abreBusca(arquivo, titulo){
 function setModoBusca(){
 	$('.blocoBotoes').html('');
 	$('#modalBuscaSubmit').unbind('click');
+	/*
 	$('#gridPrincipal').attr('id', 'formBusca');		
 	$('#gridPrincipal_wrapper').attr('id', 'formBusca_wrapper');		
 	$('#gridPrincipal_length').attr('id', 'formBusca_length');		
 	$('#gridPrincipal_filter').attr('id', 'formBusca_filter');		
 	$('#camposPesquisa').attr('id', 'formBusca_camposPesquisa');		
+	$('#camposTitulo').attr('id', 'formBusca_camposTitulo');		
 	$('#gridPrincipal_processing').attr('id', 'formBusca_processing');		
 	$('#gridPrincipal_info').attr('id', 'formBusca_info');		
 	$('#gridPrincipal_paginate').attr('id', 'formBusca_paginate');	
+	*/
 }
+
 //BOTÕES GENÉRICOS GRID
 function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false, tabelaObj = false){
 	//INÍCIO

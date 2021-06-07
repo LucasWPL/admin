@@ -20,8 +20,8 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover">
                     <thead>
-                        <tr id="camposTitulo"></tr>
-                        <tr id="camposPesquisa"></tr>
+                        <tr id="gridPrincipal_camposTitulo"></tr>
+                        <tr id="gridPrincipal_camposPesquisa"></tr>
                     </thead>
                     <tbody><tbody>
                 </table>
@@ -31,13 +31,21 @@
       </div><!--/. container-fluid -->
     </section>
     <script>
+        tableId = 'gridPrincipal';
+        if('<?=$_GET['busca']?>' == 'S') {
+            $('#gridPrincipal').attr('id', 'formBusca');
+            $('#gridPrincipal_camposPesquisa').attr('id', 'formBusca_camposPesquisa');
+            $('#gridPrincipal_camposTitulo').attr('id', 'formBusca_camposTitulo');
+            tableId = 'formBusca';
+        };
+        
         var colunas = [
             ['cod', 'Código'],
             ['banco', 'Banco']
         ];
         
         var tabela = new makeTable(colunas, 'bancos_select_grid.php');  
-        var dataTables = tabela.make();
+        var dataTables = tabela.make(tableId);
         
         setBotoes('bancos', 'bancos', 'Cadastro bancos', false, tabela);
     </script>

@@ -44,8 +44,8 @@
 		margin-bottom:20px;
 	}
 	.checkboxGrids{
-		width:30px;
-		height:30px;
+		width:20px;
+		height:20px;
 	}
 	.thCkechboxGrid{
 		width:10px;
@@ -60,6 +60,10 @@
     .tabelasScroll{
         overflow: auto;
         white-space: nowrap;
+    }
+    th 
+    {
+      max-height: 20px !important;
     }
 </style>
 <?php

@@ -25,8 +25,8 @@
             <div class="col-md-12">
                 <table id="gridPrincipal" class="table table-hover table-stripe">
                     <thead>
-                        <tr id="camposTitulo"></tr>
-                        <tr id="camposPesquisa"></tr>
+                        <tr id="gridPrincipal_camposTitulo" style="max-height: 10px !important;"></tr>
+                        <tr id="gridPrincipal_camposPesquisa"></tr>
                     </thead>
                     <tbody><tbody>
                 </table>
