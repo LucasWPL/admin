@@ -243,7 +243,7 @@ class makeTable {
             var i = $(this).attr('name'); // getting column index
             var v = $(this).val(); // getting search input value
             $(colunas).each((key, value)=>{
-                if(value[0].indexOf(i) > -1) i = key;
+                if(value[0] == i) i = key;
             });
             tabela.columns(i).search(v).draw();
         });
