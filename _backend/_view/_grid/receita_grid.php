@@ -64,6 +64,7 @@
         tabela.setSelect('status', arrayStatus, arrayCondicoes);
         tabela.setMoney(['valor', 'valorPago']);
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
         
         var dataTables = tabela.make();
         setBotoes('receita', 'receita', 'Cadastro receita', false, tabela);

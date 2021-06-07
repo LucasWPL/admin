@@ -64,6 +64,18 @@ class makeTable {
         this._id = id;
     }
     
+    verifyBusca(value, padrao = 'gridPrincipal'){
+        var tableId = padrao;
+
+        if(value == 'S') {
+            $('#gridPrincipal').attr('id', 'formBusca');
+            $('#gridPrincipal_camposPesquisa').attr('id', 'formBusca_camposPesquisa');
+            $('#gridPrincipal_camposTitulo').attr('id', 'formBusca_camposTitulo');
+            tableId = 'formBusca';
+        };
+
+        this.id = tableId;
+    }
     
     setSelect(coluna, options, condicoes = false){
         var found = this.colunas.find(element => element[1][0]  === coluna);
@@ -251,8 +263,7 @@ class makeTable {
         return tabela;
     }
 
-    make(id = 'gridPrincipal'){       
-        this.id = id; 
+    make(){     
         this.setCamposPesquisas();
         return this.loadTable();
     }

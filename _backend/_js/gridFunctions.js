@@ -2,7 +2,7 @@
 function loadPage(type, page, title, origem = null){
 	if(origem != 'menu') saveValues();
 	$('#tela').html('');
-	$('#tela').load('_backend/_view/_'+type+'/'+page, function(){
+	$('#tela').load('_backend/_view/_'+type+'/'+page+'?busca=N', function(){
 		setMask();
 		getSavedValues(page, origem);
 	});

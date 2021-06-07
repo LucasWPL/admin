@@ -30,22 +30,15 @@
         <!-- /.row -->
       </div><!--/. container-fluid -->
     </section>
-    <script>
-        tableId = 'gridPrincipal';
-        if('<?=$_GET['busca']?>' == 'S') {
-            $('#gridPrincipal').attr('id', 'formBusca');
-            $('#gridPrincipal_camposPesquisa').attr('id', 'formBusca_camposPesquisa');
-            $('#gridPrincipal_camposTitulo').attr('id', 'formBusca_camposTitulo');
-            tableId = 'formBusca';
-        };
-        
+    <script>   
         var colunas = [
             ['cod', 'Código'],
             ['banco', 'Banco']
         ];
         
         var tabela = new makeTable(colunas, 'bancos_select_grid.php');  
-        var dataTables = tabela.make(tableId);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
+        var dataTables = tabela.make();
         
         setBotoes('bancos', 'bancos', 'Cadastro bancos', false, tabela);
     </script>

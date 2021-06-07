@@ -55,6 +55,7 @@
         tabela.setSelect('tipoLancamento', arrayStatus);
         tabela.setMoney(['valor', 'valorBaixa']);
         tabela.setDate(['dataVencimento', 'dataBaixa']);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
 
         var dataTables = tabela.make();
 

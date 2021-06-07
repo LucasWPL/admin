@@ -47,6 +47,7 @@
         
         var tabela = new makeTable(colunas, 'cliente_select_grid.php');   
         tabela.setDate(['cliente-dataCadastro']);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
         setBotoes('cliente', 'cliente', 'Cadastro cliente', false, tabela);

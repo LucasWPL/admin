@@ -42,6 +42,7 @@
         
         var tabela = new makeTable(colunas, 'conta_financeira_select_grid.php');
         tabela.setDate(['conta_financeira.dataCadastro']);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
         setBotoes('conta_financeira', 'conta_financeira', 'Cadastro conta financeira', true, tabela);

@@ -41,6 +41,7 @@
         
         var tabela = new makeTable(colunas, 'usuario_select_grid.php');
         tabela.setDate(['userDataCadastro']);
+        tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
         setBotoes('usuario', 'user', 'Cadastro usuário', false, tabela);
