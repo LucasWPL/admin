@@ -22,7 +22,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Descrição</label>
-                                        <input type="text" class="form-control" name="descricao" required></input>
+                                        <input type="text" class="form-control required" name="descricao"></input>
                                         <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                 </div>
@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Banco</label>
-                                        <input type="text" class="form-control busca readonly" id="descricaoBanco" onclick="abreBusca('bancos', 'Busca banco');"></input>
+                                        <input type="text" class="form-control busca readonly required" id="descricaoBanco" onclick="abreBusca('bancos', 'Busca banco');"></input>
                                         <input type="hidden" name="banco"></input>
                                     </div>
                                     <div class="col-md-4">

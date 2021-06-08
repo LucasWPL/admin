@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Conta baixa</label>
-                                        <input type="text" class="form-control busca readonly" id="contaBaixa" required onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
+                                        <input type="text" class="form-control busca readonly required" id="contaBaixa" onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
                                         <input name="contaBaixa" type="hidden">
                                     </div>
                                     <div class="col-md-2">
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor baixa</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valorBaixa" onchange="verificaModo()" required></input>
+                                        <input type="text" class="form-control inputDinheiro required" name="valorBaixa" onchange="verificaModo()"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Desconto</label>

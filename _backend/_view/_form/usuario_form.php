@@ -19,16 +19,16 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" name="userName" required></input>
+                                        <input type="text" class="form-control required" name="userName"></input>
                                         <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Login</label>
-                                        <input type="text" class="form-control" name="userLogin" required></input>
+                                        <input type="text" class="form-control required" name="userLogin"></input>
                                     </div>
                                     <div class="col-md-8">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="userEmail"></input>
+                                        <input type="email" class="form-control required" name="userEmail"></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Senha</label>
@@ -53,6 +53,11 @@
     <script>
         $(document).ready(function() {
             let get = verifyURLForm();
-            if(get.action == 'edit') $('input[name=userLogin]').attr('readonly', true);
+            console.log(get);
+            if(get.action == 'edit') {
+                $('input[name=userLogin]').attr('readonly', true);
+            }else{
+                addRequired('userPass');
+            }
         });
     </script>

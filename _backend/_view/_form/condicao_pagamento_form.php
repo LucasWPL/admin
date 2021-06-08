@@ -22,7 +22,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Descrição</label>
-                                        <input type="text" class="form-control" name="descricao" required></input>
+                                        <input type="text" class="form-control required" name="descricao"></input>
                                         <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                 </div>
@@ -46,21 +46,21 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label>Forma de pagamento</label>
-                                        <select class="form-control" name="formaPagamento" required>
+                                        <select class="form-control" name="formaPagamento">
                                             <?=selectFormaPagamento()?>
                                         </select>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Parcelas</label>
-                                        <input type="number" class="form-control" name="parcelas" required></input>
+                                        <input type="number" class="form-control required" name="parcelas"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Carência</label>
-                                        <input type="number" class="form-control" name="carencia" required></input>
+                                        <input type="number" class="form-control required" name="carencia"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Intervalo</label>
-                                        <input type="number" class="form-control" name="intervalo" required></input>
+                                        <input type="number" class="form-control required" name="intervalo"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>(%) Desconto</label>

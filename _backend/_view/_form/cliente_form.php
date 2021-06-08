@@ -19,15 +19,15 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CPF/CNPJ</label>
-                                        <input type="number" class="form-control" name="CNPJ" required onblur="buscaCNPJ(this.value)"></input>
+                                        <input type="number" class="form-control required" name="CNPJ" onblur="buscaCNPJ(this.value)"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>IE</label>
-                                        <input type="number" class="form-control" name="IE" required></input>
+                                        <input type="number" class="form-control required" name="IE"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Tipo</label>
-                                        <select type="number" class="form-control" name="tipo" required>
+                                        <select type="number" class="form-control required" name="tipo">
                                             <option value="NA">Não se aplica</option>
                                             <option value="MATRIZ">Matriz</option>
                                             <option value="FILIAL">Filial</option>
@@ -35,18 +35,18 @@
                                     </div>
                                     <div class="col-md-5">
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" name="nome" required></input>
+                                        <input type="text" class="form-control required" name="nome"></input>
                                         <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Telefone</label>
-                                        <input type="text" class="form-control telefone" name="telefone" required></input>
+                                        <input type="text" class="form-control telefone required" name="telefone"></input>
                                     </div>
                                     <div class="col-md-8">
                                         <label>Email</label>
-                                        <input type="email" class="form-control" name="email" required></input>
+                                        <input type="email" class="form-control required" name="email"></input>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -79,30 +79,30 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CEP</label>
-                                        <input type="text" class="form-control cep" name="endereco_CEP" required onblur="buscaCEP(this.value)"></input>
+                                        <input type="text" class="form-control cep required" name="endereco_CEP" onblur="buscaCEP(this.value)"></input>
                                     </div>
                                     <div class="col-md-7">
                                         <label>Logradouro</label>
-                                        <input type="text" class="form-control readonly" name="endereco_xLgr" required></input>
+                                        <input type="text" class="form-control readonly required" name="endereco_xLgr"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>N°</label>
-                                        <input type="number" class="form-control" name="endereco_nro" required></input>
+                                        <input type="number" class="form-control required" name="endereco_nro"></input>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Bairro</label>
-                                        <input type="text" class="form-control readonly" name="endereco_xBairro" required ></input>
+                                        <input type="text" class="form-control readonly required" name="endereco_xBairro"></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Município</label>
-                                        <input type="text" class="form-control readonly" name="endereco_xMun" required></input>
+                                        <input type="text" class="form-control readonly" name="endereco_xMun"></input>
                                         <input type="hidden" class="form-control" name="endereco_cMun"></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Estado</label>
-                                        <select class="form-control readonly" name="endereco_UF" required>
+                                        <select class="form-control readonly required" name="endereco_UF">
                                             <option value=""></option>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>

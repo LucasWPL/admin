@@ -113,7 +113,7 @@ CREATE TABLE `receita` (
   `usuarioCadastro` varchar(16) NOT NULL,
   `usuarioCadastroNome` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8mb4;
 
 -- TABLE: user
 CREATE TABLE `user` (

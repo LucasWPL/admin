@@ -4,7 +4,9 @@ function loadPage(type, page, title, origem = null){
 	$('#tela').html('');
 	$('#tela').load('_backend/_view/_'+type+'/'+page+'?busca=N', function(){
 		setMask();
+		setRequired();
 		getSavedValues(page, origem);
+		if(type == 'form') setSubmit();
 	});
 	$('.titlePage').html(title);
 	
@@ -211,6 +213,35 @@ function setMask(){
 	$('.cep').inputmask("99999-999");
 }
 
+function setRequired(){
+	$('.required').each(function(){
+		let label = this.previousElementSibling;
+		if(label.localName == 'label'){
+			label.innerHTML += " <span class='text-danger'>*</span>";
+		}
+	});
+}
+
+function removeRequired(name){
+	let input = document.querySelector('[name='+name+']');
+	let label = input.previousElementSibling;
+	if(label.localName == 'label'){
+		let string = label.innerHTML.replace(" <span class=\"text-danger\">*</span>", "");
+		label.innerHTML = string;
+	}
+	$(input).removeClass('required');
+	$(input).removeClass('is-invalid');
+}
+
+function addRequired(name){
+	let input = document.querySelector('[name='+name+']');
+	let label = input.previousElementSibling;
+	if(label.localName == 'label'){
+		label.innerHTML += " <span class='text-danger'>*</span>";
+	}
+	$(input).addClass('required');
+}
+
 //ESTORNO DE LANCAMENTOS FINANCEIROS
 function estornarLancamento(tipo){
 	var selecionados = getSelectedFromGrid(true);
@@ -393,6 +424,23 @@ function verifyURLForm(){
 		formInsert(get.url);
 	}
 	return getURLParams();
+}
+
+//FUNÇÃO DE VALIDAÇÃO DO SUBMIT FORM
+function setSubmit(){
+	$('form').each(function(){
+		$(this).submit((e)=>{
+			e.preventDefault();
+			$('.required').each(function(){
+				if(this.value == '' || limpaMoeda(this.value) == 0){
+					$(this).addClass('is-invalid');
+					toast('error', "Preencha todos os campos obrigatórios.");
+				}else{
+					$(this).removeClass('is-invalid');
+				}
+			});
+		});
+	})
 }
 
 //FUNÇÕES SET E GET PARÂMETROS ENVIADOS POR URL

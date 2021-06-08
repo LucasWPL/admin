@@ -281,6 +281,23 @@
               </li>
             </ul>
           </li>
+          <li class="nav-item">
+            <a href="javascript:;" class="nav-link">
+              <i class="nav-icon fas fa-store-alt"></i>
+              <p>
+                Vendas
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'pedido_venda_grid.php','Pedido de venda', 'menu')" class="nav-link">
+                  <i class="fas fa-clipboard-list nav-icon"></i>
+                  <p>Pedido</p>
+                </a>
+              </li>
+            </ul>
+          </li>
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

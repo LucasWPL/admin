@@ -19,7 +19,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Historico</label>
-                                        <input type="text" class="form-control" name="historico" required></input>
+                                        <input type="text" class="form-control required" name="historico"></input>
                                         <input type="hidden" class="form-control" name="id" disabled></input>
                                     </div>
                                 </div>
@@ -52,15 +52,15 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control inputDinheiro" name="valor" required></input>
+                                        <input type="text" class="form-control inputDinheiro required" name="valor"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Emissão</label>
-                                        <input type="date" class="form-control" name="dataEmissao" required value="<?=date('Y-m-d')?>" max="<?=date('Y-m-d')?>"></input>
+                                        <input type="date" class="form-control required" name="dataEmissao" value="<?=date('Y-m-d')?>" max="<?=date('Y-m-d')?>"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
-                                        <input type="date" class="form-control" name="dataVencimento" required></input>
+                                        <input type="date" class="form-control required" name="dataVencimento"></input>
                                     </div>
                                 </div>
                             </div>
@@ -210,11 +210,9 @@
 
             $('.entidade').unbind('click');
             if(value == 'avulso'){
-                $('input[name="entidadeCNPJ"]').attr('required', false);
-                $('#entidadeNome').attr('required', false);
+                removeRequired('entidadeCNPJ');
             }else{
-                $('input[name="entidadeCNPJ"]').attr('required', true);
-                $('#entidadeNome').attr('required', true);
+                addRequired('entidadeCNPJ');
             }
             
             if(value == 'usuario'){
