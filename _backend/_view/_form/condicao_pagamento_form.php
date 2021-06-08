@@ -56,11 +56,11 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Carência</label>
-                                        <input type="number" class="form-control required" name="carencia"></input>
+                                        <input type="number" class="form-control" name="carencia" min="1"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Intervalo</label>
-                                        <input type="number" class="form-control required" name="intervalo"></input>
+                                        <input type="number" class="form-control" name="intervalo"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>(%) Desconto</label>
@@ -68,7 +68,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Dias bloqueados</label>
-                                        <input type="button" class="form-control btn-primary" id="diasBloqueados" value="Configurar"></input>
+                                        <input type="button" class="form-control btn-primary" id="diasBloqueadosBtn" value="Configurar"></input>
                                         <input type="hidden" name="diasBloqueados"></input>
                                     </div>
                                 </div>
@@ -149,9 +149,11 @@
 
         function desativarDias(){
             var dia = $('input[name="diasBloqueados"]').val().split('; ');
-            $(dia).each(function(k,v){
-                $('#'+v).removeClass('semanaAtivo').addClass('semanaInativo');
-            });
+            if(dia[0] != ''){
+                $(dia).each(function(k,v){
+                    $('#'+v).removeClass('semanaAtivo').addClass('semanaInativo');
+                });
+            }
         }
 
         $('.semanaButtons').click(function(){
@@ -166,7 +168,7 @@
             }
         });
 
-        $('#diasBloqueados').click(function(){
+        $('#diasBloqueadosBtn').click(function(){
             $('#modalDias').modal('show');
         });
 

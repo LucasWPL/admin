@@ -430,15 +430,17 @@ function verifyURLForm(){
 function setSubmit(){
 	$('form').each(function(){
 		$(this).submit((e)=>{
-			e.preventDefault();
+			let submit = true;
 			$('.required').each(function(){
 				if(this.value == '' || limpaMoeda(this.value) == 0){
 					$(this).addClass('is-invalid');
 					toast('error', "Preencha todos os campos obrigatórios.");
+					submit = false;
 				}else{
 					$(this).removeClass('is-invalid');
 				}
 			});
+			if(!submit) e.preventDefault();
 		});
 	})
 }

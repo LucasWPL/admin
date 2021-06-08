@@ -43,7 +43,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Conta financeira</label>
-                                        <input type="text" class="form-control busca readonly" id="contaFinanceira" onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
+                                        <input type="text" class="form-control busca readonly required" id="contaFinanceira" onclick="abreBusca('conta_financeira', 'Busca conta financeira');"></input>
                                         <input name="contaFinanceira" type="hidden">
                                     </div>
                                     <div class="col-md-2">
