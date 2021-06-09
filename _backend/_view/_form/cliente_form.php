@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>IE</label>
-                                        <input type="number" class="form-control required" name="IE"></input>
+                                        <input type="number" class="form-control" name="IE"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Tipo</label>
@@ -97,7 +97,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label>Município</label>
-                                        <input type="text" class="form-control readonly" name="endereco_xMun"></input>
+                                        <input type="text" class="form-control readonly required" name="endereco_xMun"></input>
                                         <input type="hidden" class="form-control" name="endereco_cMun"></input>
                                     </div>
                                     <div class="col-md-4">

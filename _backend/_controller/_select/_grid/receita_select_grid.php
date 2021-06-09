@@ -22,6 +22,7 @@
 		$data = array();
 		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
 		$data[] = $value->id;
+		$data[] = $value->nfe;
 		$data[] = $value->entidadeCNPJ;
 		$data[] = $value->entidadeNome;
 		$data[] = $value->historico;

@@ -38,6 +38,7 @@
     <script>
         var colunas = [
             ['receita-id', 'ID'],
+            ['nfe', 'NF-e'],
             ['entidadeCNPJ', 'CPF/CNPJ'],
             ['entidadeNome', 'Nome'],
             ['historico', 'Histórico'],
@@ -52,7 +53,7 @@
             ['receita-usuarioCadastroNome', 'Usuário cadastro']
         ];
         
-        var tabela = new makeTable(colunas, 'receita_select_grid.php', 8);
+        var tabela = new makeTable(colunas, 'receita_select_grid.php', 9);
         var arrayStatus = ['aberta', 'baixada', 'baixa parcial', 'vencida', 'apagada'];
         var arrayCondicoes = [
             'receita.status = "aberta"', 
