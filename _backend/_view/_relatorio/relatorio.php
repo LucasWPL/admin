@@ -67,13 +67,18 @@
         $table .= $footerTablle;
     $table .= "</table>";
 
+    $copyright = "<span class='copyright'>Impresso por: <b>{$_SESSION['userName']}</b>, dia ".date('d/m/Y')." ás ".date('H:i:s')." &copy; Copyright <b>WPL BI</b>.</span>";
+    $html = '';
+    $html .= $table;
+    $html .= $copyright;
+
     $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);
     $mpdf->allow_charset_conversion = true;
     
     $stylesheet = file_get_contents('style.css');
     $mpdf->WriteHTML($stylesheet, \Mpdf\HTMLParserMode::HEADER_CSS);
 
-    $mpdf->WriteHTML($table);
+    $mpdf->WriteHTML($html);
     $mpdf->Output();
     exit;
 ?>
