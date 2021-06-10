@@ -84,7 +84,7 @@ class makeTable {
 
     setDateColumn(){
         $(this.dateIds).each(function(){
-            $('#'+this).daterangepicker({
+            $('[name='+this+']').daterangepicker({
                 "locale": {
                     "format": "DD/MM/YYYY",
                     "separator": " - ",
@@ -116,13 +116,13 @@ class makeTable {
                 "firstDay": 1
                 }
             });
-            $('#'+this).attr('autocomplete', 'off');
+            $('[name='+this+']').attr('autocomplete', 'off');
             
-            $('#'+this).on('apply.daterangepicker', function (ev, picker) {
+            $('[name='+this+']').on('apply.daterangepicker', function (ev, picker) {
                 $(this).val(picker.startDate.format('DD/MM/YYYY') + ' - ' + picker.endDate.format('DD/MM/YYYY')).change();
             });
 
-            $('#'+this).on('cancel.daterangepicker', function (ev, picker) {
+            $('[name='+this+']').on('cancel.daterangepicker', function (ev, picker) {
                 $(this).val('').change();
             });
         });
@@ -138,7 +138,7 @@ class makeTable {
 
     setMoneyColumn(){
         $(this.moneyIds).each(function(){
-            $('#'+this).maskMoney({
+            $('[name='+this+']').maskMoney({
                 thousands: '.', 
                 decimal: ','
             });
