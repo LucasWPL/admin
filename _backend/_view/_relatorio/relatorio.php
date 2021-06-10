@@ -4,7 +4,7 @@
     require_once (ROOT . '_backend'. SEP . '_class'. SEP . 'crud.php');
     require_once (ROOT . '_backend'. SEP . '_class'. SEP . 'global.php');
     require_once (ROOT . 'vendor'. SEP . 'mpdf'. SEP . 'mpdf'. SEP . 'src'. SEP . 'Mpdf.php');
-    
+
     function setDateValue($value){
         if(strlen($value) == 10) return date('d/m/Y', strtotime($value));
         if(strlen($value) == 19) return date('d/m/Y H:i:s', strtotime($value));
@@ -68,7 +68,8 @@
     $table .= "</table>";
 
     $copyright = "<span class='copyright'>Impresso por: <b>{$_SESSION['userName']}</b>, dia ".date('d/m/Y')." ás ".date('H:i:s')." &copy; Copyright <b>WPL BI</b>.</span>";
-    $html = '';
+
+    $html = "<span class='titulo-relatorio'>Relatório ".strtolower($_POST['tituloRelatorio'])."</span>";
     $html .= $table;
     $html .= $copyright;
 

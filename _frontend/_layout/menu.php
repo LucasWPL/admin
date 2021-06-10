@@ -27,6 +27,7 @@
 	<form action="<?=SITEROOT?>_backend/_view/_relatorio/relatorio.php" target="_blank" style="display:none" id="formulario-relatorio" method="POST">
 		<input type="hidden" name="sql">
 		<input type="hidden" name="colunas">
+		<input type="hidden" name="tituloRelatorio">
 	</form>
 	<!-- FORM PARA CRIAR UM RELATÓRIO VIA POST-->
 

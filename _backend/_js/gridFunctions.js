@@ -7,6 +7,7 @@ function loadPage(type, page, title, origem = null){
 		setRequired();
 		getSavedValues(page, origem);
 		if(type == 'form') setSubmit();
+		$('#formulario-relatorio input[name="tituloRelatorio"]').val(title);
 	});
 	$('.titlePage').html(title);
 	
