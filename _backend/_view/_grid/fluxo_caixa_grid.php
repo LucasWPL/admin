@@ -44,8 +44,8 @@
             ['valorBaixa','Valor baixado'],
             ['dataVencimento','Vencimento'],
             ['dataBaixa','Pagamento'],
-            ['contaFinanceira','Conta origem'],
-            ['contaBaixa','Conta baixa'],
+            ['contaDesc','Conta origem'],
+            ['contaBaixaDesc','Conta baixa'],
             ['baixa_lancamento-usuarioCadastroNome','Usuário baixa']
         ];
         

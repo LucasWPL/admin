@@ -1,5 +1,7 @@
-table, td, th {  
+  table, td, th {  
     border: 1px solid black;
+    border-left: none;
+    border-right: none;
     text-align: left;
   }
   
@@ -20,4 +22,8 @@ table, td, th {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  td{
+      border-bottom: 0.5px dashed #e6e6e6;
+      border-top: 0.5px dashed #e6e6e6;
   }

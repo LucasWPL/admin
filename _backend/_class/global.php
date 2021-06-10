@@ -101,8 +101,8 @@
         return $html;
     }
     
-    function formataReal($valor){
-        return number_format($valor,2,",",".");
+    function formataReal($valor, $casas = 2){
+        return number_format($valor,$casas,",",".");
     }
 
     function compararFloats($a, $operation, $b, $decimals = 15) {

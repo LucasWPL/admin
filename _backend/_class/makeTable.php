@@ -28,6 +28,10 @@ class MakeTable{
         $this->totais = $value;
     }
 
+    public function getSqlLimit(){
+        return $this->sql . " LIMIT {$this->request['start']} , {$this->request['length']}";
+    }
+
     public function getSql(){
         return $this->sql;
     }
@@ -124,7 +128,7 @@ class MakeTable{
     private function getRegistros(){//PEGA OS DADOS COM A QUERY PRONTA
         //CONEXÃO E REQUISIÇÃO AO BDD
         $conn = new Crud();
-        $dados = $conn->getSelect($this->getSql() . " LIMIT {$this->request['start']} , {$this->request['length']}",'', TRUE);
+        $dados = $conn->getSelect($this->getSqlLimit(),'', TRUE);
         $dadosTotais = $conn->getSelect($this->getSql(),'', TRUE);
         $retorno = array("dados" => $dados, "dadosTotais" => $dadosTotais);
         return $retorno;
@@ -148,7 +152,7 @@ class MakeTable{
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
             "data" => $full,   // total data array
-            "sql" => $this-> getSql(),   // retornando a query para o objeto datatable
+            "sql" => $this-> getSqlLimit(),   // retornando a query para o objeto datatable
             "dev" => $this->request  // retornando a query para o objeto datatable
         ];
         return $response;
