@@ -69,7 +69,7 @@
 
     $copyright = "<span class='copyright'>Impresso por: <b>{$_SESSION['userName']}</b>, dia ".date('d/m/Y')." ás ".date('H:i:s')." &copy; Copyright <b>WPL BI</b>.</span>";
 
-    $html = "<span class='titulo-relatorio'>Relatório ".strtolower($_POST['tituloRelatorio'])."</span>";
+    $html = "<span class='titulo-relatorio'>Relatório ".mb_strtolower($_POST['tituloRelatorio'])."</span>";
     $html .= $table;
     $html .= $copyright;
 
