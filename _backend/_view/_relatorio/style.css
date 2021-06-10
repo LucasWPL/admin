@@ -1,8 +1,12 @@
   table, td, th {  
-    border: 1px solid black;
     border-left: none;
     border-right: none;
     text-align: left;
+  }
+
+  .head{
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
   }
   
   table {
@@ -26,4 +30,8 @@
   td{
       border-bottom: 0.5px dashed #e6e6e6;
       border-top: 0.5px dashed #e6e6e6;
+  }
+  .footer{
+      border:none;
+      border-top: 1px solid black;
   }

@@ -41,7 +41,7 @@
     //CABEÇALHO DA TABELA
     $headTable = "<thead><tr>";
     foreach($colunas AS $key => $value){
-        $headTable .= "<th>{$value[1][1]}</th>";
+        $headTable .= "<th class='head'>{$value[1][1]}</th>";
     }
     $headTable .= "</tr></thead>";
 
@@ -52,10 +52,19 @@
     }
     $bodyTable .= "</tbody>";
 
+    //RODAPÉ
+    $footerTablle = '<tfoot>';
+        $footerTablle .= "<tr>";
+            $footerTablle .= "<td class='footer' colspan='".count($colunas)."'>Reg.: ".count($dados)."</td>";
+        $footerTablle .= '</tr>';
+    $footerTablle .= '<tfoot>';
+
+
     //MONTANDO A TABELA
     $table =  "<table>";
         $table .= $headTable;
         $table .= $bodyTable;
+        $table .= $footerTablle;
     $table .= "</table>";
 
     $mpdf = new \Mpdf\Mpdf(['mode' => 'utf-8', 'format' => 'A4-L']);

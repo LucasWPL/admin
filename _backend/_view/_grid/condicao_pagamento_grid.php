@@ -41,7 +41,8 @@
         ];
         
         var tabela = new makeTable(colunas, 'condicao_pagamento_select_grid.php');
-        tabela.setDate(['dataCadastro']);
+        tabela.setDate(['condicao_pagamento-dataCadastro']);
+        tabela.setMoney(['condicao_pagamento-desconto']);
         tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
