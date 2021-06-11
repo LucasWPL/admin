@@ -142,32 +142,52 @@ function setModoBusca(){
 }
 
 //BOTÕES GENÉRICOS GRID
-function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false, tabelaObj = false){
+function setBotoes(prefixo, tabela, titleForm, deleteGeneric = false, tabelaObj = false, configInicio = ['insert', 'edit', 'view'], configFim = ['delete']){
 	//INÍCIO
-	botoesInicio = "<a class='btn btn-app bg-primary' id='formInsert'>";
-		botoesInicio += "<i class='fas fa-plus'></i> Novo";
-	botoesInicio += '</a>';
+	botoesInicio = '';
+	if(configInicio.indexOf('insert') > -1){
+		botoesInicio += `
+			<a class='btn btn-app bg-primary' id='formInsert'>
+				<i class='fas fa-plus'></i> Novo
+			</a>
+		`;
+	}
 
-	botoesInicio += "<a class='btn btn-app bg-warning' id='formUpdate'>";
-		botoesInicio += "<i class='fas fa-edit'></i> Editar";
-	botoesInicio += "</a>";
-
-	botoesInicio += "<a class='btn btn-app bg-info' id='formView'>";
-		botoesInicio += "<i class='fas fa-search'></i> Visualizar";
-	botoesInicio += "</a>";
+	if(configInicio.indexOf('edit') > -1){
+		botoesInicio += `
+			<a class='btn btn-app bg-warning' id='formUpdate'>
+				<i class='fas fa-edit'></i> Editar
+			</a>
+		`;
+	}
+	if(configInicio.indexOf('view') > -1){
+		botoesInicio += `
+			<a class='btn btn-app bg-info' id='formView'>
+				<i class='fas fa-search'></i> Visualizar
+			</a>
+		`;
+	}
 
 	//FIM
-	botoesFim = "<a class='btn btn-app bg-lightblue' id='relatorio'>";
-		botoesFim += "<i class='fas fa-list'></i> Relatório";
-	botoesFim += '</a>';
+	botoesFim = `
+		<a class='btn btn-app bg-lightblue' id='relatorio'>
+			<i class='fas fa-list'></i> Relatório
+		</a>
+	`;
 	
-	botoesFim += "<a class='btn btn-app bg-danger' id='gridDelete'>";
-		botoesFim += "<i class='fas fa-trash'></i> Deletar";
-	botoesFim += '</a>';
+	if(configFim.indexOf('delete') > -1){
+		botoesFim += `
+			<a class='btn btn-app bg-danger' id='gridDelete'>
+				<i class='fas fa-trash'></i> Deletar
+			</a>
+		`;
+	}
 
-	botoesFim += "<a class='btn btn-app bg-secondary' id='refreshGrid'>";
-		botoesFim += "<i class='fas fa-redo'></i> Atualizar";
-	botoesFim += '</a>';
+	botoesFim += `
+		<a class='btn btn-app bg-secondary' id='refreshGrid'>
+			<i class='fas fa-redo'></i> Atualizar
+		</a>
+	`;
 
 	//CLICK DOS BOTÕES
 	$('#inicioBotoes').html(botoesInicio);

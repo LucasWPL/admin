@@ -6,12 +6,9 @@
         
         <div class="row blocoBotoes">
             <div class="col-md-12">
-                <!--<span id="inicioBotoes"></span>!-->
+                <span id="inicioBotoes"></span>
                 
                 <span id="botoesEspecificos">
-                    <a class='btn btn-app bg-orange' onclick="estornarLancamento('fluxo');">
-                        <i class='fas fa-retweet'></i> Estornar
-                    </a>
                 </span>
                 
                 <span id="fimBotoes"></span>
@@ -59,5 +56,5 @@
 
         var dataTables = tabela.make();
 
-        setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento', false, tabela);
+        setBotoes('fluxo_caixa', 'baixa_lancamento', 'Cadastro lançamento', false, tabela, [], []);
     </script>
