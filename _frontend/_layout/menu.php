@@ -161,15 +161,22 @@
           <div class="dropdown-divider"></div>
           <a href="javascript:;" class="dropdown-item dropdown-footer">See All Notifications</a>
         </div>
-      </li> -->
+      </li> 
+      
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="javascript:;" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
+      -->
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="javascript:;" role="button">
           <i class="fas fa-expand-arrows-alt"></i>
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="javascript:;" role="button">
-          <i class="fas fa-th-large"></i>
+        <a class="nav-link" href="javascript:;" role="button" onclick="loadPage('grid', 'configuracoes_grid.php','Configurações')">
+          <i class="fas fas fa-cog"></i>
         </a>
       </li>
       <li class="nav-item">
