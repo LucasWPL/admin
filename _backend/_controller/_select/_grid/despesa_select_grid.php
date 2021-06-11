@@ -3,7 +3,7 @@
 	require_once('../../../_class/makeTable.php');
 	session_start();
 
-	$sql = "SELECT despesa.*, baixa_lancamento.dataBaixa, valorPago,
+	$sql = "SELECT despesa.*, baixa_lancamento.dataBaixa, valorPago, CONCAT(parcela, '/', totalParcelas) AS parcela,
 			CASE WHEN despesa.dataVencimento < NOW() AND (despesa.status = 'aberta' OR despesa.status = 'baixa parcial') THEN 'vencida' ELSE despesa.status END AS status
 			FROM despesa
 			LEFT JOIN (

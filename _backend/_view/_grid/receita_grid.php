@@ -64,6 +64,7 @@
         ];
         tabela.setSelect('status', arrayStatus, arrayCondicoes);
         tabela.setMoney(['valor', 'valorPago']);
+        tabela.setNumber(['parcela']);
         tabela.setDate(['dataEmissao', 'dataVencimento', 'dataBaixa', 'dataCadastro']);
         tabela.verifyBusca('<?=$_GET['busca']?>');
         

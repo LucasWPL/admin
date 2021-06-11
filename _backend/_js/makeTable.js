@@ -153,6 +153,13 @@ class makeTable {
         this.moneyIds = ids;         
     }
     
+    setNumber(ids){
+        $(ids).each((index, value)=>{
+            var found = this.colunas.find(element => element[1][0]  === value);
+            if(found) this.colunas[found[0]] = [found[0], found[1], 'number', 'number'];
+        });
+    }
+
     setAttr(){
         $('.employee-search-'+this.id+'-input').css('min-width', '100px');
         $('.employee-search-'+this.id+'-input').click(function(){
@@ -166,9 +173,9 @@ class makeTable {
         var html = '<td><input type="checkbox"  id="bulkDelete"  /></td>';
         var id = this.id;
         $(this.colunas).each(function(key, value){
-            if(value[2] == 'input' || value[2] == 'date' || value[2] == 'money') {
+            if(value[2] != 'select') {
                 html += '<td><input type="'+value[3]+'" class="form-control employee-search-'+id+'-input" name="'+value[1][0]+'" style="height: 33px !important; width: 100% !important;"></td>';
-            }else if(value[2] == 'select'){
+            }else{
                 html += '<td><select name="'+value[1][0]+'" class="form-control employee-search-'+id+'-input" style="height: 33px !important; width: 100% !important;">';
                 html += '<option></option>';
                 $(value[3]).each(function(){
