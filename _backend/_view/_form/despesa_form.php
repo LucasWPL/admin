@@ -84,7 +84,7 @@
                                     <div class="col-md-2">
                                         <label>Pagador tipo</label>
                                         <select class="form-control" name="entidadeTipo" onchange="changeEntidadeTipo(this.value)">
-                                            <option value="cliente">Cliente</option>
+                                            <option value="fornecedor">Fornecedor</option>
                                             <option value="avulso">Avulso</option>
                                         </select>
                                     </div>
@@ -130,7 +130,7 @@
                 
                 <div class="botoesBase">
                     <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
-                    <button type="submit" class="btn btn-primary submitFormPrincipal" id="salvarReceita">Salvar</button>
+                    <button type="submit" class="btn btn-primary submitFormPrincipal" id="salvarDespesa">Salvar</button>
                 </div>
             </form>
         </div>
@@ -160,9 +160,9 @@
                         $('#entidadeNome').val(data.userName);
                     }
                 });
-            }else if(arquivo == 'cliente'){
+            }else if(arquivo == 'fornecedor'){
                 $.ajax({
-                    url : "_backend/_controller/_select/_ajax/cliente_select_ajax.php",
+                    url : "_backend/_controller/_select/_ajax/fornecedor_select_ajax.php",
                     type : 'get',
                     dataType: "json",
                     data : {
@@ -221,9 +221,9 @@
                 $('.entidade').click(function(){
                     abreBusca('usuario', 'Busca usuário');
                 });
-            }else if(value == 'cliente'){
+            }else if(value == 'fornecedor'){
                 $('.entidade').click(function(){
-                    abreBusca('cliente', 'Busca cliente');
+                    abreBusca('fornecedor', 'Busca fornecedor');
                 });
             }
         }
@@ -233,7 +233,7 @@
             confirmCondicao = false;
             get = getURLParams();
             $.ajax({
-                url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
+                url : "_backend/_controller/_select/_ajax/despesa_select_ajax.php",
                 type : 'get',
                 dataType: "json",
                 data : {
@@ -266,7 +266,7 @@
             changeVencimento();
             //if(acao == 23) $('#formPrincipal').submit();
         }
-        $('#salvarReceita').click(function(e){
+        $('#salvarDespesa').click(function(e){
             if($('#condicaoPagamento').val() != '' && confirmCondicao == false){
                 e.preventDefault();
                 var adicional = '';
