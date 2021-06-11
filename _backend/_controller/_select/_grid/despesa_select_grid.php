@@ -7,7 +7,7 @@
 			CASE WHEN despesa.dataVencimento < NOW() AND (despesa.status = 'aberta' OR despesa.status = 'baixa parcial') THEN 'vencida' ELSE despesa.status END AS status
 			FROM despesa
 			LEFT JOIN (
-				SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) 
+				SELECT lancamento, MAX(dataBaixa) AS dataBaixa, (SUM(baixa_lancamento.valorBaixa) 
 				+ CASE WHEN SUM(baixa_lancamento.desconto) IS NULL THEN 0 ELSE SUM(baixa_lancamento.desconto) END
 				- CASE WHEN SUM(baixa_lancamento.juros) IS NULL THEN 0 ELSE SUM(baixa_lancamento.juros) END ) AS valorPago 
 				FROM baixa_lancamento WHERE tipoLancamento = 'despesa' GROUP BY baixa_lancamento.lancamento
