@@ -240,6 +240,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'fornecedor_grid.php','Fornecedor', 'menu')" class="nav-link">
+                  <i class="fas fa-people-carry nav-icon"></i>
+                  <p>Fornecedor</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="javascript:;" onclick="loadPage('grid', 'usuario_grid.php','Usuário', 'menu')" class="nav-link">
                   <i class="far fa-user nav-icon"></i>
                   <p>Usuário</p>
