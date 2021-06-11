@@ -7,6 +7,7 @@ class MakeTable{
     private $group;
     private $columns;
     private $totais;
+    private $fullData;
 
     function __construct($sql, $request, $group = false) {
         $this->setSql($sql);
@@ -38,6 +39,14 @@ class MakeTable{
 
     public function setSql($value){
         $this->sql = $value;
+    }
+
+    public function getFullData(){
+        return $this->fullData;
+    }
+
+    public function setFullData($value){
+        $this->fullData = $value;
     }
 
     public function setColunas(){
@@ -146,14 +155,59 @@ class MakeTable{
         return json_decode(json_encode($this->getRetorno()));
     }
 
-    public function getResponse($full){
+    public function limpaColuna($value){
+        $aux = explode('.', $value);
+        if($aux[1] == '') $aux[1] = $value;
+        return $aux[1];
+    }
+
+    public function setDateValue($value){
+        if(strlen($value) == 10) return date('d/m/Y', strtotime($value));
+        if(strlen($value) == 19) return date('d/m/Y H:i:s', strtotime($value));
+    }
+
+    public function formataValue($valores, $value){
+        $textoTemp = $valores[$this-> limpaColuna($value[1])];
+        if($value[2] == 'money'){
+            $texto = formataReal($textoTemp, $value[4]);
+        }else if($value[2] == 'date'){
+            $texto = $this-> setDateValue($textoTemp);
+        }else{
+            $texto = ucfirst($textoTemp);
+        }
+        return $texto;
+    }
+
+    public function getTd($dados){
+        $colunas = $this-> getColunas();
+        $data[] = "<input type='checkbox' class='checkboxGrids' value='{$dados["id"]}'>";
+	    foreach ($colunas as $key => $value) {//COLUNA
+            $data[] = $this-> formataValue($dados, $value);
+        }
+        return $data;
+    }
+
+    public function makeData(){
+        $this->getRetorno();
+        $this-> setColunas();
+        $data = $this->getRegistros();
+        
+        $fullData = array();
+        foreach($data['dados'] AS $key => $value){
+            $coluna = $this->getTd((array)$value);
+            $fullData[] = $coluna;
+        }
+        $this->setFullData($fullData);
+    }
+
+    public function getResponse(){
         $response = [
             "draw" => intval($this->request['draw']), // for every request/draw by clientside , they send a number as a parameter, when they recieve a response/data they first check the draw number, so we are sending same number in draw. 
             "recordsTotal" => $this->getTotais(), // total number of records
             "recordsFiltered" => $this->getTotais(), // total number of records after searching, if there is no searching then totalFiltered = totalData
-            "data" => $full,   // total data array
+            "data" => $this->getFullData(),   // total data array
             "sql" => $this-> getSqlLimit(),   // retornando a query para o objeto datatable
-            "dev" => $this->request  // retornando a query para o objeto datatable
+            "dev" => $this->getFullData()  // retornando a query para o objeto datatable
         ];
         return $response;
     }

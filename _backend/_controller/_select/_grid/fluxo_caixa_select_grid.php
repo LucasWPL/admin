@@ -16,28 +16,6 @@
 	LEFT JOIN (SELECT id, descricao AS contaDesc FROM conta_financeira GROUP BY id) AS conta ON conta.id = CASE baixa_lancamento.tipoLancamento WHEN 'receita' THEN receita.contaFinanceira END
 	LEFT JOIN (SELECT id, descricao AS contaBaixaDesc FROM conta_financeira GROUP BY id) AS contaBaixa ON contaBaixa.id = receita.contaFinanceira";
 	$table = new MakeTable($sql, $_REQUEST);
-	$dados = $table->getDados();
-	
-	$array = array(); $fullData = array();
-	foreach ($dados->data as $key => $value) {//COLUNA
-
-		$data = array();
-		$data[] = "<input type='checkbox' class='checkboxGrids' value='{$value->id}' {$disabled}>";
-		$data[] = $value-> id;
-		$data[] = ucfirst($value-> tipoLancamento);
-		$data[] = $value-> lancamento;
-		$data[] = $value-> historico;
-		$data[] = $value-> obsBaixa;        
-		$data[] = formataReal($value-> valor);
-		$data[] = formataReal($value-> valorBaixa);
-		$data[] = date('d/m/Y', strtotime($value-> dataVencimento));
-		$data[] = date('d/m/Y', strtotime($value-> dataBaixa));
-		$data[] = $value-> contaDesc;
-		$data[] = $value-> contaBaixaDesc;
-		$data[] = $value-> usuarioCadastroNome;
-
-		$fullData[] = $data;//ARRAY DE COLUNAS
-	}
-
+	$table-> makeData();
 	echo json_encode($table->getResponse($fullData));
 ?>
