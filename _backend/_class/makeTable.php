@@ -180,7 +180,8 @@ class MakeTable{
 
     public function getTd($dados){
         $colunas = $this-> getColunas();
-        $data[] = "<input type='checkbox' class='checkboxGrids' value='{$dados["id"]}'>";
+        $dados['status'] != 'apagada' ? $disabled = "" : $disabled = "disabled";
+        $data[] = "<input type='checkbox' class='checkboxGrids' value='{$dados["id"]}' {$disabled}>";
 	    foreach ($colunas as $key => $value) {//COLUNA
             $data[] = $this-> formataValue($dados, $value);
         }
@@ -188,8 +189,7 @@ class MakeTable{
     }
 
     public function makeData(){
-        $this->getRetorno();
-        $this-> setColunas();
+        $this->getDados();
         $data = $this->getRegistros();
         
         $fullData = array();

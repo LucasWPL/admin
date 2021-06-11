@@ -3,7 +3,9 @@
 	require_once('../../../_class/makeTable.php');
 	session_start();
 
-	$sql = "SELECT despesa.*, baixa_lancamento.dataBaixa, valorPago FROM despesa
+	$sql = "SELECT despesa.*, baixa_lancamento.dataBaixa, valorPago,
+			CASE WHEN despesa.dataVencimento < NOW() AND (despesa.status = 'aberta' OR despesa.status = 'baixa parcial') THEN 'vencida' ELSE despesa.status END AS status
+			FROM despesa
 			LEFT JOIN (
 				SELECT lancamento, dataBaixa, (SUM(baixa_lancamento.valorBaixa) 
 				+ CASE WHEN SUM(baixa_lancamento.desconto) IS NULL THEN 0 ELSE SUM(baixa_lancamento.desconto) END
