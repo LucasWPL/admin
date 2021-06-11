@@ -4,7 +4,7 @@
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
     $valor = limpaMoeda($_POST['valor']); unset($_POST['valor']);
-    $_POST['usuarioCadastro']   = $_SESSION['userId']; $_POST['usuarioCadastroNome'] = $_SESSION['userName']; $_POST['tipoLancamento'] = 'receita';
+    $_POST['usuarioCadastro']   = $_SESSION['userId']; $_POST['usuarioCadastroNome'] = $_SESSION['userName'];
     $_POST['valorBaixa']        = limpaMoeda($_POST['valorBaixa']);
     $_POST['juros']             = limpaMoeda($_POST['juros']);
     $_POST['desconto']          = limpaMoeda($_POST['desconto']);
@@ -15,7 +15,7 @@
         $return = $conn->insert($_POST, 'baixa_lancamento');
         
         if($return){
-            $msg = "Lançamento de receita cadastrado com sucesso.";
+            $msg = "Lançamento de {$_POST['tipoLancamento']} cadastrado com sucesso.";
             $param = [":id" => $_POST['lancamento']];
 
             if($tipo == 'parcial' && compararFloats($valorReal, '!=', $valor)){
@@ -24,10 +24,10 @@
                 $status = "baixada";
             }
 
-            $conn->sql("UPDATE receita SET status = '{$status}' WHERE id = :id", $param);
+            $conn->sql("UPDATE {$_POST['tipoLancamento']} SET status = '{$status}' WHERE id = :id", $param);
         }else{
             $msg = "Houve um erro ao cadastrar o lançamento, tente novamente.";    
-            $conn->rollbackId('receita');
+            $conn->rollbackId($_POST['tipoLancamento']);
         }
     }else{
         $msg = "O valor de baixa deve ser menor ou igual ao saldo devedor.";  

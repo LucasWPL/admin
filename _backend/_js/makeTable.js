@@ -233,14 +233,14 @@ class makeTable {
             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
                 if(status != false ){
                     //MUDANDO AS CORES DAS COLUNAS DE ACORDO COM OS STATUS
-                    if(grid == 'receita_select_grid.php'){
+                    if(grid == 'receita_select_grid.php' || grid == 'despesa_select_grid.php'){
                         if(aData[status] == 'Apagada') $('td', nRow).css('background-color', '#f2f2f2');
-                        if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#ccffdd');
-                        if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#e6ffee');
-                        if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#ff9980');
+                        if(aData[status] == 'Baixada') $('td', nRow).css('background-color', '#A8E5E6');
+                        if(aData[status] == 'Baixa parcial') $('td', nRow).css('background-color', '#d7f3f4');
+                        if(aData[status] == 'Vencida') $('td', nRow).css('background-color', '#F5A893');
                     }else if(grid == 'fluxo_caixa_select_grid.php'){
-                        if(aData[status] == 'Receita') $('td', nRow).css('background-color', '#ccffdd');
-                        if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#ffc2b3');
+                        if(aData[status] == 'Receita') $('td', nRow).css('background-color', '#A8E5E6');
+                        if(aData[status] == 'Despesa') $('td', nRow).css('background-color', '#F5A893');
                     }			
                 }
             },

@@ -28,7 +28,7 @@
                                         <label>Observação de baixa</label>
                                         <input type="text" class="form-control" name="obsBaixa"></input>
                                         <input type="hidden" class="form-control" name="lancamento"></input>
-                                        <input type="hidden" class="form-control" name="tipoLancamento" value="receita"></input>
+                                        <input type="hidden" class="form-control" name="tipoLancamento" value="despesa"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Vencimento</label>
@@ -144,7 +144,7 @@
         $(document).ready(function() {
             var get = getURLParams();
             $.ajax({
-                url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
+                url : "_backend/_controller/_select/_ajax/despesa_select_ajax.php",
                 type : 'get',
                 dataType: "json",
                 data : {
