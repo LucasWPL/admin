@@ -3,6 +3,20 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-3 col-6">
+                <div class="small-box bg-primary">
+                    <div class="inner">
+                        <h3>Usuário</h3>
+                        <p>Configurações</p>
+                    </div>
+                    <div class="icon">
+                        <i class="far fa-user"></i>
+                    </div>
+                    <a href="javascript:;" class="small-box-footer" onclick="openForm('usuario_form.php', 'Cadastro usuário', 'edit', true);">
+                        Editar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
                     <div class="overlay dark">
                         <span style="color:white">Em breve...</span>
@@ -12,7 +26,7 @@
                         <p>Configurações</p>
                     </div>
                     <div class="icon">
-                        <i class="fas fa-user"></i>
+                        <i class="far fa-building"></i>
                     </div>
                     <a href="javascript:;" class="small-box-footer">
                         Editar <i class="fas fa-arrow-circle-right"></i>
