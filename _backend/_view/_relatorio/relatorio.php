@@ -20,6 +20,7 @@
         }
         return $texto;
     }
+
     function limpaColuna($value){
         $aux = explode('-', $value);
         if($aux[1] == '') $aux[1] = $value;
@@ -34,10 +35,14 @@
         return $html.'<tr>';
     }
 
+    function getSoma($valores, $i){
+
+    }
+
     $crud = new Crud();
     $dados = $crud->getSelect($_POST['sql'], '',true);
     $colunas = json_decode($_POST['colunas']);
-    
+
     //CABEÇALHO DA TABELA
     $headTable = "<thead><tr>";
     foreach($colunas AS $key => $value){
@@ -52,13 +57,27 @@
     }
     $bodyTable .= "</tbody>";
 
+    $somasRodape = [];
+    foreach($colunas AS $key => $value){
+        $id = limpaColuna($value[1][0]); $soma = 0;
+        if($value[2] == 'money'){
+            foreach($dados AS $key => $value){
+                $array = (array) $value;
+                $soma += $array[$id];
+            }
+        }
+        $somasRodape[] = array($id, $soma);
+    }
     //RODAPÉ
     $footerTablle = '<tfoot>';
         $footerTablle .= "<tr>";
-            $footerTablle .= "<td class='footer' colspan='".count($colunas)."'>Reg.: ".count($dados)."</td>";
+            $footerTablle .= "<td class='footer' colspan='2'>Reg.: ".count($dados)."</td>";
+            for($i = 2; $i < count($colunas); $i++){
+                $somasRodape[$i][1] > 0 ? $value = "R$ " . formataReal($somasRodape[$i][1]) : $value = '';
+                $footerTablle .= "<td class='footer'>".$value."</td>";
+            }
         $footerTablle .= '</tr>';
     $footerTablle .= '<tfoot>';
-
 
     //MONTANDO A TABELA
     $table =  "<table>";
