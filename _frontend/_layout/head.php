@@ -37,6 +37,7 @@
   <script type="text/javascript" src="_backend/_js/global.js"></script>
   <script type="text/javascript" src="_backend/_js/gridFunctions.js"></script>  
   <script type="text/javascript" src="_backend/_js/makeTable.js"></script></head>
+  <script type="text/javascript" src="_backend/_js/buscaDadosReceita.js"></script></head>
   </head>
 
 <style>

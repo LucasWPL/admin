@@ -18,9 +18,6 @@
             </div>
             <div class="col-lg-3 col-6">
                 <div class="small-box bg-info">
-                    <div class="overlay dark">
-                        <span style="color:white">Em breve...</span>
-                    </div>
                     <div class="inner">
                         <h3>Emitente</h3>
                         <p>Configurações</p>
@@ -28,7 +25,7 @@
                     <div class="icon">
                         <i class="far fa-building"></i>
                     </div>
-                    <a href="javascript:;" class="small-box-footer">
+                    <a href="javascript:;" class="small-box-footer" onclick="openForm('emitente_form.php', 'Emitente', 'edit', true);">
                         Editar <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
