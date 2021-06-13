@@ -276,15 +276,15 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita', 'menu')" class="nav-link">
-                  <i class="fas fa-money-bill-wave-alt nav-icon"></i>
-                  <p>Receita</p>
-                </a>
-              </li>
-              <li class="nav-item">
                 <a href="javascript:;" onclick="loadPage('grid', 'despesa_grid.php','Despesa', 'menu')" class="nav-link">
                   <i class="fas fa-hand-holding-usd nav-icon"></i>
                   <p>Despesa</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="javascript:;" onclick="loadPage('grid', 'receita_grid.php','Receita', 'menu')" class="nav-link">
+                  <i class="fas fa-money-bill-wave-alt nav-icon"></i>
+                  <p>Receita</p>
                 </a>
               </li>
               <li class="nav-item">
