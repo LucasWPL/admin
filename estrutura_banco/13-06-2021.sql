@@ -107,6 +107,15 @@ CREATE TABLE `despesa` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 
+-- TABLE: emitente
+CREATE TABLE `emitente` (
+  `CNPJ` varchar(14) NOT NULL,
+  `nome` varchar(32) NOT NULL,
+  `razaoSocial` varchar(32) NOT NULL,
+  `dataCadastro` timestamp NOT NULL DEFAULT current_timestamp(),
+  PRIMARY KEY (`CNPJ`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- TABLE: forma_pagamento
 CREATE TABLE `forma_pagamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,

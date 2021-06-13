@@ -19,13 +19,13 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label>CPF/CNPJ</label>
-                                        <input type="number" class="form-control required" name="CNPJ" onblur="buscaCNPJ(this.value)"></input>
+                                        <input type="number" class="form-control required readonly" name="CNPJ" onblur="buscaCNPJ(this.value)"></input>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <label>IE</label>
                                         <input type="number" class="form-control" name="IE"></input>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <label>Tipo</label>
                                         <select type="number" class="form-control required" name="tipo">
                                             <option value="NA">Não se aplica</option>
@@ -33,10 +33,23 @@
                                             <option value="FILIAL">Filial</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-5">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control required" name="nome"></input>
-                                        <input type="hidden" class="form-control" name="id" disabled></input>
+                                    <div class="col-md-3">
+                                        <label>Regime tributário</label>
+                                        <select type="number" class="form-control required" name="regime">
+                                            <option value="simples">Simples nacional</option>
+                                            <option value="real">Lucro real</option>
+                                            <option value="presumido">Lucro presumido</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Fantasia</label>
+                                        <input type="text" class="form-control required" name="fantasia"></input>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Razão social</label>
+                                        <input type="text" class="form-control required" name="razaoSocial"></input>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -47,16 +60,6 @@
                                     <div class="col-md-8">
                                         <label>Email</label>
                                         <input type="email" class="form-control required" name="email"></input>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label>Celular</label>
-                                        <input type="text" class="form-control telefone" name="celular"></input>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <label>Contato comercial</label>
-                                        <input type="text" class="form-control" name="contatoComercial"></input>
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +163,7 @@
             verifyURLForm();
             get = getURLParams();
             $.ajax({
-                url : "_backend/_controller/_select/_ajax/cliente_endereco_select_ajax.php",
+                url : "_backend/_controller/_select/_ajax/emitente_endereco_select_ajax.php",
                 type : 'get',
                 dataType: "json",
                 data : {

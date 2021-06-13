@@ -55,6 +55,8 @@ function setEnderecoVia(data){
 
 function setDadosWs(data){
     $('input[name="nome"]').val(data.nome);
+    $('input[name="razaoSocial"]').val(data.nome);
+    $('input[name="fantasia"]').val(data.fantasia);
     $('input[name="email"]').val(data.email);
     $('input[name="telefone"]').val(data.telefone);
     $('select[name="tipo"]').val(data.tipo);
