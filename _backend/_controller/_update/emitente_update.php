@@ -2,6 +2,7 @@
 	require_once('../../_class/crud.php');
 	//CONEXÃO E REQUISIÇÃO AO BDD
 	$conn = new Crud();
+    unset($_POST['logo']);
     $param = [
         "CNPJ" => $_POST['CNPJ']
     ];

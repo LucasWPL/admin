@@ -149,7 +149,49 @@
                         </div>
                     </div>
                 </div>                
-                
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Logo</h3>
+
+                                <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                </div>
+                            </div>
+                            <div class="card-body" style="min-height:130px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <label>Imagem</label>
+                                        <input type="file" class="form-control" name="logo" id="logo" accept="image/*" onblur="preVisualizar()"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>            
+                    <div class="col-md-5">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title">Pré visualização logo</h3>
+
+                                <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                </div>
+                            </div>
+                            <div class="card-body" style="min-height:130px;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <img id="pre-visualizacao" class="pre-visualizacao"></img>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                
+                </div>
                 <div class="botoesBase">
                     <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
                     <button type="submit" class="btn btn-primary submitFormPrincipal">Salvar</button>
@@ -157,6 +199,16 @@
             </form>
         </div>
     </section>
+    
+    <style>
+        .pre-visualizacao
+        {
+            max-height: 90px;
+            max-width: auto;
+            margin: auto;
+            display: block;
+        }
+    </style>
 
     <script>
         $(document).ready(function() {
@@ -177,4 +229,35 @@
                 }
             });
         });
+        
+        function preVisualizar(){
+            getPhoto().then(
+                (content)=>{
+                    $('#pre-visualizacao').attr('src', content);
+                },
+                (e)=>{
+                    console.error(e);
+                }
+            );
+        }
+        
+        function getPhoto(){
+            return new Promise((resolve, reject) => {
+                let fileReader = new FileReader();
+
+                let file = document.getElementById('logo').files[0];
+        
+                fileReader.onload = () => {
+                    resolve(fileReader.result);
+                };
+                
+                fileReader.onerror = () => {
+                    reject(e);
+                };
+                if(file){
+                    fileReader.readAsDataURL(file);
+                }else{
+                }
+            });        
+        }
     </script>
