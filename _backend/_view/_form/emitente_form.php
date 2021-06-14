@@ -2,7 +2,7 @@
     <section class="content">
         <div class="container-fluid">
             <!-- Main row -->
-            <form id="formPrincipal">
+            <form id="formPrincipal" enctype='multipart/form-data'>
                 <div class="row">
                     <div class="col-md-7">
                         <div class="card card-default">
