@@ -275,9 +275,30 @@ class makeTable {
         return this.loadTable();
     }
 
+    openRelatorio(url, data) {
+        var form = document.createElement("form");
+        form.target = "_blank";
+        form.method = "POST";
+        form.action = url;
+        form.style.display = "none";
+    
+        for (var key in data) {
+            var input = document.createElement("input");
+            input.type = "hidden";
+            input.name = key;
+            input.value = data[key];
+            form.appendChild(input);
+        }
+    
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    }
+
     relatorio(){
-        $('#formulario-relatorio input[name=sql]').val(this.sql);
-        $('#formulario-relatorio input[name=colunas]').val(JSON.stringify(this.colunas));
-        $('#formulario-relatorio').submit();
+        this.openRelatorio('_backend/_view/_relatorio/relatorio.php', {
+            sql: this.sql,
+            colunas: JSON.stringify(this.colunas)
+        });
     }
 }
