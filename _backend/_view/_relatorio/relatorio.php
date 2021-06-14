@@ -5,6 +5,39 @@
     require_once (ROOT . '_backend'. SEP . '_class'. SEP . 'global.php');
     require_once (ROOT . 'vendor'. SEP . 'mpdf'. SEP . 'mpdf'. SEP . 'src'. SEP . 'Mpdf.php');
 
+    function getTopo(){
+        $crud = new Crud();
+        $dados = $crud->getSelect("SELECT * FROM emitente LEFT JOIN emitente_endereco ON emitente.CNPJ = emitente_endereco.CNPJ");
+        
+        $topoRelatorio = "<table class='table-topo'>";
+            $topoRelatorio .= "<tr>";
+                $topoRelatorio .= "<td style='width:20%' class='topo'>";
+                    $topoRelatorio .= "<img src='". ROOT . $dados->logo ."'></img>";
+                $topoRelatorio .= "</td>";
+                $topoRelatorio .= "<td style='width:70%' class='topo'>";
+                    $topoRelatorio .= "<table>";
+                        $topoRelatorio .= "<tr>";
+                            $topoRelatorio .= "<td class='topo'><b>{$dados->razaoSocial}</b>, </td>";
+                        $topoRelatorio .= "</tr>";
+                        $topoRelatorio .= "<tr>";
+                            $topoRelatorio .= "<td class='topo sub-topo'><b>{$dados->fantasia}</b>, CNPJ: <b>{$dados->CNPJ}</b>, IE: <b>{$dados->IE}</b></td>";
+                        $topoRelatorio .= "</tr>";
+                        $topoRelatorio .= "<tr>";
+                            $topoRelatorio .= "<td class='topo sub-topo'>{$dados->xLgr}, <b>{$dados->nro}</b>, {$dados->xBairro}. {$dados->xMun}/{$dados->UF}. CEP: <b>{$dados->CEP}</b>.</td>";
+                        $topoRelatorio .= "</tr>";
+                        $topoRelatorio .= "<tr>";
+                            $topoRelatorio .= "<td class='topo sub-topo'>{$dados->email}, {$dados->telefone}.</td>";
+                        $topoRelatorio .= "</tr>";
+                    $topoRelatorio .= "</table>";
+                $topoRelatorio .= "</td>";
+                $topoRelatorio .= "<td style='width:10%' class='topo'>";
+                $topoRelatorio .= "</td>";
+            $topoRelatorio .= "</tr>";
+        $topoRelatorio .= "</table>";
+
+        return $topoRelatorio;
+    }
+
     function setDateValue($value){
         if(strlen($value) == 10) return date('d/m/Y', strtotime($value));
         if(strlen($value) == 19) return date('d/m/Y H:i:s', strtotime($value));
@@ -35,8 +68,9 @@
         return $html.'<tr>';
     }
 
-    function getSoma($valores, $i){
-
+    function getSoma($value){
+        $value > 0 ? $value = "R$ " . formataReal($value) : $value = '';
+        return $value;
     }
 
     $crud = new Crud();
@@ -73,8 +107,7 @@
         $footerTablle .= "<tr>";
             $footerTablle .= "<td class='footer' colspan='2'>Reg.: ".count($dados)."</td>";
             for($i = 2; $i < count($colunas); $i++){
-                $somasRodape[$i][1] > 0 ? $value = "R$ " . formataReal($somasRodape[$i][1]) : $value = '';
-                $footerTablle .= "<td class='footer'>".$value."</td>";
+                $footerTablle .= "<td class='footer'>".getSoma($somasRodape[$i][1])."</td>";
             }
         $footerTablle .= '</tr>';
     $footerTablle .= '<tfoot>';
@@ -87,8 +120,9 @@
     $table .= "</table>";
 
     $copyright = "<span class='copyright'>Impresso por: <b>{$_SESSION['userName']}</b>, dia ".date('d/m/Y')." ás ".date('H:i:s')." &copy; Copyright <b>WPL BI</b>.</span>";
-
-    $html = "<span class='titulo-relatorio'>Relatório ".mb_strtolower($_POST['tituloRelatorio'])."</span>";
+    
+    $html = getTopo();
+    $html .= "<span class='titulo-relatorio'>Relatório ".mb_strtolower($_POST['tituloRelatorio'])."</span>";
     $html .= $table;
     $html .= $copyright;
 
