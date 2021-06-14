@@ -10,8 +10,14 @@
     //UPDANDO LOGO
     if(isset($_FILES['logo'])){
         $file_ext=strtolower(end(explode('.',$_FILES['logo']['name'])));      
-        $file_tmp =$_FILES['logo']['tmp_name'];  
-        move_uploaded_file($file_tmp, ROOT ."dist/img/logo/logo.".$file_ext);
+        $file_tmp =$_FILES['logo']['tmp_name'];
+        $name = date('dmYHis');  
+        $dir = "dist/img/logo/{$name}.".$file_ext;
+        if(move_uploaded_file($file_tmp, ROOT . $dir)){
+            $_ENDERECO['logo'] = $dir;
+        }else{
+            $_ENDERECO['logo'] = '';
+        }
     }
 
     //QUERY DO ENDEREÇO

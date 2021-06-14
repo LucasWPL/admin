@@ -223,8 +223,12 @@
                 },
                 success : function(data){
                     $.each(data, function( index, value ) {
-                        $('input[name="endereco_'+index+'"]').val(value);
-                        $('select[name="endereco_'+index+'"]').val(value);
+                        if(index == 'logo' && value != ''){
+                            $('#pre-visualizacao').attr('src', value);
+                        }else{
+                            $('input[name="endereco_'+index+'"]').val(value);
+                            $('select[name="endereco_'+index+'"]').val(value);
+                        }
                     });
                 }
             });
