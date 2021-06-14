@@ -1,5 +1,5 @@
 
-<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar layout-footer">
   <div class="modal fade" id="modalBusca">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">

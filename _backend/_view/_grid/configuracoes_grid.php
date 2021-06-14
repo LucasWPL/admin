@@ -2,7 +2,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3">
                 <div class="small-box bg-primary">
                     <div class="inner">
                         <h3>Usuário</h3>
@@ -16,7 +16,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3">
                 <div class="small-box bg-info">
                     <div class="inner">
                         <h3>Emitente</h3>
@@ -30,7 +30,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3">
                 <div class="small-box bg-success">
                     <div class="overlay dark">
                         <span style="color:white">Em breve...</span>
@@ -47,7 +47,7 @@
                     </a>
                 </div>
             </div>
-            <div class="col-lg-3 col-6">
+            <div class="col-lg-3">
                 <div class="small-box bg-small-box bg-warning">
                     <div class="overlay dark">
                         <span style="color:white">Em breve...</span>
@@ -61,6 +61,23 @@
                     </div>
                     <a href="javascript:;" class="small-box-footer">
                         Editar <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="small-box bg-small-box bg-danger">
+                    <div class="overlay dark">
+                        <span style="color:white">Em breve...</span>
+                    </div>
+                    <div class="inner">
+                        <h3>Recuperar registros</h3>
+                        <p>Configurações</p>
+                    </div>
+                    <div class="icon">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                    <a href="javascript:;" class="small-box-footer">
+                        Recuperar <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>
             </div>
