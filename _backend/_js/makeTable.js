@@ -296,8 +296,10 @@ class makeTable {
     }
 
     relatorio(){
+        let aux = getCurrentPage();
         this.openRelatorio('_backend/_view/_relatorio/relatorio.php', {
             sql: this.sql,
+            tituloRelatorio: aux[2],
             colunas: JSON.stringify(this.colunas)
         });
     }

@@ -7,7 +7,6 @@
     require_once('_class/Relatorio.php');
 
     $relatorio = new Relatorio($_POST);
-
     
     $html = $relatorio->getTopo();
     $html .= $relatorio->getTitulo();

@@ -66,7 +66,7 @@ class Relatorio{
                 <td style='width:20%' class='topo'>
                     <img src='". ROOT . $dados->logo ."'></img>
                 </td>
-                <td style='width:70%' class='topo'>
+                <td style='width:60%' class='topo'>
                     <table>
                         <tr>
                             <td class='topo'><b>{$dados->razaoSocial}</b> </td>
@@ -82,7 +82,7 @@ class Relatorio{
                         </tr>
                     </table>
                 </td>
-                <td style='width:10%' class='topo'> Imprimindo de 60 até 73
+                <td style='width:10%' class='topo'>
                 </td>
             </tr>
         </table>
