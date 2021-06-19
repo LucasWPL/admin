@@ -53,18 +53,26 @@
 <!-- ChartJS -->
 <script src="plugins/chart.js/Chart.min.js"></script>
 
+<!-- bs-custom-file-input -->
+<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="dist/js/pages/dashboard2.js"></script>
 <!-- InputMask -->
-<script src="../../plugins/moment/moment.min.js"></script>
-<script src="../../plugins/inputmask/jquery.inputmask.min.js"></script>
+<script src="plugins/moment/moment.min.js"></script>
+<script src="plugins/inputmask/jquery.inputmask.min.js"></script>
 <!-- date-range-picker -->
-<script src="../../plugins/daterangepicker/daterangepicker.js"></script>
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
 <!-- JS-BRASIL -->
-<script src="../../apis/js-brasil-master/js-brasil.js"></script>
-
+<script src="apis/js-brasil-master/js-brasil.js"></script>
+<!-- Bootstrap Switch -->
+<script src="plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+<script>
+$(function () {
+  bsCustomFileInput.init();
+});
+</script>
 <script>
 	$(document).ready(function(){
 		toLastPage();

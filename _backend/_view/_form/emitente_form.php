@@ -165,7 +165,10 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <label>Imagem</label>
-                                        <input type="file" class="form-control" name="logo" id="logo" accept="image/*" onblur="preVisualizar()"></input>
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input"  name="logo" id="logo" accept="image/*" onblur="preVisualizar()">
+                                            <label class="custom-file-label" for="customFile">Escolha um arquivo</label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -32,8 +32,10 @@
   <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">
   <!-- daterange picker -->
-  <link rel="stylesheet" href="../../plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <script type="text/javascript" src="_backend/_js/global.js"></script>
   <script type="text/javascript" src="_backend/_js/gridFunctions.js"></script>  
   <script type="text/javascript" src="_backend/_js/makeTable.js"></script></head>

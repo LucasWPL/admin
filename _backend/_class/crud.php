@@ -13,7 +13,7 @@
         {
             $auto = $this-> getSelect("SELECT `AUTO_INCREMENT` as auto FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{$this->db}' AND  TABLE_NAME = '{$tabela}'");
             $index = $auto->auto - 1;
-            $retorno = $this-> sql("ALTER TABLE {$tabela} AUTO_INCREMENT = {$index}");
+            $this-> sql("ALTER TABLE {$tabela} AUTO_INCREMENT = {$index}");
         }
 
         public function __construct()
@@ -96,15 +96,52 @@
             return $retorno;
         }
 
+        private function preparaBackup($string, $auto = false){
+            $retorno = str_replace('CREATE TABLE', 'CREATE TABLE IF NOT EXISTS', $string);
+            
+            if(!$auto){
+                $aux = explode('AUTO_INCREMENT=', $retorno);
+                if($aux[1]){
+                    $newEnd = '';
+                    $aux2 = explode(' ', $aux[1]);
+                    foreach ($aux2 as $key => $value) {
+                        if($key != 0){
+                            $newEnd .= ' ' . $value;
+                        }
+                    }
+                    $retorno = $aux[0] . $newEnd;
+                }
+            }
+
+            return $retorno;
+        }
+        
         public function backup(){
-            $arquivo = fopen('../../estrutura_banco/'.date('d-m-Y').'.sql','wt'); 
+            $getDados = [
+                'bancos'
+            ];
+
+            mkdir('../../estrutura_banco/'.date('m-Y'));
+            $arquivo = fopen('../../estrutura_banco/'.date('m-Y').'/'.date('d-m-Y H').'.sql','wt'); 
             $tables = parent::query('SHOW TABLES');
 
             foreach ($tables as $table) {
+                
                 $sql = '-- TABLE: '.$table[0].PHP_EOL; 
                 $create = parent::query('SHOW CREATE TABLE `'.$table[0].'`')->fetch(); 
-                $sql.=$create['Create Table'].';'.PHP_EOL;
-                fwrite($arquivo, $sql);              
+                $sql.= $this->preparaBackup($create['Create Table']).';'.PHP_EOL;
+                fwrite($arquivo, $sql);
+                
+                //DADOS FIXOS
+                if(in_array($table[0], $getDados)){
+                    $linhas = parent::query('SELECT * FROM `'.$table[0].'`'); 
+                    $linhas->setFetchMode(PDO::FETCH_ASSOC); 
+
+                    foreach ($linhas as $linha) {
+                        $sql = 'INSERT INTO `'.$table[0].'` (`'.implode('`, `',array_keys($linha)).'`) VALUES ("'.utf8_encode(implode('", "',$linha)).'");'. PHP_EOL;
+                        fwrite($arquivo, $sql); 
+                    }
+                }
 
                 $sql = PHP_EOL; 
                 $resultado = fwrite($arquivo, $sql); 
