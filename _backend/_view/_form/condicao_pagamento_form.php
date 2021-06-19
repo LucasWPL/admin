@@ -122,8 +122,8 @@
             margin-bottom:4px;
         }
         .semanaAtivo{
-            background-color: #048243 !important;
-            border-color: #048243 !important;
+            background-color: #32BF84 !important;
+            border-color: #32BF84 !important;
         }
         .semanaInativo{
             background-color: #5A6268 !important;
