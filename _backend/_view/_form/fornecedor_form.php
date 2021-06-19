@@ -71,26 +71,26 @@
                                     </div>
                                     <div class="col-md-7">
                                         <label>Logradouro</label>
-                                        <input type="text" class="form-control readonly required" name="endereco_xLgr"></input>
+                                        <input type="text" class="form-control  required" name="endereco_xLgr" readonly></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>N°</label>
-                                        <input type="number" class="form-control required" name="endereco_nro"></input>
+                                        <input type="number" class="form-control required" name="endereco_nro" readonly></input>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label>Bairro</label>
-                                        <input type="text" class="form-control readonly required" name="endereco_xBairro"></input>
+                                        <input type="text" class="form-control  required" name="endereco_xBairro" readonly></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Município</label>
-                                        <input type="text" class="form-control readonly required" name="endereco_xMun"></input>
+                                        <input type="text" class="form-control  required" name="endereco_xMun" readonly></input>
                                         <input type="hidden" class="form-control" name="endereco_cMun"></input>
                                     </div>
                                     <div class="col-md-4">
                                         <label>Estado</label>
-                                        <select class="form-control readonly required" name="endereco_UF">
+                                        <select class="form-control  required" name="endereco_UF" readonly>
                                             <option value=""></option>
                                             <option value="AC">Acre</option>
                                             <option value="AL">Alagoas</option>

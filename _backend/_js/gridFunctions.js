@@ -230,6 +230,7 @@ function setMask(){
 			e.preventDefault();
 	});
 	$('.readonly').attr('autocomplete', 'off').css('background-color', '#E9ECEF');
+	$('.readonly').attr('placeholder', 'Clique para selecionar');
 	$('.telefone').inputmask("(99) 999999999");
 	$('.cep').inputmask("99999-999");
 }
