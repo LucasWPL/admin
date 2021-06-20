@@ -32,7 +32,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>CFOP</label>
-                                        <input type="number" class="form-control busca readonly required" id="CFOP" onclick="abreBusca('cfop', 'Busca CFOP');"></input>
+                                        <input type="number" class="form-control busca readonly required" name="CFOP" onclick="abreBusca('cfop', 'Busca CFOP');"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Emissão</label>
@@ -167,6 +167,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12">
+                        <div class="card card-default">
+                            <div class="card-header">
+                                <h3 class="card-title"> Totais</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="botoesBase">
@@ -226,6 +245,8 @@
                         $('#contaFinanceira').val(data.descricao);
                     }
                 });
+            }else if(arquivo == 'cfop'){
+                $('input[name="CFOP"]').val($(selecionados).get(0));
             }
         }
         $(document).ready(function() {
