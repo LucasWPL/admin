@@ -4,6 +4,7 @@
     define('SEP', DIRECTORY_SEPARATOR);
     define('SITEROOT', 'http://local.bi.com' . SEP);
     define('ROOT', $_SERVER['DOCUMENT_ROOT'] . SEP);
+    $_SESSION['GRID'] = ROOT . "_frontend/_layout/grid.php";
     
     if(!isset($_SESSION['logValidated'])){
         header('Location: login');
