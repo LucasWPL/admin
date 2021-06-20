@@ -181,28 +181,28 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <label>Forma de pagamento</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" id="formaPagamento"></input>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Valor total</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" name="valorTotal"></input>
+                                        <label>Pedido total</label>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="pedidoTotal" value="4.900,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor pago</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" name="valorPago"></input>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Troco</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" name="troco"></input>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label>Restante</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" name="restante"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais" name="valorPago" value="5.000,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Desconto (R$)</label>
-                                        <input type="text" class="form-control readonly inputDinheiro" name="desconto"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais" name="desconto" value="0,00"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Troco</label>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="troco" value="0,00"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Restante</label>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="restante" value="0,00"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Valor total</label>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="valorTotal" value="4.900,00"></input>
                                     </div>
                                 </div>
                             </div>
@@ -221,6 +221,33 @@
     </section>
 
     <script>
+        $('.camposTotais').change(()=>{
+            calculaValorPago();
+        });
+
+        function calculaValorPago(){
+            let pedidoTotal = limpaMoeda($('[name=pedidoTotal]').val());
+            let total = limpaMoeda($('[name=valorTotal]').val());
+            let pago = limpaMoeda($('[name=valorPago]').val());
+            let desconto = limpaMoeda($('[name=desconto]').val());
+            let troco = limpaMoeda($('[name=troco]').val());
+            let restante = 0;
+
+            total = pedidoTotal - desconto;
+            troco = pago - total;
+            
+            if(troco < 0){
+                restante = troco;
+                troco = 0;
+            }
+
+            $('[name=valorTotal]').val(real(total));
+            $('[name=troco]').val(real(troco));
+            $('[name=restante]').val(real(restante));
+
+            if(get.action == 'edit') toast('warning', 'Valores totais atualizados');
+        }
+
         $('#simularCondicoes').click(()=>{
             simularCondicoes();
         });
@@ -289,8 +316,8 @@
         }
 
         $(document).ready(function() {
-            verifyURLForm();
-            get = getURLParams();
+            get = verifyURLForm();
+            calculaValorPago();
         });
 
         function removerCondicao(acao){

@@ -224,6 +224,8 @@ function setMask(){
 		thousands: '.', 
 		decimal: ','
 	});
+	$(".inputDinheiro").attr('autocomplete', 'off');
+	
 	//ATRIBUIÇÃO DE UM READONLY FAKE POIS NÃO FUNCIONA COM O REQUIRED
 	$(".readonly").on('keydown paste focus mousedown', function(e){
 		if(e.keyCode != 9) // ignore tab
