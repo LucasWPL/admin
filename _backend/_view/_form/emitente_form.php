@@ -195,9 +195,9 @@
                         </div>
                     </div>                
                 </div>
-                <div class="botoesBase">
-                    <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
+                <div class="d-flex flex-row-reverse botoesBase">
                     <button type="submit" class="btn btn-primary submitFormPrincipal">Salvar</button>
+                    <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
                 </div>
             </form>
         </div>

@@ -44,9 +44,8 @@
 
 <style>
   .actions{
-    margin-left:6px;
-  }
-
+  margin-left:6px;
+}
 	.blocoBotoes{
 		margin-bottom:20px;
 	}
@@ -57,21 +56,17 @@
 	.thCkechboxGrid{
 		width:10px;
 	}
-  	.botoesBase{
-		float: right;
-		margin-bottom:100px;
-  	}
-  	.busca{
+  .busca{
 		cursor: pointer;
-  	}
-    .tabelasScroll{
-        overflow: auto;
-        white-space: nowrap;
-    }
-    th 
-    {
+  }
+  .tabelasScroll{
+    overflow: auto;
+    white-space: nowrap;
+  }
+  th 
+  {
       max-height: 20px !important;
-    }
+  }
 </style>
 <?php
   	date_default_timezone_set('America/Sao_Paulo');

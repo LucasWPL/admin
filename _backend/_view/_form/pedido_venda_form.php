@@ -180,6 +180,30 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
+                                    <div class="col-md-2">
+                                        <label>Forma de pagamento</label>
+                                        <input type="text" class="form-control readonly" id="formaPagamento"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Valor total</label>
+                                        <input type="text" class="form-control readonly" name="valorTotal"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Valor pago</label>
+                                        <input type="text" class="form-control readonly" name="valorPago"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Troco</label>
+                                        <input type="text" class="form-control readonly" name="troco"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Restante</label>
+                                        <input type="text" class="form-control readonly" name="restante"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Desconto (R$)</label>
+                                        <input type="text" class="form-control readonly" name="desconto"></input>
+                                    </div>
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -188,9 +212,9 @@
                     </div>
                 </div>
                 
-                <div class="botoesBase">
-                    <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
+                <div class="d-flex flex-row-reverse botoesBase">
                     <button type="submit" class="btn btn-primary submitFormPrincipal" id="salvarVenda">Salvar</button>
+                    <button type="button" class="btn btn-secondary" onclick="toLastGrid();">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -251,35 +275,7 @@
         }
         $(document).ready(function() {
             verifyURLForm();
-            confirmCondicao = false;
             get = getURLParams();
-            /*
-            $.ajax({
-                url : "_backend/_controller/_select/_ajax/receita_select_ajax.php",
-                type : 'get',
-                dataType: "json",
-                data : {
-                    id : get.id
-                },
-                success : function(data){
-                    if(data.status == 'aberta' || get.action != 'edit'){
-                        $('input[name="valor"]').val(real(data.valor));
-                        $('#entidadeNome').val(data.entidadeNome);
-                        $('#condicaoPagamento').val(data.condicaoDesc);
-                        $('#contaFinanceira').val(data.contaDesc);
-                        changeEntidadeTipo('inicial');
-                    }else{
-                        toLastGrid();
-                        toast('error', "Só é possível editar lançamentos em aberto.");
-                    }                        
-                    console.log(data);
-                    if(data.condicaoPagamento != 0 && get.action == 'edit'){
-                        toLastGrid();
-                        toast('error', "Não é permitido a alteração de lançamento com condições de pagamento.");
-                    }                  
-                }
-            });
-            */
         });
 
         function removerCondicao(acao){
