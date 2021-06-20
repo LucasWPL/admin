@@ -139,7 +139,7 @@
                     $linhas->setFetchMode(PDO::FETCH_ASSOC); 
 
                     foreach ($linhas as $linha) {
-                        $sql = 'INSERT INTO `'.$table[0].'` (`'.implode('`, `',array_keys($linha)).'`) VALUES ("'.utf8_encode(implode('", "',$linha)).'");'. PHP_EOL;
+                        $sql = 'INSERT INTO `'.$table[0].'` (`'.implode('`, `',array_keys($linha))."`) VALUES ('".implode("', '",$linha)."');". PHP_EOL;
                         fwrite($arquivo, $sql); 
                     }
                 }
