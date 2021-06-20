@@ -182,27 +182,27 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label>Forma de pagamento</label>
-                                        <input type="text" class="form-control readonly" id="formaPagamento"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" id="formaPagamento"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor total</label>
-                                        <input type="text" class="form-control readonly" name="valorTotal"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" name="valorTotal"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor pago</label>
-                                        <input type="text" class="form-control readonly" name="valorPago"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" name="valorPago"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Troco</label>
-                                        <input type="text" class="form-control readonly" name="troco"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" name="troco"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Restante</label>
-                                        <input type="text" class="form-control readonly" name="restante"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" name="restante"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Desconto (R$)</label>
-                                        <input type="text" class="form-control readonly" name="desconto"></input>
+                                        <input type="text" class="form-control readonly inputDinheiro" name="desconto"></input>
                                     </div>
                                 </div>
                             </div>
@@ -221,6 +221,19 @@
     </section>
 
     <script>
+        $('#simularCondicoes').click(()=>{
+            simularCondicoes();
+        });
+        
+        function simularCondicoes(emissao = $('[name=dataEmissao]').val(), condicao = $('[name=condicaoPagamento]').val(), valor = $('[name=valorPago]').val()){
+            if(condicao == ''){
+                toast('warning', 'É necessário escolher uma condição de pagamento');
+                return false;
+            }
+            $('#modalCondicoesCorpo').load('_backend/_elements/simular_condicoes.php', {emissao: emissao, condicao: condicao, valor: valor});
+            $('#modalCondicoes').modal('show');
+        }
+        
         function changeCondicao(){
             if($('#condicaoPagamento').val() != ''){
                 $('#simularCondicoes').removeClass('btn-secondary').addClass('btn-primary').removeClass('disabled');
@@ -228,6 +241,7 @@
                 $('#simularCondicoes').removeClass('btn-primary').addClass('btn-secondary').addClass('disabled');
             }
         }
+
         function selecionadosBusca(selecionados, arquivo){
             if(arquivo == 'cliente'){
                 $.ajax({
@@ -273,6 +287,7 @@
                 $('input[name="CFOP"]').val($(selecionados).get(0));
             }
         }
+
         $(document).ready(function() {
             verifyURLForm();
             get = getURLParams();
@@ -283,6 +298,7 @@
             $('#condicaoPagamento').val('');
             toast('success', "Condição de pagamento removida com sucesso.");
         }
+        
         $('#salvarVenda').click(function(e){
         });        
         
