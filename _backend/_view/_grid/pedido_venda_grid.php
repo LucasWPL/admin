@@ -26,17 +26,15 @@
     </section>
     <script>
         var colunas = [
-            ['user-id', 'ID'],
-            ['userName', 'Nome'],
-            ['userLogin', 'Login'],
-            ['userDataCadastro', 'Data cadastro'],
-            ['userUserCadastroNome', 'Usuário cadastro']
+            ['id', 'ID'],
+            ['dataCadastro', 'Data cadastro'],
+            ['usuarioCadastroNome', 'Usuário cadastro']
         ];
         
-        var tabela = new makeTable(colunas, 'usuario_select_grid.php');
-        tabela.setDate(['userDataCadastro']);
+        var tabela = new makeTable(colunas, 'pedido_venda_select_grid.php');
+        tabela.setDate(['dataCadastro']);
         tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
-        setBotoes('usuario', 'user', 'Cadastro usuário', false, tabela);
+        setBotoes('pedido_venda', 'venda', 'Cadastro venda', false, tabela);
     </script>

@@ -43,6 +43,10 @@
   </head>
 
 <style>
+  .actions{
+    margin-left:6px;
+  }
+
 	.blocoBotoes{
 		margin-bottom:20px;
 	}

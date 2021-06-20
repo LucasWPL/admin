@@ -230,9 +230,11 @@ function setMask(){
 			e.preventDefault();
 	});
 	$('.readonly').attr('autocomplete', 'off').css('background-color', '#E9ECEF');
-	$('.readonly').attr('placeholder', 'Clique para selecionar');
+	$('.readonly').attr('placeholder', 'Selecionar');
 	$('.telefone').inputmask("(99) 999999999");
 	$('.cep').inputmask("99999-999");
+	$('.label-null').html('.').css('color', 'white');
+	$('.actions').addClass('btn').addClass('btn-block').addClass('bg-gradient-info').addClass('btn-xs');
 }
 
 function setRequired(){
