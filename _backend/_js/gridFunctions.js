@@ -237,6 +237,7 @@ function setMask(){
 	$('.cep').inputmask("99999-999");
 	$('.label-null').html('.').css('color', 'white');
 	$('.actions').addClass('btn').addClass('btn-block').addClass('bg-gradient-info').addClass('btn-xs');
+	$('.actions-danger').addClass('btn').addClass('btn-block').addClass('bg-gradient-danger').addClass('btn-xs');
 }
 
 function setRequired(){

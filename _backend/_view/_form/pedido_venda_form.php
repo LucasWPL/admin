@@ -138,7 +138,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label class="label-null"></label>
-                                        <input type="button" class="form-control btn btn-block btn-secondary disabled" id="simularCondicoes" value="Simular"></input>
+                                        <input type="button" class="form-control btn btn-block btn-info disabled" id="simularCondicoes" value="Simular"></input>
                                     </div>
                                 </div>
                             </div>
@@ -151,8 +151,9 @@
                             <div class="card-header">
                                 <h3 class="card-title"> Produtos</h3>
                                                                 
-                                <h3 class="card-title"><input type="button" class="actions" value="Adicionar produto"></input></h3>
-
+                                <h3 class="card-title"><input type="button" class="actions-danger" value="Adicionar produto" onclick="hideAddProd();" id="action-add-hide"></input></h3>
+                                <h3 class="card-title"><input type="button" class="actions" value="Adicionar produto" onclick="showAddProd();" id="action-add"></input></h3>
+                               
                                 <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -160,7 +161,53 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row">
+                                <div class="row" id="prod-novo">
+                                    <div class="col-md-1">
+                                        <label>Código</label>
+                                        <input type="text" class="form-control prod busca" id="prod-cod"></input>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label>Descrição</label>
+                                        <input type="text" class="form-control prod readonly" id="prod-desc"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>NCM</label>
+                                        <input type="text" class="form-control prod readonly" id="prod-ncm"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Quant.</label>
+                                        <input type="number" class="form-control prod campos-sub-totais" id="prod-qtd"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Peso b.</label>
+                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-bruto"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Peso líq.</label>
+                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-liquido"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Valor unit.</label>
+                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-valor"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Peso total</label>
+                                        <input type="text" class="form-control prod inputDinheiro readonly" id="prod-peso-total"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label>Valor total</label>
+                                        <input type="text" class="form-control prod inputDinheiro readonly" id="prod-valor-total"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="label-null"></label>
+                                        <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-config" value="Configurar"></input>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="label-null"></label>
+                                        <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-add" value="Adicionar"></input>
+                                    </div>
+                                </div>
+                                <div class="row" id="prod-list">
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -182,11 +229,11 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <label>Pedido total</label>
-                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="pedidoTotal" value="4.900,00"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="pedidoTotal" value="0,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor pago</label>
-                                        <input type="text" class="form-control inputDinheiro camposTotais" name="valorPago" value="5.000,00"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais" name="valorPago" value="0,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Desconto (R$)</label>
@@ -202,7 +249,7 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor total</label>
-                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="valorTotal" value="4.900,00"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="valorTotal" value="0,00"></input>
                                     </div>
                                 </div>
                             </div>
@@ -221,6 +268,48 @@
     </section>
 
     <script>
+        
+        function showAddProd(){
+            $('#prod-novo').show(200);
+            $('#action-add').css('display','none');
+            $('#action-add-hide').css('display','block');
+        }
+
+        function hideAddProd(){
+            $('#prod-novo').hide(200);
+            $('#action-add').css('display','block');
+            $('#action-add-hide').css('display','none');
+        }
+
+        $('.campos-sub-totais').change(()=>{
+            calculaSubTotal();
+        });
+
+        function calculaSubTotal(){
+            $('#prod-peso-total').val(real(limpaMoeda($('#prod-liquido').val()) * limpaMoeda($('#prod-qtd').val())));
+            $('#prod-valor-total').val(real(limpaMoeda($('#prod-valor').val()) * limpaMoeda($('#prod-qtd').val())));
+        }
+
+        $('#prod-cod').change(()=>{
+            carregaProduto($('#prod-cod').val());
+        });
+
+        function carregaProduto(cod){
+            //AJAX AQUI PEGANDO O PRODUTO
+
+            //SUCCESS AJAX
+            $('#prod-desc').val('AIR PODS V03');
+            $('#prod-ncm').val(85183000);
+            $('#prod-bruto').val(real('0.5'));
+            $('#prod-liquido').val(real('0.3'));
+            $('#prod-valor').val(real('1299.99'));
+            $('#prod-qtd').val(1);
+            $('#prod-valor-total').val(real('1299.99'));
+            $('#prod-peso-total').val(real('0.3'))
+
+            toast('info', 'Produto encontrado');
+        }
+
         $('.camposTotais').change(()=>{
             calculaValorPago();
         });
@@ -318,6 +407,7 @@
         $(document).ready(function() {
             get = verifyURLForm();
             calculaValorPago();
+            hideAddProd();
         });
 
         function removerCondicao(acao){

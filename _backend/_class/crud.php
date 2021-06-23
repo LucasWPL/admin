@@ -119,7 +119,8 @@
         public function backup(){
             $getDados = [
                 'bancos',
-                'cfop'
+                'cfop',
+                'ncm'
             ];
 
             mkdir('../../estrutura_banco/'.date('m-Y'));

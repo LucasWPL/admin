@@ -19,7 +19,7 @@ function toast(type, message){
 
 	Toast.fire({
 		icon: type,
-		title: message
+		title: '&nbsp;' + message
 	});
 }
 

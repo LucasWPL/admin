@@ -43,9 +43,9 @@
   </head>
 
 <style>
-  .actions{
-  margin-left:6px;
-}
+  .actions, .actions-danger{
+    margin-left:6px;
+  }
 	.blocoBotoes{
 		margin-bottom:20px;
 	}
