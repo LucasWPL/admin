@@ -72,7 +72,7 @@
                         id : $(selecionados).get(0)
                     },
                     success : function(data){
-                        $('input[name="NCM"]').val(data.id);
+                        $('input[name="NCM"]').val(data.ncm);
                     }
                 });
             }
