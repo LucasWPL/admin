@@ -12,7 +12,7 @@
         $msg = "Usuário cadastrado com sucesso.";
     }else{
         $msg = "Houve um erro ao cadastrar o usuário, tente novamente.";    
-        $conn->rollbackId('user');
+        //$conn->rollbackId('user');
     }
     $reponse = array('mensagem' => $msg, 'retorno' => $return);
 	echo json_encode($reponse);

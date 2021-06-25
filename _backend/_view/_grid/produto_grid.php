@@ -26,6 +26,7 @@
     <script>
         var colunas = [
             ['id', 'ID'],
+            ['codigo', 'Código'],
             ['xProd', 'Descrição'],
             ['NCM', 'NCM'],
             ['valor', 'Valor'],
@@ -37,8 +38,9 @@
         
         var tabela = new makeTable(colunas, 'produto_select_grid.php');
         tabela.setDate(['dataCadastro']);
+        tabela.setMoney(['valor', 'pesoBruto', 'pesoLiquido']);
         tabela.verifyBusca('<?=$_GET['busca']?>');
         var dataTables = tabela.make();
         
-        setBotoes('produto', 'produto', 'Cadastro produto', false, tabela);
+        setBotoes('produto', 'produto', 'Cadastro produto', true, tabela);
     </script>

@@ -35,15 +35,15 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label>Peso bruto</label>
-                                        <input type="text" class="form-control" name="pesoBruto"></input>
+                                        <input type="text" class="form-control inputDinheiro" name="pesoBruto"></input>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Peso líquido</label>
-                                        <input type="text" class="form-control" name="pesoLiquido"></input>
+                                        <input type="text" class="form-control inputDinheiro" name="pesoLiquido"></input>
                                     </div>
                                     <div class="col-md-3">
                                         <label>Valor</label>
-                                        <input type="text" class="form-control required" name="valor"></input>
+                                        <input type="text" class="form-control required inputDinheiro" name="valor"></input>
                                     </div>
                                 </div>
                             </div>
@@ -79,5 +79,18 @@
         }
         $(document).ready(function() {
             let get = verifyURLForm();
+            $.ajax({
+                url : "_backend/_controller/_select/_ajax/produto_select_ajax.php",
+                type : 'get',
+                dataType: "json",
+                data : {
+                    id : get.id
+                },
+                success : function(data){
+                    $('input[name="valor"]').val(real(data.valor));
+                    $('input[name="pesoBruto"]').val(real(data.pesoBruto));
+                    $('input[name="pesoLiquido"]').val(real(data.pesoLiquido));
+                }
+            });
         });
     </script>
