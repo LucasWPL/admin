@@ -147,67 +147,86 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-                        <div class="card card-default">
-                            <div class="card-header">
-                                <h3 class="card-title"> Produtos</h3>
-                                                                
-                                <h3 class="card-title"><input type="button" class="actions-danger" value="Adicionar produto" onclick="hideAddProd();" id="action-add-hide"></input></h3>
-                                <h3 class="card-title"><input type="button" class="actions" value="Adicionar produto" onclick="showAddProd();" id="action-add"></input></h3>
-                               
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
+                        <div class="card">
+                            <div class="card-header d-flex p-0">
+                                <h3 class="card-title p-3"> Produtos</h3>
+                                <ul class="nav nav-pills ml-auto p-2">
+                                    <li class="nav-item"><a class="nav-link" href="#tab_1" data-toggle="tab">Adicionar</a></li>
+                                    <li class="nav-item"><a class="nav-link active" href="#tab_2" data-toggle="tab">Listar</a></li>
+                                </ul>
                             </div>
                             <div class="card-body">
-                                <div class="row" id="prod-novo">
-                                    <div class="col-md-1">
-                                        <label>Código</label>
-                                        <input type="text" class="form-control prod busca" id="prod-cod"></input>
+                                <div class="tab-content">
+                                    <div class="tab-pane" id="tab_1">
+                                        <div class="row" id="prod-novo">
+                                            <div class="col-md-1">
+                                                <label>Código</label>
+                                                <input type="text" class="form-control prod prod-required busca readonly" id="prod-cod" onclick="abreBusca('produto', 'Busca produto');"></input>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>Descrição</label>
+                                                <input type="text" class="form-control prod prod-required readonly" id="prod-desc"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>NCM</label>
+                                                <input type="text" class="form-control prod prod-required readonly" id="prod-ncm"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Quant.</label>
+                                                <input type="number" class="form-control prod prod-required campos-sub-totais" id="prod-qtd"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Peso b.</label>
+                                                <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-bruto"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Peso líq.</label>
+                                                <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-liquido"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Valor unit.</label>
+                                                <input type="text" class="form-control prod prod-required inputDinheiro campos-sub-totais" id="prod-valor"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Peso total</label>
+                                                <input type="text" class="form-control prod inputDinheiro readonly" id="prod-peso-total"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label>Valor total</label>
+                                                <input type="text" class="form-control prod inputDinheiro readonly" id="prod-valor-total"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="label-null"></label>
+                                                <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-config" value="Configurar"></input>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <label class="label-null"></label>
+                                                <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-add" value="Adicionar" onclick="addProd()"></input>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <label>Descrição</label>
-                                        <input type="text" class="form-control prod readonly" id="prod-desc"></input>
+                                    
+                                    <div class="tab-pane active" id="tab_2">
+                                        <div class="row" id="prod-list">
+                                        <table class="table table-head-fixed table-hover text-nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Código</th>
+                                                    <th>Descrição</th>
+                                                    <th>NCM</th>
+                                                    <th>Quant.</th>
+                                                    <th>Peso b.</th>
+                                                    <th>Peso líq.</th>
+                                                    <th>Valor unit.</th>
+                                                    <th>Peso total</th>
+                                                    <th>Valor total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="table-body-prod">
+                                            </tbody>
+                                        </table>
+                                        </div>
                                     </div>
-                                    <div class="col-md-1">
-                                        <label>NCM</label>
-                                        <input type="text" class="form-control prod readonly" id="prod-ncm"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Quant.</label>
-                                        <input type="number" class="form-control prod campos-sub-totais" id="prod-qtd"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Peso b.</label>
-                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-bruto"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Peso líq.</label>
-                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-liquido"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Valor unit.</label>
-                                        <input type="text" class="form-control prod inputDinheiro campos-sub-totais" id="prod-valor"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Peso total</label>
-                                        <input type="text" class="form-control prod inputDinheiro readonly" id="prod-peso-total"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label>Valor total</label>
-                                        <input type="text" class="form-control prod inputDinheiro readonly" id="prod-valor-total"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label class="label-null"></label>
-                                        <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-config" value="Configurar"></input>
-                                    </div>
-                                    <div class="col-md-1">
-                                        <label class="label-null"></label>
-                                        <input type="button" class="form-control btn btn-block btn-info disabled" id="prod-add" value="Adicionar"></input>
-                                    </div>
-                                </div>
-                                <div class="row" id="prod-list">
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -268,17 +287,58 @@
     </section>
 
     <script>
-        
-        function showAddProd(){
-            $('#prod-novo').show(200);
-            $('#action-add').css('display','none');
-            $('#action-add-hide').css('display','block');
+        var dadosProdutos;
+
+        function addProd(){
+            if(!($('#prod-add').hasClass('disabled'))){
+                let vazio = false;
+                $('.prod-required').each(function(){
+                    if(!(this.value) || this.value == 0) {
+                        $(this).addClass('is-invalid');
+                        vazio = true;
+                    }else{
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+                
+                if(vazio){
+                    toast('error', 'Preencha todos os campos');
+                    return false;
+                }
+
+                dadosProdutos = {
+                    'codigo': $('#prod-cod').val(),
+                    'xProd': $('#prod-desc').val(),
+                    'NCM': $('#prod-ncm').val(),
+                    'quantidade': $('#prod-qtd').val(),
+                    'pesoBruto': $('#prod-bruto').val(),
+                    'pesoLiquido': $('#prod-liquido').val(),
+                    'valor': $('#prod-valor').val(),
+                    'pesoTotal': $('#prod-peso-total').val(),
+                    'valorTotal': $('#prod-valor-total').val()
+                };
+
+                geraProduto(dadosProdutos);
+            }
         }
 
-        function hideAddProd(){
-            $('#prod-novo').hide(200);
-            $('#action-add').css('display','block');
-            $('#action-add-hide').css('display','none');
+        function geraProduto(dados){
+            console.log(dados);
+            html = `
+                <tr>
+                    <td>${dados.codigo}</td>
+                    <td>${dados.xProd}</td>
+                    <td>${dados.NCM}</td>
+                    <td>${dados.quantidade}</td>
+                    <td>${dados.pesoBruto}</td>
+                    <td>${dados.pesoLiquido}</td>
+                    <td>${dados.valor}</td>
+                    <td>${dados.pesoTotal}</td>
+                    <td>${dados.valorTotal}</td>
+                </tr>
+            `;
+
+            $('#table-body-prod').append(html);
         }
 
         $('.campos-sub-totais').change(()=>{
@@ -290,24 +350,42 @@
             $('#prod-valor-total').val(real(limpaMoeda($('#prod-valor').val()) * limpaMoeda($('#prod-qtd').val())));
         }
 
-        $('#prod-cod').change(()=>{
-            carregaProduto($('#prod-cod').val());
-        });
-
         function carregaProduto(cod){
-            //AJAX AQUI PEGANDO O PRODUTO
+            $.ajax({
+                url : "_backend/_controller/_select/_ajax/produto_select_ajax.php",
+                type : 'get',
+                dataType: "json",
+                async: false,
+                data : {
+                    id : cod
+                },
+                success : function(data){
+                    if(data){
+                        $('#prod-desc').val(data.xProd);
+                        $('#prod-cod').val(data.codigo);
+                        $('#prod-ncm').val(data.NCM);
+                        $('#prod-bruto').val(real(data.pesoBruto));
+                        $('#prod-liquido').val(real(data.pesoLiquido));
+                        $('#prod-valor').val(real(data.valor));
+                        $('#prod-qtd').val(1);
+                        $('#prod-valor-total').val(real(data.valor));
+                        $('#prod-peso-total').val(real(data.pesoLiquido))
 
-            //SUCCESS AJAX
-            $('#prod-desc').val('AIR PODS V03');
-            $('#prod-ncm').val(85183000);
-            $('#prod-bruto').val(real('0.5'));
-            $('#prod-liquido').val(real('0.3'));
-            $('#prod-valor').val(real('1299.99'));
-            $('#prod-qtd').val(1);
-            $('#prod-valor-total').val(real('1299.99'));
-            $('#prod-peso-total').val(real('0.3'))
+                        toast('info', 'Produto encontrado');
+                        $('#prod-add').removeClass('disabled');
+                    }else{
+                        toast('error', 'Produto não encontrado');
+                        limpaProduto();
+                    }
+                }
+            });
+        }
 
-            toast('info', 'Produto encontrado');
+        function limpaProduto(){
+            $('.prod').each(function(){
+                $(this).val('');
+            });
+            $('#prod-add').addClass('disabled');
         }
 
         $('.camposTotais').change(()=>{
@@ -401,13 +479,14 @@
                 });
             }else if(arquivo == 'cfop'){
                 $('input[name="CFOP"]').val($(selecionados).get(0));
+            }else if(arquivo == 'produto'){
+                carregaProduto($(selecionados).get(0));
             }
         }
 
         $(document).ready(function() {
             get = verifyURLForm();
             calculaValorPago();
-            hideAddProd();
         });
 
         function removerCondicao(acao){
