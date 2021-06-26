@@ -252,11 +252,11 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label>Valor pago</label>
-                                        <input type="text" class="form-control inputDinheiro camposTotais" name="valorPago" value="0,00"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="valorPago" value="0,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Desconto (R$)</label>
-                                        <input type="text" class="form-control inputDinheiro camposTotais" name="desconto" value="0,00"></input>
+                                        <input type="text" class="form-control inputDinheiro camposTotais readonly" name="desconto" value="0,00"></input>
                                     </div>
                                     <div class="col-md-2">
                                         <label>Troco</label>
@@ -288,67 +288,6 @@
 
     <script>
         var dadosProdutos;
-
-        function addProd(){
-            if(!($('#prod-add').hasClass('disabled'))){
-                let vazio = false;
-                $('.prod-required').each(function(){
-                    if(!(this.value) || this.value == 0) {
-                        $(this).addClass('is-invalid');
-                        vazio = true;
-                    }else{
-                        $(this).removeClass('is-invalid');
-                    }
-                });
-                
-                if(vazio){
-                    toast('error', 'Preencha todos os campos');
-                    return false;
-                }
-
-                dadosProdutos = {
-                    'codigo': $('#prod-cod').val(),
-                    'xProd': $('#prod-desc').val(),
-                    'NCM': $('#prod-ncm').val(),
-                    'quantidade': $('#prod-qtd').val(),
-                    'pesoBruto': $('#prod-bruto').val(),
-                    'pesoLiquido': $('#prod-liquido').val(),
-                    'valor': $('#prod-valor').val(),
-                    'pesoTotal': $('#prod-peso-total').val(),
-                    'valorTotal': $('#prod-valor-total').val()
-                };
-
-                geraProduto(dadosProdutos);
-            }
-        }
-
-        function geraProduto(dados){
-            console.log(dados);
-            html = `
-                <tr>
-                    <td>${dados.codigo}</td>
-                    <td>${dados.xProd}</td>
-                    <td>${dados.NCM}</td>
-                    <td>${dados.quantidade}</td>
-                    <td>${dados.pesoBruto}</td>
-                    <td>${dados.pesoLiquido}</td>
-                    <td>${dados.valor}</td>
-                    <td>${dados.pesoTotal}</td>
-                    <td>${dados.valorTotal}</td>
-                </tr>
-            `;
-
-            $('#table-body-prod').append(html);
-        }
-
-        $('.campos-sub-totais').change(()=>{
-            calculaSubTotal();
-        });
-
-        function calculaSubTotal(){
-            $('#prod-peso-total').val(real(limpaMoeda($('#prod-liquido').val()) * limpaMoeda($('#prod-qtd').val())));
-            $('#prod-valor-total').val(real(limpaMoeda($('#prod-valor').val()) * limpaMoeda($('#prod-qtd').val())));
-        }
 
         function carregaProduto(cod){
             $.ajax({
@@ -388,11 +327,114 @@
             $('#prod-add').addClass('disabled');
         }
 
-        $('.camposTotais').change(()=>{
-            calculaValorPago();
+        function addProd(){
+            if(!($('#prod-add').hasClass('disabled'))){
+                let vazio = false;
+                $('.prod-required').each(function(){
+                    if(!(this.value) || this.value == 0) {
+                        $(this).addClass('is-invalid');
+                        vazio = true;
+                    }else{
+                        $(this).removeClass('is-invalid');
+                    }
+                });
+                
+                if(vazio){
+                    toast('error', 'Preencha todos os campos');
+                    return false;
+                }
+
+                dadosProdutos = {
+                    'codigo': $('#prod-cod').val(),
+                    'xProd': $('#prod-desc').val(),
+                    'NCM': $('#prod-ncm').val(),
+                    'quantidade': $('#prod-qtd').val(),
+                    'pesoBruto': $('#prod-bruto').val(),
+                    'pesoLiquido': $('#prod-liquido').val(),
+                    'valor': $('#prod-valor').val(),
+                    'pesoTotal': $('#prod-peso-total').val(),
+                    'valorTotal': $('#prod-valor-total').val()
+                };
+
+                geraProduto(dadosProdutos);
+                limpaProduto();
+            }
+        }
+
+        function geraProduto(dados){
+            html = `
+                <tr>
+                    <td>${dados.codigo}</td>
+                    <td>${dados.xProd}</td>
+                    <td>${dados.NCM}</td>
+                    <td>${dados.quantidade}</td>
+                    <td>${dados.pesoBruto}</td>
+                    <td>${dados.pesoLiquido}</td>
+                    <td>${dados.valor}</td>
+                    <td>${dados.pesoTotal}</td>
+                    <td>${dados.valorTotal}</td>
+                </tr>
+            `;
+
+            $('#table-body-prod').append(html);
+
+            $.each(dados, function(key, value){
+                let input = document.createElement("input");
+                $(input).attr('name', 'produto-'+key+'-array[]');
+                $(input).val(value); $(input).css('display', 'none');
+                $('#formPrincipal').append(input);
+            });
+            calculaPedidoTotal();
+        }
+
+        $('.campos-sub-totais').change(()=>{
+            calculaSubTotal();
         });
 
+        function calculaSubTotal(){
+            $('#prod-peso-total').val(real(limpaMoeda($('#prod-liquido').val()) * limpaMoeda($('#prod-qtd').val())));
+            $('#prod-valor-total').val(real(limpaMoeda($('#prod-valor').val()) * limpaMoeda($('#prod-qtd').val())));
+        }
+
+        function calculaPedidoTotal(){
+            let soma = 0;
+            $('[name="produto-valorTotal-array[]"]').each(function(){
+                soma += limpaMoeda(this.value);
+            });
+            $('input[name="pedidoTotal"]').val(real(soma));
+            calculaValorPago();
+        }
+
         function calculaValorPago(){
+            if($('#condicaoPagamento').val()){
+                $.ajax({
+                    url : "_backend/_controller/_select/_ajax/condicao_pagamento_select_ajax.php",
+                    type : 'get',
+                    dataType: "json",
+                    data : {
+                        id : $('[name="condicaoPagamento"]').val()
+                    },
+                    success : function(data){
+                        let pedido = limpaMoeda($('[name=pedidoTotal]').val());
+                        let pago = (pedido * (100 - parseFloat(data.desconto)))/100;
+                        
+                        $('[name=valorPago]').val(real(pago));
+                        $('[name=desconto]').val(real(pedido - pago));
+                        calculaValoresTotais();
+                    }
+                });
+            }else{
+                $('[name=valorPago]').val('0,00');
+                toast('error', 'Não foi possível calcular o valor pago pois não foi selecionada uma condição de pagamento');
+                return false;
+            }
+        }
+
+        $('.camposTotais').change(()=>{
+            calculaValoresTotais();
+        });
+
+        function calculaValoresTotais(inicial = false){
             let pedidoTotal = limpaMoeda($('[name=pedidoTotal]').val());
             let total = limpaMoeda($('[name=valorTotal]').val());
             let pago = limpaMoeda($('[name=valorPago]').val());
@@ -412,7 +454,7 @@
             $('[name=troco]').val(real(troco));
             $('[name=restante]').val(real(restante));
 
-            if(get.action == 'edit') toast('warning', 'Valores totais atualizados');
+            if(!inicial) toast('warning', 'Valores totais atualizados');
         }
 
         $('#simularCondicoes').click(()=>{
@@ -434,6 +476,7 @@
             }else{
                 $('#simularCondicoes').removeClass('btn-primary').addClass('btn-secondary').addClass('disabled');
             }
+            calculaValorPago();
         }
 
         function selecionadosBusca(selecionados, arquivo){
@@ -486,7 +529,7 @@
 
         $(document).ready(function() {
             get = verifyURLForm();
-            calculaValorPago();
+            calculaValoresTotais(true);
         });
 
         function removerCondicao(acao){
